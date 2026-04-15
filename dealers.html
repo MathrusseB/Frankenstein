@@ -67,7 +67,7 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">National Network</span>
+        <span class="eyebrow">Authorized Dealers Nationwide</span>
         <h1 class="page-header__title">Dealers.</h1>
         <p class="page-header__sub">
           Authorized dealers across the US and internationally. Sales,
@@ -78,7 +78,49 @@
 
     <section class="section">
       <div class="container">
-        <p class="text-secondary">Dealer listings populated from <code>data/dealers.json</code>.</p>
+        <label class="dealer-search" for="dealerSearch">
+          <span class="dealer-search__icon" aria-hidden="true">Find</span>
+          <input
+            id="dealerSearch"
+            class="dealer-search__input"
+            type="search"
+            placeholder="Search by name, city, or state…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <span class="dealer-search__count" id="dealerCount" aria-live="polite"></span>
+        </label>
+
+        <div class="dealer-groups" id="dealerGroups" aria-live="polite">
+          <p class="kit-grid__empty">Loading dealers…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="become-dealer">
+      <div class="container">
+        <div class="become-dealer__inner">
+          <div>
+            <span class="eyebrow">Join the Network</span>
+            <h2 class="become-dealer__title">Become a Dealer.</h2>
+            <p class="become-dealer__desc">
+              Interested in carrying Frankenstein trike kits and components?
+              We're actively expanding our authorized dealer network across
+              North America and internationally. Talk to us about wholesale
+              pricing, training, and territory.
+            </p>
+          </div>
+          <div class="become-dealer__contacts">
+            <a class="become-dealer__contact" href="tel:+19133526788">
+              <span class="become-dealer__contact-label">Call</span>
+              <span class="become-dealer__contact-value">(913) 352-6788</span>
+            </a>
+            <a class="become-dealer__contact" href="mailto:Info@FrankensteinTrikes.com?subject=Dealer%20Inquiry">
+              <span class="become-dealer__contact-label">Email</span>
+              <span class="become-dealer__contact-value">Info@FrankensteinTrikes.com</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -144,5 +186,180 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const groupsMount = document.getElementById('dealerGroups');
+      const searchInput = document.getElementById('dealerSearch');
+      const countEl = document.getElementById('dealerCount');
+      if (!groupsMount) return;
+
+      const US_STATE_NAMES = {
+        AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
+        CO: 'Colorado', CT: 'Connecticut', DE: 'Delaware', FL: 'Florida', GA: 'Georgia',
+        HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois', IN: 'Indiana', IA: 'Iowa',
+        KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana', ME: 'Maine', MD: 'Maryland',
+        MA: 'Massachusetts', MI: 'Michigan', MN: 'Minnesota', MS: 'Mississippi', MO: 'Missouri',
+        MT: 'Montana', NE: 'Nebraska', NV: 'Nevada', NH: 'New Hampshire', NJ: 'New Jersey',
+        NM: 'New Mexico', NY: 'New York', NC: 'North Carolina', ND: 'North Dakota', OH: 'Ohio',
+        OK: 'Oklahoma', OR: 'Oregon', PA: 'Pennsylvania', RI: 'Rhode Island', SC: 'South Carolina',
+        SD: 'South Dakota', TN: 'Tennessee', TX: 'Texas', UT: 'Utah', VT: 'Vermont',
+        VA: 'Virginia', WA: 'Washington', WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming',
+        DC: 'District of Columbia'
+      };
+
+      function escapeHtml(str) {
+        return String(str == null ? '' : str).replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function telHref(phone) {
+        const digits = String(phone || '').replace(/[^\d+]/g, '');
+        return digits ? `tel:${digits}` : '';
+      }
+
+      function websiteLabel(url) {
+        return String(url || '')
+          .replace(/^https?:\/\//i, '')
+          .replace(/\/$/, '');
+      }
+
+      function renderDealer(d) {
+        const stateLabel = d.country === 'USA'
+          ? `${escapeHtml(d.city)}, ${escapeHtml(d.state)}`
+          : [d.city, d.state, d.country].filter(Boolean).map(escapeHtml).join(', ');
+
+        const phoneHref = telHref(d.phone);
+        const phoneRow = d.phone ? `
+          <div>
+            <span>Call</span>
+            ${phoneHref
+              ? `<a href="${phoneHref}">${escapeHtml(d.phone)}</a>`
+              : escapeHtml(d.phone)}
+          </div>` : '';
+
+        const websiteRow = d.website ? `
+          <div>
+            <span>Web</span>
+            <a href="${escapeHtml(d.website)}" target="_blank" rel="noopener">${escapeHtml(websiteLabel(d.website))}</a>
+          </div>` : '';
+
+        return `
+          <article class="dealer-card">
+            <h3 class="dealer-card__name">${escapeHtml(d.name)}</h3>
+            <div class="dealer-card__location">${stateLabel}</div>
+            <div class="dealer-card__contact">${phoneRow}${websiteRow}</div>
+          </article>
+        `;
+      }
+
+      function groupKey(d) {
+        if (d.country === 'USA') {
+          return { type: 'us', key: d.state || 'ZZ' };
+        }
+        return { type: 'intl', key: 'international' };
+      }
+
+      function buildGroups(dealers) {
+        const usGroups = new Map();
+        const international = [];
+
+        dealers.forEach(d => {
+          const g = groupKey(d);
+          if (g.type === 'us') {
+            if (!usGroups.has(g.key)) usGroups.set(g.key, []);
+            usGroups.get(g.key).push(d);
+          } else {
+            international.push(d);
+          }
+        });
+
+        const sortedUs = Array.from(usGroups.entries()).sort(([a], [b]) => a.localeCompare(b));
+
+        const groups = sortedUs.map(([state, items]) => ({
+          title: US_STATE_NAMES[state] || state,
+          meta: state,
+          items: items.slice().sort((a, b) => a.name.localeCompare(b.name))
+        }));
+
+        if (international.length) {
+          groups.push({
+            title: 'International',
+            meta: 'Worldwide',
+            items: international.slice().sort((a, b) => {
+              const c = (a.country || '').localeCompare(b.country || '');
+              return c !== 0 ? c : a.name.localeCompare(b.name);
+            })
+          });
+        }
+
+        return groups;
+      }
+
+      function render(dealers) {
+        if (!dealers.length) {
+          groupsMount.innerHTML = '<p class="dealer-empty">No dealers match your search.</p>';
+          if (countEl) countEl.textContent = '0 Results';
+          return;
+        }
+
+        const groups = buildGroups(dealers);
+
+        groupsMount.innerHTML = groups.map(g => `
+          <section class="dealer-group">
+            <h2 class="dealer-group__heading">
+              <span>${escapeHtml(g.title)}</span>
+              <span class="dealer-group__count">${g.items.length} ${g.items.length === 1 ? 'Dealer' : 'Dealers'}</span>
+            </h2>
+            <div class="dealer-list">
+              ${g.items.map(renderDealer).join('')}
+            </div>
+          </section>
+        `).join('');
+
+        if (countEl) {
+          countEl.textContent = `${dealers.length} ${dealers.length === 1 ? 'Result' : 'Results'}`;
+        }
+      }
+
+      function filterDealers(all, query) {
+        const q = query.trim().toLowerCase();
+        if (!q) return all;
+        return all.filter(d => {
+          const stateFull = (US_STATE_NAMES[d.state] || '').toLowerCase();
+          return (
+            (d.name || '').toLowerCase().includes(q) ||
+            (d.city || '').toLowerCase().includes(q) ||
+            (d.state || '').toLowerCase().includes(q) ||
+            stateFull.includes(q) ||
+            (d.country || '').toLowerCase().includes(q)
+          );
+        });
+      }
+
+      let allDealers = [];
+
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          render(filterDealers(allDealers, searchInput.value));
+        });
+      }
+
+      fetch('data/dealers.json')
+        .then(r => {
+          if (!r.ok) throw new Error('Failed to load dealers');
+          return r.json();
+        })
+        .then(data => {
+          allDealers = Array.isArray(data) ? data : [];
+          render(allDealers);
+        })
+        .catch(err => {
+          groupsMount.innerHTML = `<p class="dealer-empty">Unable to load dealers — ${escapeHtml(err.message)}.</p>`;
+        });
+    })();
+  </script>
 </body>
 </html>
