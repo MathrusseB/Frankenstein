@@ -22,19 +22,19 @@
         <li class="nav__item nav__item--has-dropdown">
           <a href="trike-kits.html" class="nav__link">Trike Kits <span class="nav__caret">▾</span></a>
           <div class="nav__dropdown">
-            <a href="kit-detail.html?kit=sportster">Sportster</a>
-            <a href="kit-detail.html?kit=dyna">Dyna</a>
-            <a href="kit-detail.html?kit=softail">Softail</a>
-            <a href="kit-detail.html?kit=rocker-breakout">Rocker &amp; Breakout</a>
-            <a href="kit-detail.html?kit=fatboy-heritage">Fat Boy &amp; Heritage</a>
-            <a href="kit-detail.html?kit=flt-flh-roadking">FLT FLH &amp; Roadking</a>
-            <a href="kit-detail.html?kit=vrod">V-Rod</a>
-            <a href="kit-detail.html?kit=fxr">FXR</a>
-            <a href="kit-detail.html?kit=4-speed-fl-fx">4 Speed FL/FX</a>
-            <a href="kit-detail.html?kit=street">Street</a>
-            <a href="kit-detail.html?kit=yamaha">Yamaha</a>
-            <a href="kit-detail.html?kit=kawasaki">Kawasaki 1700</a>
-            <a href="kit-detail.html?kit=old-school">Frankenstein Old School</a>
+            <a href="kit-detail.html?id=sportster">Sportster</a>
+            <a href="kit-detail.html?id=dyna">Dyna</a>
+            <a href="kit-detail.html?id=softail">Softail</a>
+            <a href="kit-detail.html?id=rocker-breakout">Rocker &amp; Breakout</a>
+            <a href="kit-detail.html?id=fatboy-heritage">Fat Boy &amp; Heritage</a>
+            <a href="kit-detail.html?id=flt-flh-roadking">FLT FLH &amp; Roadking</a>
+            <a href="kit-detail.html?id=v-rod">V-Rod</a>
+            <a href="kit-detail.html?id=fxr">FXR</a>
+            <a href="kit-detail.html?id=4-speed-fl-fx">4 Speed FL/FX</a>
+            <a href="kit-detail.html?id=street">Street</a>
+            <a href="kit-detail.html?id=yamaha">Yamaha</a>
+            <a href="kit-detail.html?id=kawasaki-1700">Kawasaki 1700</a>
+            <a href="kit-detail.html?id=dna-old-school">Frankenstein Old School</a>
           </div>
         </li>
         <li class="nav__item nav__item--has-dropdown">
@@ -64,20 +64,10 @@
     </nav>
   </header>
 
-  <main>
-    <section class="page-header">
-      <div class="container">
-        <span class="eyebrow">Kit Detail</span>
-        <h1 class="page-header__title">Kit Detail.</h1>
-        <p class="page-header__sub">
-          Year breakdowns, specs, features, and pricing for the selected kit.
-        </p>
-      </div>
-    </section>
-
+  <main id="kitMain">
     <section class="section">
       <div class="container">
-        <p class="text-secondary">Kit detail content populated from <code>data/kits.json</code> via query param.</p>
+        <p class="text-secondary">Loading kit…</p>
       </div>
     </section>
   </main>
@@ -143,5 +133,219 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const main = document.getElementById('kitMain');
+
+      function escapeHtml(str) {
+        return String(str == null ? '' : str).replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function getParam(name) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(name);
+      }
+
+      function renderNotFound() {
+        document.title = 'Kit Not Found — Frankenstein Trikes';
+        main.innerHTML = `
+          <section class="kit-empty">
+            <div class="container">
+              <span class="eyebrow">404</span>
+              <h1 class="kit-empty__title">Kit Not Found.</h1>
+              <p class="lede" style="margin: 0 auto 32px; color: var(--text-secondary);">
+                We couldn't find a kit matching that ID. Browse all available trike kits.
+              </p>
+              <a href="trike-kits.html" class="btn btn--primary">Back to Trike Kits</a>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderSubmodels(subModels) {
+        if (!subModels || !subModels.length) return '';
+        const items = subModels.map((sm, i) => `
+          <div class="submodel${i === 0 ? ' is-open' : ''}" data-submodel>
+            <button type="button" class="submodel__head" data-submodel-toggle aria-expanded="${i === 0 ? 'true' : 'false'}">
+              <span>${escapeHtml(sm.name)}</span>
+              <span style="display:inline-flex;align-items:center;">
+                <span class="submodel__years">${escapeHtml(sm.yearRange || '')}</span>
+                <span class="submodel__icon" aria-hidden="true">+</span>
+              </span>
+            </button>
+            <div class="submodel__body">
+              ${sm.description ? `<p>${escapeHtml(sm.description)}</p>` : `<p>Components engineered specifically for the ${escapeHtml(sm.name)} (${escapeHtml(sm.yearRange || '')}). Call to confirm fitment for your model year.</p>`}
+              ${sm.imageUrl ? `<div style="margin-top:20px;"><img src="${escapeHtml(sm.imageUrl)}" alt="${escapeHtml(sm.name)}" loading="lazy" style="width:100%;height:auto;" /></div>` : ''}
+            </div>
+          </div>
+        `).join('');
+
+        return `
+          <section class="section">
+            <div class="container">
+              <span class="eyebrow">Year &amp; Model Breakdown</span>
+              <h2 class="section__heading">Select Your Variant.</h2>
+              <div class="submodels" id="submodelList">${items}</div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderSpecs(specs) {
+        if (!specs || (Array.isArray(specs) && !specs.length) || (typeof specs === 'object' && !Object.keys(specs).length)) return '';
+        const entries = Array.isArray(specs)
+          ? specs.map(s => [s.label || s.name, s.value])
+          : Object.entries(specs);
+        if (!entries.length) return '';
+
+        const items = entries.map(([label, value]) => `
+          <div class="specs__item">
+            <div class="specs__label">${escapeHtml(label)}</div>
+            <div class="specs__value">${escapeHtml(value)}</div>
+          </div>
+        `).join('');
+
+        return `
+          <section class="section">
+            <div class="container">
+              <span class="eyebrow">Specifications</span>
+              <h2 class="section__heading">Built to Spec.</h2>
+              <div class="specs">${items}</div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderRelated(allKits, currentId) {
+        const others = allKits.filter(k => k.id !== currentId);
+        // Pick 3 — try to keep it stable but varied
+        const picks = others.slice(0, 3);
+        if (!picks.length) return '';
+
+        const cards = picks.map(kit => `
+          <a class="kit-card reveal" href="kit-detail.html?id=${encodeURIComponent(kit.id)}">
+            <div class="kit-card__media">
+              <img src="${escapeHtml(kit.imageUrl)}" alt="${escapeHtml(kit.name)} trike kit" loading="lazy" />
+            </div>
+            <div class="kit-card__body">
+              <span class="kit-card__meta">${escapeHtml(kit.yearRange || '')}</span>
+              <h3 class="kit-card__title">${escapeHtml(kit.name)}</h3>
+              <p class="kit-card__desc">${escapeHtml((kit.description || '').slice(0, 140))}${kit.description && kit.description.length > 140 ? '…' : ''}</p>
+              <span class="arrow-link kit-card__cta">View Details</span>
+            </div>
+          </a>
+        `).join('');
+
+        return `
+          <section class="section">
+            <div class="container">
+              <span class="eyebrow">Related Kits</span>
+              <h2 class="section__heading">More Frankenstein Builds.</h2>
+              <div class="kit-grid">${cards}</div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderCtaStrip(kit) {
+        return `
+          <section class="cta-strip">
+            <div class="container">
+              <div class="cta-strip__inner">
+                <div>
+                  <h2 class="cta-strip__title">Order Your ${escapeHtml(kit.name)} Kit.</h2>
+                  <a href="tel:+19133526788" class="cta-strip__phone">Call to Order · (913) 352-6788</a>
+                </div>
+                <div class="cta-strip__actions">
+                  <a href="tel:+19133526788" class="btn btn--primary">Call (913) 352-6788</a>
+                  <a href="mailto:Info@FrankensteinTrikes.com?subject=${encodeURIComponent(kit.name + ' Trike Kit Inquiry')}" class="btn btn--ghost">Email Us</a>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderKit(kit, allKits) {
+        document.title = `${kit.name} Trike Kit — Frankenstein Trikes`;
+
+        main.innerHTML = `
+          <section class="kit-hero">
+            <div class="container">
+              <div class="kit-hero__layout">
+                <div class="reveal">
+                  <span class="eyebrow">Trike Kit</span>
+                  <h1 class="kit-hero__title">${escapeHtml(kit.name)}.</h1>
+                  ${kit.yearRange ? `<div class="kit-hero__years">${escapeHtml(kit.yearRange)}</div>` : ''}
+                  <p class="kit-hero__desc">${escapeHtml(kit.description)}</p>
+                  <div class="btn-row">
+                    <a href="tel:+19133526788" class="btn btn--primary">Call to Order</a>
+                    <a href="trike-kits.html" class="btn btn--ghost">All Kits</a>
+                  </div>
+                </div>
+                <div class="kit-hero__media reveal">
+                  <img src="${escapeHtml(kit.imageUrl)}" alt="${escapeHtml(kit.name)} trike kit" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          ${renderSubmodels(kit.subModels)}
+          ${renderSpecs(kit.specs)}
+          ${renderCtaStrip(kit)}
+          ${renderRelated(allKits, kit.id)}
+        `;
+
+        // Wire submodel accordion
+        main.querySelectorAll('[data-submodel-toggle]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const parent = btn.closest('[data-submodel]');
+            if (!parent) return;
+            const isOpen = parent.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          });
+        });
+
+        // Reveal observer for newly-rendered content
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+          main.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        } else {
+          main.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+        }
+      }
+
+      const id = getParam('id');
+
+      fetch('data/kits.json')
+        .then(r => {
+          if (!r.ok) throw new Error('Failed to load kits');
+          return r.json();
+        })
+        .then(data => {
+          const kits = Array.isArray(data) ? data : [];
+          const kit = id ? kits.find(k => k.id === id) : null;
+          if (!kit) {
+            renderNotFound();
+            return;
+          }
+          renderKit(kit, kits);
+        })
+        .catch(() => {
+          renderNotFound();
+        });
+    })();
+  </script>
 </body>
 </html>
