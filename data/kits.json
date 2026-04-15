@@ -1,3 +1,159 @@
-{
-  "kits": []
-}
+[
+  {
+    "id": "sportster",
+    "name": "Sportster",
+    "slug": "sportster",
+    "category": "harley-davidson",
+    "yearRange": "1957-2022",
+    "description": "Sport Trike Kit for H-D Sportster. It is very important that you choose the year of your bike. Harley-Davidson has made small design changes over the years, and Frankenstein Trikes has developed components specific to each year to ensure proper fitment.",
+    "imageUrl": "https://frankensteintrikes.com/images/sportster-trike-kit-page/package_trike_kit page_sportster_submenu_pic.jpg",
+    "subModels": [
+      { "name": "1957-1987", "yearRange": "1957-1987" },
+      { "name": "1988-2003", "yearRange": "1988-2003" },
+      { "name": "2004-2022", "yearRange": "2004-2022" },
+      { "name": "Forty-Eight / SuperLow / Custom", "yearRange": "2010-2022" }
+    ]
+  },
+  {
+    "id": "dyna",
+    "name": "Dyna",
+    "slug": "dyna",
+    "category": "harley-davidson",
+    "yearRange": "1991-2017",
+    "description": "Sport Trike Kit for H-D Dyna. Selecting the correct motorcycle year is critical, as Harley-Davidson implemented various design modifications across production years. Frankenstein Trikes has engineered components tailored to each specific year to ensure proper fitment.",
+    "imageUrl": "https://frankensteintrikes.com/images/dyna-trike-kit-page/dyna_trike_kit_submenu_year-selection-pic.jpg",
+    "subModels": [
+      { "name": "1991-2005", "yearRange": "1991-2005" },
+      { "name": "2006-2017", "yearRange": "2006-2017" }
+    ]
+  },
+  {
+    "id": "softail",
+    "name": "Softail",
+    "slug": "softail",
+    "category": "harley-davidson",
+    "yearRange": "1984-Up",
+    "description": "Sport Trike Kit for H-D Softail. It is very important that you choose the year of your bike. Harley-Davidson has made small design changes over the years. We have made components specific to each year. Prospective buyers should select their motorcycle's year before proceeding.",
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/softail/2018 softail side.jpg",
+    "subModels": [
+      { "name": "1984-2007", "yearRange": "1984-2007" },
+      { "name": "2008-2017", "yearRange": "2008-2017" },
+      { "name": "2018 and Up", "yearRange": "2018-Up" }
+    ]
+  },
+  {
+    "id": "rocker-breakout",
+    "name": "Rocker & Breakout",
+    "slug": "rocker-breakout",
+    "category": "harley-davidson",
+    "yearRange": "2008-Up",
+    "description": "Sport Trike Kit for H-D Rocker & Breakout. It is very important that you choose the year of your bike, because Harley-Davidson implements incremental design modifications annually. Frankenstein Trikes manufactures components tailored to each specific model year.",
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/softail/2018 fatboy side.jpg",
+    "subModels": [
+      { "name": "2008-2011 Rocker & 2013-2017 Breakout", "yearRange": "2008-2017" },
+      { "name": "2018 and Up Breakout", "yearRange": "2018-Up" }
+    ]
+  },
+  {
+    "id": "fatboy-heritage",
+    "name": "Fat Boy & Heritage",
+    "slug": "fatboy-heritage",
+    "category": "harley-davidson",
+    "yearRange": "1986-Up",
+    "description": "Sport Trike Kit for H-D Heritage, Fatboy & Deluxe. Selecting the correct motorcycle year is crucial, as Harley-Davidson has made small design changes over the years and Frankenstein Trikes has tailored components accordingly to ensure proper fitment for each specific year.",
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/softail/2018 fatboy side.jpg",
+    "subModels": [
+      { "name": "1986-2007 Heritage/Fatboy/Deluxe", "yearRange": "1986-2007" },
+      { "name": "2008-2017 Heritage/Fatboy/Deluxe", "yearRange": "2008-2017" },
+      { "name": "2018 and Up Heritage", "yearRange": "2018-Up" },
+      { "name": "2018 and Up Fatboy", "yearRange": "2018-Up" }
+    ]
+  },
+  {
+    "id": "flt-flh-roadking",
+    "name": "FLT FLH & Roadking",
+    "slug": "flt-flh-roadking",
+    "category": "harley-davidson",
+    "yearRange": "1980-Up",
+    "description": "Sport Trike Kit for FLT, FLH & Roadking. Selecting the correct motorcycle year is essential because Harley-Davidson has made small design changes over the years. Frankenstein Trikes has made components specific to each year to ensure proper fitment.",
+    "imageUrl": "https://frankensteintrikes.com/images/trikekit_flt-flh-roadking-submenu-year-selection.jpg",
+    "subModels": [
+      { "name": "1980-2008", "yearRange": "1980-2008" },
+      { "name": "2009 and Up", "yearRange": "2009-Up" }
+    ]
+  },
+  {
+    "id": "v-rod",
+    "name": "V-Rod",
+    "slug": "v-rod",
+    "category": "harley-davidson",
+    "yearRange": "2002-2017",
+    "description": "Sport Trike Kit for V-Rod. It is very important that you choose the year of your bike. Harley-Davidson has made small design changes over the years. We have made components specific to each year. The kit is offered in two tire configuration options: 180-200 tire variant and 240 tire variant.",
+    "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/v-rod/vrod clipped.jpg",
+    "subModels": [
+      { "name": "V-Rod 180-200 Tire", "yearRange": "2002-2017" },
+      { "name": "V-Rod 240 Tire", "yearRange": "2002-2017" }
+    ]
+  },
+  {
+    "id": "fxr",
+    "name": "FXR",
+    "slug": "fxr",
+    "category": "harley-davidson",
+    "yearRange": "1982-1994",
+    "description": "Frankenstein Sport Trike Kit for Harley-Davidson FXR. A precision-engineered conversion kit that has earned customer praise for its well-designed rear end. Built to Frankenstein Trikes' standards with year-specific components for reliable fitment on FXR platform motorcycles.",
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/fxr/trikekit_fxr_package.jpg"
+  },
+  {
+    "id": "4-speed-fl-fx",
+    "name": "4 Speed FL/FX",
+    "slug": "4-speed-fl-fx",
+    "category": "harley-davidson",
+    "yearRange": "1971-1985",
+    "description": "Frankenstein Sport Trike Kit for Harley-Davidson 4 Speed FL/FX. Designed specifically for the classic 1971-1985 4-speed Harley-Davidson FL and FX models. Includes a one-year warranty and is engineered to fit the vintage 4-speed platform.",
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit page 4 speed.jpg"
+  },
+  {
+    "id": "street",
+    "name": "Street",
+    "slug": "street",
+    "category": "harley-davidson",
+    "yearRange": "2014-2020",
+    "description": "Frankenstein Sport Trike Kit for Harley-Davidson Street. Engineered to convert the Harley-Davidson Street motorcycle platform into a trike. Mechanics have praised the rear end design and construction quality of Frankenstein's kits.",
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit page street.jpg"
+  },
+  {
+    "id": "yamaha",
+    "name": "Yamaha",
+    "slug": "yamaha",
+    "category": "yamaha",
+    "yearRange": "Multiple",
+    "description": "Sport Trike Kit for Yamaha. Frankenstein Trikes offers trike conversion kits for a variety of Yamaha motorcycle models. Please click on your model to continue: Yamaha Road Star 1600/1700, Yamaha Road Star Raider 1900, Yamaha Bolt 950, Yamaha V-Star 950, and Yamaha V-Star 1300.",
+    "imageUrl": "https://frankensteintrikes.com/images/Yamaha Road Star body clipped.jpg",
+    "subModels": [
+      { "name": "Road Star 1600 / 1700", "yearRange": "Multiple" },
+      { "name": "Road Star Raider 1900", "yearRange": "Multiple" },
+      { "name": "Bolt 950", "yearRange": "Multiple" },
+      { "name": "V-Star 950", "yearRange": "Multiple" },
+      { "name": "V-Star 1300", "yearRange": "Multiple" }
+    ]
+  },
+  {
+    "id": "kawasaki-1700",
+    "name": "Kawasaki 1700",
+    "slug": "kawasaki-1700",
+    "category": "kawasaki",
+    "yearRange": "2009-Up",
+    "description": "Frankenstein Sport Trike Kit for Kawasaki 1700. Engineered with a precision rear end design that mechanics have praised as thoroughly worked out. Built for the Kawasaki 1700 platform with Frankenstein Trikes' signature construction quality.",
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Kawasaki 1700/package trike kit page kawasaki 1700.jpg"
+  },
+  {
+    "id": "dna-old-school",
+    "name": "Frankenstein Old School (DNA)",
+    "slug": "dna-old-school",
+    "category": "custom",
+    "yearRange": "Custom",
+    "description": "Frankenstein Trikes Old School Kit for Harley-Davidson. This kit uses a DNA rear end for a classic old school trike look. A heritage-styled trike conversion designed for traditionalists who want vintage aesthetics paired with Frankenstein Trikes' engineering.",
+    "imageUrl": "https://frankensteintrikes.com/images/kitchoices DNA.jpg"
+  }
+]
