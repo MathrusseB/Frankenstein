@@ -62,12 +62,15 @@
       </button>
       <button type="button" class="admin-tab" role="tab" data-tab="dealers" aria-selected="false">
         <span class="admin-tab__label">Dealers</span>
+        <span class="admin-tab__badge" data-badge="dealers" hidden>override</span>
       </button>
       <button type="button" class="admin-tab" role="tab" data-tab="faq" aria-selected="false">
         <span class="admin-tab__label">FAQ</span>
+        <span class="admin-tab__badge" data-badge="faq" hidden>override</span>
       </button>
       <button type="button" class="admin-tab" role="tab" data-tab="gallery" aria-selected="false">
         <span class="admin-tab__label">Gallery</span>
+        <span class="admin-tab__badge" data-badge="gallery" hidden>override</span>
       </button>
     </nav>
 
@@ -130,37 +133,81 @@
         </div>
       </section>
 
-      <!-- DEALERS (placeholder for pass two) -->
-      <section class="admin-pane" id="pane-dealers" role="tabpanel" hidden>
+      <!-- DEALERS -->
+      <section class="admin-pane" id="pane-dealers" role="tabpanel" aria-labelledby="tab-dealers" hidden>
         <div class="admin-pane__head">
           <div>
             <h2 class="admin-pane__title">Dealers</h2>
-            <p class="admin-pane__sub">Dealer management coming in the next pass.</p>
+            <p class="admin-pane__sub">Authorized dealer directory. Changes are stored locally in your browser.</p>
+          </div>
+          <div class="admin-pane__toolbar">
+            <button type="button" class="admin-btn admin-btn--primary" data-action="add" data-entity="dealers">+ Add New Dealer</button>
+            <button type="button" class="admin-btn admin-btn--ghost" data-action="reset" data-entity="dealers">Reset to Original</button>
           </div>
         </div>
-        <div class="admin-empty">Not yet wired up.</div>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="dealersTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th class="admin-table__actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="dealersTbody">
+              <tr class="admin-table__loading"><td colspan="7">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
-      <!-- FAQ (placeholder for pass two) -->
-      <section class="admin-pane" id="pane-faq" role="tabpanel" hidden>
+      <!-- FAQ -->
+      <section class="admin-pane" id="pane-faq" role="tabpanel" aria-labelledby="tab-faq" hidden>
         <div class="admin-pane__head">
           <div>
             <h2 class="admin-pane__title">FAQ</h2>
-            <p class="admin-pane__sub">FAQ management coming in the next pass.</p>
+            <p class="admin-pane__sub">Frequently asked questions. Changes are stored locally in your browser.</p>
+          </div>
+          <div class="admin-pane__toolbar">
+            <button type="button" class="admin-btn admin-btn--primary" data-action="add" data-entity="faq">+ Add New Question</button>
+            <button type="button" class="admin-btn admin-btn--ghost" data-action="reset" data-entity="faq">Reset to Original</button>
           </div>
         </div>
-        <div class="admin-empty">Not yet wired up.</div>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="faqTable">
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Category</th>
+                <th class="admin-table__actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="faqTbody">
+              <tr class="admin-table__loading"><td colspan="3">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
-      <!-- GALLERY (placeholder for pass two) -->
-      <section class="admin-pane" id="pane-gallery" role="tabpanel" hidden>
+      <!-- GALLERY -->
+      <section class="admin-pane" id="pane-gallery" role="tabpanel" aria-labelledby="tab-gallery" hidden>
         <div class="admin-pane__head">
           <div>
             <h2 class="admin-pane__title">Gallery</h2>
-            <p class="admin-pane__sub">Gallery management coming in the next pass.</p>
+            <p class="admin-pane__sub">Customer photo gallery. Changes are stored locally in your browser.</p>
+          </div>
+          <div class="admin-pane__toolbar">
+            <button type="button" class="admin-btn admin-btn--primary" data-action="add" data-entity="gallery">+ Add New Photo</button>
+            <button type="button" class="admin-btn admin-btn--ghost" data-action="reset" data-entity="gallery">Reset to Original</button>
           </div>
         </div>
-        <div class="admin-empty">Not yet wired up.</div>
+        <div class="admin-grid" id="galleryGrid">
+          <div class="admin-grid__loading">Loading…</div>
+        </div>
       </section>
 
     </main>
@@ -178,11 +225,24 @@
     // =========================================================
     var ADMIN_PASSWORD = 'kleos2026';
     var SESSION_KEY    = 'admin_auth';
-    var STORAGE_KEYS   = { kits: 'admin_kits', components: 'admin_components' };
-    var DATA_SOURCES   = { kits: 'data/kits.json', components: 'data/components.json' };
+    var STORAGE_KEYS   = {
+      kits: 'admin_kits',
+      components: 'admin_components',
+      dealers: 'admin_dealers',
+      faq: 'admin_faq',
+      gallery: 'admin_gallery'
+    };
+    var DATA_SOURCES   = {
+      kits: 'data/kits.json',
+      components: 'data/components.json',
+      dealers: 'data/dealers.json',
+      faq: 'data/faq.json',
+      gallery: 'data/gallery.json'
+    };
+    var FAQ_CATEGORIES = ['general', 'installation-tips'];
 
     // In-memory working copies
-    var state = { kits: [], components: [] };
+    var state = { kits: [], components: [], dealers: [], faq: [], gallery: [] };
 
     // =========================================================
     // ELEMENTS
@@ -353,6 +413,26 @@
     function renderEntity(entity) {
       if (entity === 'kits') renderKits();
       else if (entity === 'components') renderComponents();
+      else if (entity === 'dealers') renderDealers();
+      else if (entity === 'faq') renderFaq();
+      else if (entity === 'gallery') renderGallery();
+    }
+
+    function truncate(str, n) {
+      var s = String(str == null ? '' : str);
+      if (s.length <= n) return s;
+      return s.slice(0, n - 1).replace(/\s+$/, '') + '…';
+    }
+
+    function galleryCategories() {
+      var seen = {};
+      var out = [];
+      state.gallery.forEach(function (g) {
+        var c = (g && g.category) || '';
+        if (c && !seen[c]) { seen[c] = true; out.push(c); }
+      });
+      out.sort(function (a, b) { return a.localeCompare(b); });
+      return out;
     }
 
     function renderKits() {
@@ -400,26 +480,141 @@
       tbody.innerHTML = html;
     }
 
+    function renderDealers() {
+      var tbody = document.getElementById('dealersTbody');
+      var items = state.dealers;
+      if (!items.length) {
+        tbody.innerHTML = '<tr class="admin-table__empty"><td colspan="7">No dealers yet. Click “Add New Dealer”.</td></tr>';
+        return;
+      }
+      var html = '';
+      items.forEach(function (d, i) {
+        var site = d.website
+          ? '<a href="' + esc(d.website) + '" target="_blank" rel="noopener noreferrer">' + esc(d.website.replace(/^https?:\/\//, '')) + '</a>'
+          : '';
+        html += ''
+          + '<tr class="admin-row" data-index="' + i + '">'
+          +   '<td class="admin-row__name">' + esc(d.name) + '</td>'
+          +   '<td>' + esc(d.city) + '</td>'
+          +   '<td>' + esc(d.state) + '</td>'
+          +   '<td>' + esc(d.country) + '</td>'
+          +   '<td>' + esc(d.phone) + '</td>'
+          +   '<td>' + site + '</td>'
+          +   '<td class="admin-table__actions">'
+          +     '<button type="button" class="admin-btn admin-btn--sm" data-action="edit" data-entity="dealers" data-index="' + i + '">Edit</button>'
+          +     '<button type="button" class="admin-btn admin-btn--sm admin-btn--danger" data-action="delete" data-entity="dealers" data-index="' + i + '">Delete</button>'
+          +   '</td>'
+          + '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderFaq() {
+      var tbody = document.getElementById('faqTbody');
+      var items = state.faq;
+      if (!items.length) {
+        tbody.innerHTML = '<tr class="admin-table__empty"><td colspan="3">No questions yet. Click “Add New Question”.</td></tr>';
+        return;
+      }
+      var html = '';
+      items.forEach(function (q, i) {
+        html += ''
+          + '<tr class="admin-row" data-index="' + i + '">'
+          +   '<td class="admin-row__name" title="' + esc(q.question) + '">' + esc(truncate(q.question, 60)) + '</td>'
+          +   '<td>' + esc(q.category) + '</td>'
+          +   '<td class="admin-table__actions">'
+          +     '<button type="button" class="admin-btn admin-btn--sm" data-action="edit" data-entity="faq" data-index="' + i + '">Edit</button>'
+          +     '<button type="button" class="admin-btn admin-btn--sm admin-btn--danger" data-action="delete" data-entity="faq" data-index="' + i + '">Delete</button>'
+          +   '</td>'
+          + '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderGallery() {
+      var grid = document.getElementById('galleryGrid');
+      var items = state.gallery;
+      if (!items.length) {
+        grid.innerHTML = '<div class="admin-grid__empty">No photos yet. Click “Add New Photo”.</div>';
+        return;
+      }
+      var html = '';
+      items.forEach(function (g, i) {
+        html += ''
+          + '<div class="admin-gallery-card" data-index="' + i + '">'
+          +   '<div class="admin-gallery-card__thumb">'
+          +     (g.imageUrl ? '<img src="' + esc(g.imageUrl) + '" alt="' + esc(g.caption || '') + '" loading="lazy" />' : '')
+          +   '</div>'
+          +   '<div class="admin-gallery-card__body">'
+          +     '<div class="admin-gallery-card__caption">' + esc(g.caption || '(untitled)') + '</div>'
+          +     (g.category ? '<span class="admin-gallery-card__badge">' + esc(g.category) + '</span>' : '')
+          +   '</div>'
+          +   '<div class="admin-gallery-card__actions">'
+          +     '<button type="button" class="admin-btn admin-btn--sm" data-action="edit" data-entity="gallery" data-index="' + i + '">Edit</button>'
+          +     '<button type="button" class="admin-btn admin-btn--sm admin-btn--danger" data-action="delete" data-entity="gallery" data-index="' + i + '">Delete</button>'
+          +   '</div>'
+          + '</div>';
+      });
+      grid.innerHTML = html;
+    }
+
     // =========================================================
     // INLINE EDIT FORM
     // =========================================================
     function closeAllForms(entity) {
+      if (entity === 'gallery') {
+        var grid = document.getElementById('galleryGrid');
+        if (!grid) return;
+        grid.querySelectorAll('.admin-form-card').forEach(function (fr) { fr.remove(); });
+        grid.querySelectorAll('.admin-gallery-card.is-editing').forEach(function (c) { c.classList.remove('is-editing'); });
+        return;
+      }
       var tbody = document.getElementById(entity + 'Tbody');
       if (!tbody) return;
       tbody.querySelectorAll('.admin-form-row').forEach(function (fr) { fr.remove(); });
       tbody.querySelectorAll('.admin-row.is-editing').forEach(function (r) { r.classList.remove('is-editing'); });
     }
 
+    function formColspan(entity) {
+      if (entity === 'kits') return 4;
+      if (entity === 'components') return 3;
+      if (entity === 'dealers') return 7;
+      if (entity === 'faq') return 3;
+      return 1;
+    }
+
     function openEditForm(entity, index) {
       closeAllForms(entity);
       var item = index === -1 ? blankItem(entity) : Object.assign({}, state[entity][index] || {});
-      var colspan = entity === 'kits' ? 4 : 3;
-      var tbody = document.getElementById(entity + 'Tbody');
 
+      if (entity === 'gallery') {
+        var grid = document.getElementById('galleryGrid');
+        var wrap = document.createElement('div');
+        wrap.className = 'admin-form-card';
+        wrap.innerHTML = buildFormHtml(entity, item, index);
+
+        if (index === -1) {
+          grid.insertBefore(wrap, grid.firstChild);
+        } else {
+          var card = grid.querySelector('.admin-gallery-card[data-index="' + index + '"]');
+          if (card) {
+            card.classList.add('is-editing');
+            card.parentNode.insertBefore(wrap, card.nextSibling);
+          } else {
+            grid.appendChild(wrap);
+          }
+        }
+
+        var firstGalleryInput = wrap.querySelector('input, textarea, select');
+        if (firstGalleryInput) firstGalleryInput.focus();
+        return;
+      }
+
+      var tbody = document.getElementById(entity + 'Tbody');
       var formRow = document.createElement('tr');
       formRow.className = 'admin-form-row';
       var td = document.createElement('td');
-      td.colSpan = colspan;
+      td.colSpan = formColspan(entity);
       td.innerHTML = buildFormHtml(entity, item, index);
       formRow.appendChild(td);
 
@@ -435,7 +630,7 @@
         }
       }
 
-      var firstInput = formRow.querySelector('input, textarea');
+      var firstInput = formRow.querySelector('input, textarea, select');
       if (firstInput) firstInput.focus();
     }
 
@@ -443,13 +638,37 @@
       if (entity === 'kits') {
         return { id: '', name: '', slug: '', category: '', yearRange: '', description: '' };
       }
-      return { id: '', name: '', slug: '', category: '', description: '', specs: [] };
+      if (entity === 'components') {
+        return { id: '', name: '', slug: '', category: '', description: '', specs: [] };
+      }
+      if (entity === 'dealers') {
+        return { id: '', name: '', city: '', state: '', country: '', phone: '', website: '' };
+      }
+      if (entity === 'faq') {
+        return { id: '', question: '', answer: '', category: 'general' };
+      }
+      if (entity === 'gallery') {
+        return { id: '', imageUrl: '', caption: '', category: '' };
+      }
+      return {};
+    }
+
+    function addLabelFor(entity, index, item) {
+      if (index !== -1) {
+        if (entity === 'faq') return 'Editing: ' + esc(truncate(item.question || '(untitled)', 60));
+        if (entity === 'gallery') return 'Editing: ' + esc(item.caption || '(untitled)');
+        return 'Editing: ' + esc(item.name || '(untitled)');
+      }
+      if (entity === 'kits') return 'Add New Kit';
+      if (entity === 'components') return 'Add New Component';
+      if (entity === 'dealers') return 'Add New Dealer';
+      if (entity === 'faq') return 'Add New Question';
+      if (entity === 'gallery') return 'Add New Photo';
+      return 'Add';
     }
 
     function buildFormHtml(entity, item, index) {
-      var title = index === -1
-        ? (entity === 'kits' ? 'Add New Kit' : 'Add New Component')
-        : 'Editing: ' + esc(item.name || '(untitled)');
+      var title = addLabelFor(entity, index, item);
 
       var fields = '';
       if (entity === 'kits') {
@@ -458,13 +677,33 @@
           + fieldText('category', 'Category', item.category)
           + fieldText('yearRange', 'Year Range', item.yearRange)
           + fieldTextarea('description', 'Description', item.description);
-      } else {
+      } else if (entity === 'components') {
         var specsStr = Array.isArray(item.specs) ? item.specs.join(', ') : '';
         fields = ''
           + fieldText('name', 'Name', item.name)
           + fieldText('category', 'Category', item.category)
           + fieldTextarea('description', 'Description', item.description)
           + fieldText('specs', 'Specs (comma-separated)', specsStr);
+      } else if (entity === 'dealers') {
+        fields = ''
+          + fieldText('name', 'Name', item.name)
+          + fieldText('city', 'City', item.city)
+          + fieldText('state', 'State', item.state)
+          + fieldText('country', 'Country', item.country)
+          + fieldText('phone', 'Phone', item.phone)
+          + fieldText('website', 'Website', item.website);
+      } else if (entity === 'faq') {
+        fields = ''
+          + fieldTextarea('question', 'Question', item.question)
+          + fieldTextarea('answer', 'Answer', item.answer)
+          + fieldSelect('category', 'Category', item.category, FAQ_CATEGORIES);
+      } else if (entity === 'gallery') {
+        var cats = galleryCategories();
+        if (item.category && cats.indexOf(item.category) === -1) cats.push(item.category);
+        fields = ''
+          + fieldText('imageUrl', 'Image URL', item.imageUrl)
+          + fieldText('caption', 'Caption', item.caption)
+          + fieldSelect('category', 'Category', item.category, cats);
       }
 
       return ''
@@ -493,6 +732,19 @@
         + '<label class="admin-field admin-field--full">'
         +   '<span class="admin-field__label">' + esc(label) + '</span>'
         +   '<textarea class="admin-field__input admin-field__input--area" name="' + name + '" rows="4">' + esc(val || '') + '</textarea>'
+        + '</label>';
+    }
+
+    function fieldSelect(name, label, val, options) {
+      var opts = '';
+      (options || []).forEach(function (o) {
+        var selected = (String(val) === String(o)) ? ' selected' : '';
+        opts += '<option value="' + esc(o) + '"' + selected + '>' + esc(o) + '</option>';
+      });
+      return ''
+        + '<label class="admin-field">'
+        +   '<span class="admin-field__label">' + esc(label) + '</span>'
+        +   '<select class="admin-field__input" name="' + name + '">' + opts + '</select>'
         + '</label>';
     }
 
@@ -541,14 +793,10 @@
       var raw = readForm(formEl);
       var list = state[entity].slice();
       var existing = index === -1 ? {} : Object.assign({}, list[index] || {});
-
-      if (!raw.name || !raw.name.trim()) {
-        toast('Name is required.', 'delete');
-        return;
-      }
-
       var next;
+
       if (entity === 'kits') {
+        if (!raw.name || !raw.name.trim()) { toast('Name is required.', 'delete'); return; }
         next = Object.assign(existing, {
           name: raw.name.trim(),
           category: (raw.category || '').trim(),
@@ -557,7 +805,8 @@
         });
         if (!next.id)   next.id = slugify(next.name);
         if (!next.slug) next.slug = next.id;
-      } else {
+      } else if (entity === 'components') {
+        if (!raw.name || !raw.name.trim()) { toast('Name is required.', 'delete'); return; }
         var specs = (raw.specs || '')
           .split(',')
           .map(function (s) { return s.trim(); })
@@ -570,6 +819,38 @@
         });
         if (!next.id)   next.id = slugify(next.name);
         if (!next.slug) next.slug = next.id;
+      } else if (entity === 'dealers') {
+        if (!raw.name || !raw.name.trim()) { toast('Name is required.', 'delete'); return; }
+        next = Object.assign(existing, {
+          name: raw.name.trim(),
+          city: (raw.city || '').trim(),
+          state: (raw.state || '').trim(),
+          country: (raw.country || '').trim(),
+          phone: (raw.phone || '').trim(),
+          website: (raw.website || '').trim()
+        });
+        if (!next.id) {
+          var parts = [next.name, next.city, next.state].filter(function (p) { return p; }).join(' ');
+          next.id = slugify(parts);
+        }
+      } else if (entity === 'faq') {
+        if (!raw.question || !raw.question.trim()) { toast('Question is required.', 'delete'); return; }
+        next = Object.assign(existing, {
+          question: raw.question.trim(),
+          answer: (raw.answer || '').trim(),
+          category: (raw.category || 'general').trim()
+        });
+        if (!next.id) next.id = slugify(next.question).slice(0, 60);
+      } else if (entity === 'gallery') {
+        if (!raw.imageUrl || !raw.imageUrl.trim()) { toast('Image URL is required.', 'delete'); return; }
+        next = Object.assign(existing, {
+          imageUrl: raw.imageUrl.trim(),
+          caption: (raw.caption || '').trim(),
+          category: (raw.category || '').trim()
+        });
+        if (!next.id) next.id = slugify(next.caption || next.imageUrl).slice(0, 60);
+      } else {
+        return;
       }
 
       if (index === -1) list.unshift(next);
@@ -582,10 +863,17 @@
       toast(index === -1 ? 'Added successfully.' : 'Saved successfully.', 'success');
     }
 
+    function itemLabel(entity, item) {
+      if (!item) return 'this item';
+      if (entity === 'faq') return truncate(item.question || 'this item', 60);
+      if (entity === 'gallery') return item.caption || 'this photo';
+      return item.name || 'this item';
+    }
+
     function handleDelete(entity, index) {
       var item = state[entity][index];
       if (!item) return;
-      var ok = window.confirm('Delete "' + (item.name || 'this item') + '"? This cannot be undone.');
+      var ok = window.confirm('Delete "' + itemLabel(entity, item) + '"? This cannot be undone.');
       if (!ok) return;
       var list = state[entity].slice();
       list.splice(index, 1);
@@ -612,8 +900,14 @@
     function initAdmin() {
       loadEntity('kits');
       loadEntity('components');
+      loadEntity('dealers');
+      loadEntity('faq');
+      loadEntity('gallery');
       updateBadge('kits');
       updateBadge('components');
+      updateBadge('dealers');
+      updateBadge('faq');
+      updateBadge('gallery');
     }
 
     // Boot
