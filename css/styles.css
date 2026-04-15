@@ -3133,12 +3133,104 @@ html:not(.js-ready) .reveal {
   flex-wrap: wrap;
 }
 
+/* ---------- Gallery Grid ---------- */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.admin-grid__loading,
+.admin-grid__empty {
+  grid-column: 1 / -1;
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  font-style: italic;
+}
+
+.admin-gallery-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s var(--ease);
+}
+
+.admin-gallery-card:hover { border-color: rgba(255, 255, 255, 0.15); }
+
+.admin-gallery-card.is-editing {
+  border-color: var(--accent);
+}
+
+.admin-gallery-card__thumb {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.admin-gallery-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-gallery-card__body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.admin-gallery-card__caption {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.admin-gallery-card__badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.admin-gallery-card__actions {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.admin-gallery-card__actions .admin-btn { flex: 1; }
+
+.admin-form-card {
+  grid-column: 1 / -1;
+  background: #121212;
+  border: 1px solid var(--border);
+}
+
 @media (max-width: 640px) {
   .admin-form__grid { grid-template-columns: 1fr; }
   .admin-panel__header { padding: 16px 20px; }
   .admin-tabs { padding: 0 16px; }
   .admin-tab { padding: 16px 14px; }
   .admin-content { padding: 28px 20px 60px; }
+  .admin-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
 }
 
 /* ---------- Toast ---------- */
