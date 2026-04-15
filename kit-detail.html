@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kit Detail — Frankenstein Trikes</title>
+  <meta name="description" content="Kit details: year/model breakdown, specs, pricing, and testimonials." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="nav__brand">Franken<span>stein</span></a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__menu" role="menubar">
+        <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+        <li class="nav__item nav__item--has-dropdown">
+          <a href="trike-kits.html" class="nav__link">Trike Kits <span class="nav__caret">▾</span></a>
+          <div class="nav__dropdown">
+            <a href="kit-detail.html?kit=sportster">Sportster</a>
+            <a href="kit-detail.html?kit=dyna">Dyna</a>
+            <a href="kit-detail.html?kit=softail">Softail</a>
+            <a href="kit-detail.html?kit=rocker-breakout">Rocker &amp; Breakout</a>
+            <a href="kit-detail.html?kit=fatboy-heritage">Fat Boy &amp; Heritage</a>
+            <a href="kit-detail.html?kit=flt-flh-roadking">FLT FLH &amp; Roadking</a>
+            <a href="kit-detail.html?kit=vrod">V-Rod</a>
+            <a href="kit-detail.html?kit=fxr">FXR</a>
+            <a href="kit-detail.html?kit=4-speed-fl-fx">4 Speed FL/FX</a>
+            <a href="kit-detail.html?kit=street">Street</a>
+            <a href="kit-detail.html?kit=yamaha">Yamaha</a>
+            <a href="kit-detail.html?kit=kawasaki">Kawasaki 1700</a>
+            <a href="kit-detail.html?kit=old-school">Frankenstein Old School</a>
+          </div>
+        </li>
+        <li class="nav__item nav__item--has-dropdown">
+          <a href="components.html" class="nav__link">Components <span class="nav__caret">▾</span></a>
+          <div class="nav__dropdown">
+            <a href="components.html#rear-ends">Rear Ends</a>
+            <a href="components.html#swing-arms">Swing Arms</a>
+            <a href="components.html#triple-trees">Triple Trees</a>
+            <a href="components.html#wheels-tires">Wheels &amp; Tires</a>
+            <a href="components.html#fenders">Fenders &amp; Brackets</a>
+            <a href="components.html#exhaust">Exhaust</a>
+            <a href="components.html#trailer-hitch">Trailer Hitch</a>
+            <a href="components.html#parking-brake">Parking Brake</a>
+            <a href="components.html#luggage-rack">Luggage Rack</a>
+            <a href="components.html#brakes">Brakes / Outboard Brakes</a>
+            <a href="components.html#tshirts">T-Shirts</a>
+            <a href="components.html#patches">Patches</a>
+          </div>
+        </li>
+        <li class="nav__item"><a href="pricing.html" class="nav__link">Pricing</a></li>
+        <li class="nav__item"><a href="gallery.html" class="nav__link">Gallery</a></li>
+        <li class="nav__item"><a href="faq.html" class="nav__link">FAQ</a></li>
+        <li class="nav__item"><a href="dealers.html" class="nav__link">Dealers</a></li>
+        <li class="nav__item"><a href="our-story.html" class="nav__link">Our Story</a></li>
+        <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <span class="eyebrow">Kit Detail</span>
+        <h1 class="page-header__title">Kit Detail.</h1>
+        <p class="page-header__sub">
+          Year breakdowns, specs, features, and pricing for the selected kit.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="text-secondary">Kit detail content populated from <code>data/kits.json</code> via query param.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Create Your Own Monster</span>
+        <span class="marquee__item">Made in Pleasanton, Kansas</span>
+        <span class="marquee__item">Hot Rod Trike Kits</span>
+        <span class="marquee__item">Bolt-On in One Day</span>
+        <span class="marquee__item">Since 1995</span>
+        <span class="marquee__item">3 Year Warranty</span>
+      </div>
+    </div>
+    <div class="footer__main">
+      <div>
+        <div class="footer__brand">Franken<span>stein</span></div>
+        <p class="footer__tag">Create Your Own Monster</p>
+        <p class="text-secondary" style="margin-top: 24px; font-size: 14px; max-width: 40ch;">
+          Complete, bolt-on trike conversion kits for Harley-Davidson and select
+          Yamaha &amp; Kawasaki models. Designed and manufactured in Pleasanton, Kansas.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Shop</h4>
+        <ul class="footer__list">
+          <li><a href="trike-kits.html">Trike Kits</a></li>
+          <li><a href="components.html">Components</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="dealers.html">Dealers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Support</h4>
+        <ul class="footer__list">
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="installation.html">Installation</a></li>
+          <li><a href="warranty.html">Warranty</a></li>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <h4 class="footer__heading">Visit</h4>
+        <p>9453 Trump Terr.<br/>Pleasanton, KS</p>
+        <p><a href="tel:+19133526788">(913) 352-6788</a></p>
+        <p><a href="mailto:Info@FrankensteinTrikes.com">Info@FrankensteinTrikes.com</a></p>
+        <p>Mon–Fri · 8a–5p CT</p>
+        <div class="footer__social" aria-label="Social">
+          <a href="https://www.facebook.com/FrankensteinTrikes/" aria-label="Facebook">Fb</a>
+          <a href="https://www.instagram.com/frankensteintrikes" aria-label="Instagram">Ig</a>
+          <a href="https://www.youtube.com/@frankensteintrikesusa" aria-label="YouTube">Yt</a>
+          <a href="https://www.pinterest.com/frankensteintrikes/" aria-label="Pinterest">Pn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>&copy; 2026 Frankenstein Unlimited. All rights reserved.</div>
+      <div>Built by <a href="https://kleosdesign.com" rel="noopener">Kleos.</a></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
