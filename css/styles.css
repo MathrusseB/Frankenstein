@@ -304,18 +304,43 @@ p:last-child {
 }
 
 .nav__brand {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 24px;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   color: var(--text);
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.nav__logo {
+  display: block;
+  height: 52px;
+  width: auto;
+  max-width: 100%;
   flex-shrink: 0;
 }
 
-.nav__brand span {
+.nav__brand-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nav__brand-text span {
   color: var(--accent);
+}
+
+/* On mobile (where the hamburger takes over) show the logo alone. */
+@media (max-width: 1024px) {
+  .nav__brand-text { display: none; }
+}
+
+@media (max-width: 560px) {
+  .nav__logo { height: 44px; }
 }
 
 .nav__menu {
@@ -850,16 +875,30 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .footer__brand {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  text-transform: uppercase;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   margin-bottom: 16px;
 }
 
-.footer__brand span { color: var(--accent); }
+.footer__logo {
+  display: block;
+  height: 48px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.footer__brand-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  color: var(--text);
+}
+
+.footer__brand-text span { color: var(--accent); }
 
 .footer__tag {
   font-size: 12px;
@@ -3478,5 +3517,134 @@ select { max-width: 100%; }
 /* Lightbox accessibility on touch: larger tap targets already in place */
 @media (max-width: 400px) {
   .lightbox { padding: 48px 12px; }
+}
+
+/* =========================================================
+   LOGO — Brand identity treatments
+   ========================================================= */
+
+/* ---------- Hero logo (homepage) ---------- */
+.hero__logo-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 40px;
+  padding: 16px 0;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.hero__logo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -40% -20%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(178, 34, 34, 0.55) 0%,
+    rgba(178, 34, 34, 0.18) 35%,
+    rgba(178, 34, 34, 0) 70%
+  );
+  filter: blur(8px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__logo {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: clamp(70px, 11vw, 130px);
+  width: auto;
+  max-width: 100%;
+  filter: drop-shadow(0 0 24px rgba(178, 34, 34, 0.45))
+          drop-shadow(0 8px 28px rgba(0, 0, 0, 0.55));
+}
+
+/* Fade-in-down on load — completes before headline word reveal */
+.js-ready .hero__logo-wrap {
+  opacity: 0;
+  transform: translateY(-32px);
+  animation: heroLogoIn 0.75s var(--ease) 120ms forwards;
+}
+
+@keyframes heroLogoIn {
+  0%   { opacity: 0; transform: translateY(-32px); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* No-JS / reduced motion fallback */
+html:not(.js-ready) .hero__logo-wrap {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-ready .hero__logo-wrap {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Footer logo lockup (compact tweaks per breakpoint) ---------- */
+@media (max-width: 560px) {
+  .footer__logo { height: 40px; }
+  .footer__brand { gap: 12px; }
+}
+
+/* ---------- Admin login gate logo ---------- */
+.admin-gate__logo {
+  display: block;
+  height: 56px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto 16px;
+  filter: drop-shadow(0 0 18px rgba(178, 34, 34, 0.35));
+}
+
+/* ---------- Admin panel header logo lockup ---------- */
+.admin-panel__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+}
+
+.admin-panel__logo-img {
+  display: block;
+  height: 36px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.admin-panel__logo-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.admin-panel__logo-text span { color: var(--accent); }
+
+@media (max-width: 560px) {
+  .admin-panel__logo-text { display: none; }
+  .admin-panel__logo-img { height: 32px; }
+}
+
+/* ---------- Our Story editorial logo ---------- */
+.editorial__brand {
+  margin-bottom: 24px;
+}
+
+.editorial__logo {
+  display: block;
+  height: clamp(56px, 7vw, 80px);
+  width: auto;
+  max-width: 100%;
+  filter: drop-shadow(0 0 16px rgba(178, 34, 34, 0.3));
 }
 

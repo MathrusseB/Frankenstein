@@ -174,10 +174,21 @@
     heroHeadline.innerHTML = '';
     heroHeadline.appendChild(frag);
     heroHeadline.dataset.wordSplit = 'true';
-    // Trigger on next frame so transition animates.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => heroHeadline.classList.add('is-revealed'));
-    });
+    // If the hero logo animation is in play, wait for it to finish
+    // before kicking off the headline word reveal — gives the brand
+    // a moment to "land" before the type begins to lift.
+    const heroLogoWrap = document.querySelector('.hero__logo-wrap');
+    const headlineDelay = (heroLogoWrap && !prefersReducedMotion) ? 950 : 0;
+    const triggerReveal = () => heroHeadline.classList.add('is-revealed');
+    if (headlineDelay > 0) {
+      setTimeout(() => {
+        requestAnimationFrame(triggerReveal);
+      }, headlineDelay);
+    } else {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(triggerReveal);
+      });
+    }
   }
 
   /* -----------------------------------------------------
