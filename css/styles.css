@@ -3273,3 +3273,210 @@ html:not(.js-ready) .reveal {
     max-width: none;
   }
 }
+
+/* =========================================================
+   POLISH — WORD REVEAL, PARALLAX, MOBILE SAFETY
+   ========================================================= */
+
+/* ---------- Hero headline word reveal ---------- */
+.js-ready .hero__headline .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 0.85;
+  padding-bottom: 0.05em;
+}
+
+.js-ready .hero__headline .word__inner {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 0.9s var(--ease), opacity 0.9s var(--ease);
+  will-change: transform, opacity;
+}
+
+.js-ready .hero__headline.is-revealed .word__inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* When word-reveal is active, the headline itself should stay visible —
+   word inners handle the reveal animation. */
+.js-ready .hero__headline.reveal,
+.js-ready .hero__headline.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* No-JS / reduced-motion fallback */
+html:not(.js-ready) .hero__headline .word,
+html:not(.js-ready) .hero__headline .word__inner {
+  display: inline;
+  transform: none;
+  opacity: 1;
+  overflow: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-ready .hero__headline .word__inner {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* ---------- Parallax hero media ---------- */
+/* Body class `parallax-enabled` is toggled by JS for desktop + motion-allowed viewers. */
+.parallax-enabled .hero__media {
+  background-attachment: fixed;
+}
+
+.parallax-enabled .kit-hero__media,
+.parallax-enabled .two-col__media {
+  /* Subtle inner parallax: slight scale so background reads as depthful. */
+  background-attachment: scroll;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-enabled .hero__media {
+    background-attachment: scroll;
+  }
+}
+
+/* ---------- Reveal polish ---------- */
+/* The reveal transition now accepts per-item delay from JS stagger. */
+.js-ready .reveal {
+  transition-property: opacity, transform;
+  transition-duration: 0.8s;
+  transition-timing-function: var(--ease);
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-ready .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Mobile safety — 393px audit ---------- */
+@media (max-width: 560px) {
+  :root { --gutter: 24px; }
+
+  /* Allow large words to wrap rather than overflow */
+  .hero__headline,
+  .page-header__title,
+  .kit-hero__title,
+  .cta-band__title,
+  .cta-strip__title,
+  .kit-empty__title,
+  .admin-gate__title {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Gateway items: tighten padding & prevent number/title overflow */
+  .gateway__item {
+    padding: 28px var(--gutter);
+  }
+
+  /* Pullquote & story-quote text sizing */
+  .pullquote__text { font-size: clamp(1.5rem, 7vw, 2.25rem); }
+
+  /* Footer text spacing */
+  .footer__main { padding: 60px var(--gutter); }
+  .footer__bottom { padding: 20px var(--gutter); }
+
+  /* CTA strip: stack phone below title */
+  .cta-strip__inner { gap: 24px; }
+
+  /* Contact strip: single-column on narrow screens */
+  .contact-strip { grid-template-columns: 1fr; }
+  .contact-strip__item {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 28px var(--gutter);
+  }
+  .contact-strip__item:last-child { border-bottom: 0; }
+
+  /* Social links on contact strip stack */
+  .contact-strip__value[style] {
+    flex-wrap: wrap;
+    gap: 12px !important;
+  }
+
+  /* Hero inner padding tighter */
+  .hero__inner {
+    padding-top: 96px;
+  }
+
+  /* Filter chips shrink slightly */
+  .filter-chip {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+
+  /* Marquee font down a touch */
+  .marquee__item {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    gap: 32px;
+  }
+  .marquee__track { gap: 32px; }
+
+  /* Admin content + form padding tighten */
+  .admin-panel__header { padding: 14px 16px; }
+  .admin-tabs { padding: 0 8px; }
+  .admin-tab { padding: 14px 12px; font-size: 12px; letter-spacing: 0.15em; }
+  .admin-content { padding: 24px 16px 56px; }
+  .admin-pane__head { gap: 16px; }
+  .admin-form { padding: 20px; }
+  .admin-table thead th,
+  .admin-table tbody td { padding: 12px 14px; }
+}
+
+/* At very narrow widths (~393px iPhone) keep headlines safe */
+@media (max-width: 400px) {
+  .hero__headline {
+    font-size: clamp(3rem, 13vw, 4.5rem);
+  }
+
+  .page-header__title,
+  .kit-hero__title {
+    font-size: clamp(2.5rem, 11vw, 4rem);
+  }
+
+  .cta-band__title {
+    font-size: clamp(2.25rem, 10vw, 3.5rem);
+  }
+
+  /* Become-dealer stacks */
+  .become-dealer__inner { gap: 24px; }
+
+  /* Gateway item title size */
+  .gateway__title { font-size: clamp(1.75rem, 8vw, 2.5rem); }
+}
+
+/* Admin panel header wraps gracefully on small screens */
+@media (max-width: 560px) {
+  .admin-panel__header { flex-direction: column; align-items: flex-start; }
+  .admin-panel__actions { width: 100%; justify-content: space-between; }
+}
+
+/* Prevent any inline-width inputs from blowing past the viewport */
+input,
+textarea,
+select { max-width: 100%; }
+
+/* Safety: keep scrollable tables and tabs from forcing page overflow */
+.admin-table-wrap,
+.admin-tabs {
+  max-width: 100%;
+}
+
+/* Lightbox accessibility on touch: larger tap targets already in place */
+@media (max-width: 400px) {
+  .lightbox { padding: 48px 12px; }
+}
+

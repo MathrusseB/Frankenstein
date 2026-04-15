@@ -67,9 +67,9 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">Customer Builds &amp; Product Photos</span>
-        <h1 class="page-header__title">Gallery.</h1>
-        <p class="page-header__sub">
+        <span class="eyebrow reveal">Customer Builds &amp; Product Photos</span>
+        <h1 class="page-header__title reveal">Gallery.</h1>
+        <p class="page-header__sub reveal">
           Completed trikes from customers across the US, Tasmania, and beyond.
           Photos courtesy of Frankenstein Trikes riders.
         </p>
@@ -78,7 +78,7 @@
 
     <section class="section">
       <div class="container">
-        <div class="filter-bar" id="galleryFilters" role="tablist" aria-label="Gallery categories">
+        <div class="filter-bar reveal" id="galleryFilters" role="tablist" aria-label="Gallery categories">
           <button type="button" class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
           <button type="button" class="filter-chip" data-filter="sportster" role="tab">Sportster</button>
           <button type="button" class="filter-chip" data-filter="dyna" role="tab">Dyna</button>
@@ -239,16 +239,8 @@
           </figure>
         `).join('');
 
-        if ('IntersectionObserver' in window) {
-          const io = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                io.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-          grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        if (window.FrankReveal) {
+          window.FrankReveal.apply(grid);
         } else {
           grid.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
         }

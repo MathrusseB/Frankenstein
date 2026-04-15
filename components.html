@@ -67,9 +67,9 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">Individual Parts &amp; Upgrades</span>
-        <h1 class="page-header__title">Components.</h1>
-        <p class="page-header__sub">
+        <span class="eyebrow reveal">Individual Parts &amp; Upgrades</span>
+        <h1 class="page-header__title reveal">Components.</h1>
+        <p class="page-header__sub reveal">
           Individual parts for custom builds — from 9&rdquo; Ford street/strip
           rear ends to T-shirts. All Frankenstein-quality.
         </p>
@@ -78,7 +78,7 @@
 
     <section class="section">
       <div class="container">
-        <div class="filter-bar" id="componentFilters" role="tablist" aria-label="Component categories">
+        <div class="filter-bar reveal" id="componentFilters" role="tablist" aria-label="Component categories">
           <button type="button" class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
           <button type="button" class="filter-chip" data-filter="rear-ends" role="tab">Rear Ends</button>
           <button type="button" class="filter-chip" data-filter="swing-arms" role="tab">Swing Arms</button>
@@ -102,7 +102,7 @@
 
     <section class="cta-strip">
       <div class="container">
-        <div class="cta-strip__inner">
+        <div class="cta-strip__inner reveal">
           <div>
             <h2 class="cta-strip__title">Ready to Build Your Monster?</h2>
             <a href="tel:+19133526788" class="cta-strip__phone">Call to Order · (913) 352-6788</a>
@@ -226,16 +226,8 @@
           </article>
         `).join('');
 
-        if ('IntersectionObserver' in window) {
-          const io = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                io.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-          grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        if (window.FrankReveal) {
+          window.FrankReveal.apply(grid);
         } else {
           grid.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
         }
