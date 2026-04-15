@@ -22,19 +22,19 @@
         <li class="nav__item nav__item--has-dropdown">
           <a href="trike-kits.html" class="nav__link">Trike Kits <span class="nav__caret">▾</span></a>
           <div class="nav__dropdown">
-            <a href="kit-detail.html?kit=sportster">Sportster</a>
-            <a href="kit-detail.html?kit=dyna">Dyna</a>
-            <a href="kit-detail.html?kit=softail">Softail</a>
-            <a href="kit-detail.html?kit=rocker-breakout">Rocker &amp; Breakout</a>
-            <a href="kit-detail.html?kit=fatboy-heritage">Fat Boy &amp; Heritage</a>
-            <a href="kit-detail.html?kit=flt-flh-roadking">FLT FLH &amp; Roadking</a>
-            <a href="kit-detail.html?kit=vrod">V-Rod</a>
-            <a href="kit-detail.html?kit=fxr">FXR</a>
-            <a href="kit-detail.html?kit=4-speed-fl-fx">4 Speed FL/FX</a>
-            <a href="kit-detail.html?kit=street">Street</a>
-            <a href="kit-detail.html?kit=yamaha">Yamaha</a>
-            <a href="kit-detail.html?kit=kawasaki">Kawasaki 1700</a>
-            <a href="kit-detail.html?kit=old-school">Frankenstein Old School</a>
+            <a href="kit-detail.html?id=sportster">Sportster</a>
+            <a href="kit-detail.html?id=dyna">Dyna</a>
+            <a href="kit-detail.html?id=softail">Softail</a>
+            <a href="kit-detail.html?id=rocker-breakout">Rocker &amp; Breakout</a>
+            <a href="kit-detail.html?id=fatboy-heritage">Fat Boy &amp; Heritage</a>
+            <a href="kit-detail.html?id=flt-flh-roadking">FLT FLH &amp; Roadking</a>
+            <a href="kit-detail.html?id=v-rod">V-Rod</a>
+            <a href="kit-detail.html?id=fxr">FXR</a>
+            <a href="kit-detail.html?id=4-speed-fl-fx">4 Speed FL/FX</a>
+            <a href="kit-detail.html?id=street">Street</a>
+            <a href="kit-detail.html?id=yamaha">Yamaha</a>
+            <a href="kit-detail.html?id=kawasaki-1700">Kawasaki 1700</a>
+            <a href="kit-detail.html?id=dna-old-school">Frankenstein Old School</a>
           </div>
         </li>
         <li class="nav__item nav__item--has-dropdown">
@@ -67,18 +67,52 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">13 Platforms</span>
+        <span class="eyebrow">Complete Conversion Kits</span>
         <h1 class="page-header__title">Trike Kits.</h1>
         <p class="page-header__sub">
           Complete bolt-on conversion kits for Harley-Davidson, Yamaha, and
-          Kawasaki. Select your platform to see year breakdowns, specs, and pricing.
+          Kawasaki. Filter by platform to find the kit engineered for your bike.
         </p>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <p class="text-secondary">Kit listings populated from <code>data/kits.json</code>.</p>
+        <div class="filter-bar" id="kitFilters" role="tablist" aria-label="Kit categories">
+          <button type="button" class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button type="button" class="filter-chip" data-filter="sportster" role="tab">Sportster</button>
+          <button type="button" class="filter-chip" data-filter="dyna" role="tab">Dyna</button>
+          <button type="button" class="filter-chip" data-filter="softail" role="tab">Softail</button>
+          <button type="button" class="filter-chip" data-filter="rocker-breakout" role="tab">Rocker &amp; Breakout</button>
+          <button type="button" class="filter-chip" data-filter="fatboy-heritage" role="tab">Fat Boy &amp; Heritage</button>
+          <button type="button" class="filter-chip" data-filter="flt-flh-roadking" role="tab">FLT/FLH/Roadking</button>
+          <button type="button" class="filter-chip" data-filter="v-rod" role="tab">V-Rod</button>
+          <button type="button" class="filter-chip" data-filter="fxr" role="tab">FXR</button>
+          <button type="button" class="filter-chip" data-filter="4-speed-fl-fx" role="tab">4 Speed FL/FX</button>
+          <button type="button" class="filter-chip" data-filter="street" role="tab">Street</button>
+          <button type="button" class="filter-chip" data-filter="yamaha" role="tab">Yamaha</button>
+          <button type="button" class="filter-chip" data-filter="kawasaki-1700" role="tab">Kawasaki</button>
+          <button type="button" class="filter-chip" data-filter="dna-old-school" role="tab">Old School</button>
+        </div>
+
+        <div class="kit-grid" id="kitGrid" aria-live="polite">
+          <p class="kit-grid__empty">Loading kits…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-strip">
+      <div class="container">
+        <div class="cta-strip__inner">
+          <div>
+            <h2 class="cta-strip__title">Ready to Build Your Monster?</h2>
+            <a href="tel:+19133526788" class="cta-strip__phone">Call to Order · (913) 352-6788</a>
+          </div>
+          <div class="cta-strip__actions">
+            <a href="tel:+19133526788" class="btn btn--primary">Call Now</a>
+            <a href="contact.html" class="btn btn--ghost">Email Us</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -144,5 +178,91 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const grid = document.getElementById('kitGrid');
+      const filterBar = document.getElementById('kitFilters');
+      let allKits = [];
+      let activeFilter = 'all';
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function renderKits() {
+        if (!grid) return;
+        const filtered = activeFilter === 'all'
+          ? allKits
+          : allKits.filter(k => k.id === activeFilter);
+
+        if (!filtered.length) {
+          grid.innerHTML = '<p class="kit-grid__empty">No kits match this filter.</p>';
+          return;
+        }
+
+        grid.innerHTML = filtered.map(kit => `
+          <a class="kit-card reveal" href="kit-detail.html?id=${encodeURIComponent(kit.id)}">
+            <div class="kit-card__media">
+              <img src="${escapeHtml(kit.imageUrl)}" alt="${escapeHtml(kit.name)} trike kit" loading="lazy" />
+            </div>
+            <div class="kit-card__body">
+              <span class="kit-card__meta">${escapeHtml(kit.yearRange || '')}</span>
+              <h3 class="kit-card__title">${escapeHtml(kit.name)}</h3>
+              <p class="kit-card__desc">${escapeHtml(kit.description)}</p>
+              <span class="arrow-link kit-card__cta">View Details</span>
+            </div>
+          </a>
+        `).join('');
+
+        // Wire up reveal observer for newly-rendered cards
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+          grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        } else {
+          grid.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+        }
+      }
+
+      if (filterBar) {
+        filterBar.addEventListener('click', (e) => {
+          const btn = e.target.closest('.filter-chip');
+          if (!btn) return;
+          activeFilter = btn.dataset.filter;
+          filterBar.querySelectorAll('.filter-chip').forEach(c => {
+            const isActive = c === btn;
+            c.classList.toggle('is-active', isActive);
+            c.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+          renderKits();
+        });
+      }
+
+      fetch('data/kits.json')
+        .then(r => {
+          if (!r.ok) throw new Error('Failed to load kits');
+          return r.json();
+        })
+        .then(data => {
+          allKits = Array.isArray(data) ? data : [];
+          renderKits();
+        })
+        .catch(err => {
+          if (grid) {
+            grid.innerHTML = `<p class="kit-grid__empty">Unable to load kits — ${escapeHtml(err.message)}.</p>`;
+          }
+        });
+    })();
+  </script>
 </body>
 </html>
