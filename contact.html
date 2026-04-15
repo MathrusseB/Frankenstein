@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Frankenstein Trikes</title>
-  <meta name="description" content="Reach Frankenstein Trikes by phone, email, or visit the Pleasanton, Kansas shop." />
+  <meta name="description" content="Get in touch with Frankenstein Trikes — phone, email, address, and order form. Mon–Fri, 8a–5p CT, Pleasanton, Kansas." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/styles.css" />
@@ -67,18 +67,182 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">Pleasanton, Kansas</span>
+        <span class="eyebrow">Get in Touch</span>
         <h1 class="page-header__title">Contact.</h1>
         <p class="page-header__sub">
           Talk to a product specialist about the exact kit for your year,
-          make, and model. Mon–Fri, 8a–5p CT.
+          make, and model. Mon–Fri, 8a–5p Central.
         </p>
       </div>
     </section>
 
+    <!-- =========================================================
+         FORM + INFO
+         ========================================================= -->
     <section class="section">
       <div class="container">
-        <p class="text-secondary">Contact form, map, and order info to be added.</p>
+        <div class="contact-layout">
+
+          <!-- Left: Form -->
+          <div class="reveal">
+            <span class="eyebrow">Send a Message</span>
+            <h2 class="section__title">Tell Us About Your Bike.</h2>
+            <p class="section__lede">
+              The more detail you give us up front, the faster we can quote
+              the right kit. All fields marked with a red dot are required.
+            </p>
+
+            <form class="form" id="contactForm" novalidate>
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label" for="cf-name">Name<span class="form__label-required">●</span></label>
+                  <input class="form__input" type="text" id="cf-name" name="name" autocomplete="name" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="cf-email">Email<span class="form__label-required">●</span></label>
+                  <input class="form__input" type="email" id="cf-email" name="email" autocomplete="email" required />
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="cf-phone">Phone</label>
+                <input class="form__input" type="tel" id="cf-phone" name="phone" autocomplete="tel" />
+              </div>
+
+              <div class="form__row form__row--three">
+                <div class="form__group">
+                  <label class="form__label" for="cf-year">Motorcycle Year<span class="form__label-required">●</span></label>
+                  <input class="form__input" type="text" id="cf-year" name="year" placeholder="e.g. 2018" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="cf-make">Make<span class="form__label-required">●</span></label>
+                  <input class="form__input" type="text" id="cf-make" name="make" placeholder="Harley-Davidson" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="cf-model">Model<span class="form__label-required">●</span></label>
+                  <input class="form__input" type="text" id="cf-model" name="model" placeholder="Road King" required />
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="cf-message">Message<span class="form__label-required">●</span></label>
+                <textarea class="form__textarea" id="cf-message" name="message" rows="6" placeholder="Tell us what you're trying to build, towing plans, color preferences, anything else we should know…" required></textarea>
+              </div>
+
+              <div class="form__status" role="status" aria-live="polite" id="cf-status"></div>
+
+              <div class="form__actions">
+                <button type="submit" class="btn btn--primary">Send Message</button>
+                <p class="form__disclaimer">
+                  We'll reply by phone or email within one business day. We
+                  never share your info.
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right: Info -->
+          <aside class="reveal">
+            <span class="eyebrow">Frankenstein HQ</span>
+            <h2 class="section__title" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">Pleasanton, Kansas.</h2>
+
+            <div class="info-stack" style="margin-top: 24px;">
+              <div class="info-block">
+                <div class="info-block__label">Call</div>
+                <div class="info-block__value"><a href="tel:+19133526788">(913) 352-6788</a></div>
+                <p class="info-block__detail">Fax · (913) 352-6868</p>
+              </div>
+              <div class="info-block">
+                <div class="info-block__label">Email</div>
+                <div class="info-block__value"><a href="mailto:Info@FrankensteinTrikes.com">Info@FrankensteinTrikes.com</a></div>
+              </div>
+              <div class="info-block">
+                <div class="info-block__label">Visit</div>
+                <div class="info-block__value">9453 Trump Terr.<br/>Pleasanton, KS</div>
+                <p class="info-block__detail">USA</p>
+              </div>
+              <div class="info-block">
+                <div class="info-block__label">Hours</div>
+                <div class="info-block__value">Mon – Fri<br/>8a – 5p Central</div>
+              </div>
+              <div class="info-block">
+                <div class="info-block__label">Follow</div>
+                <div class="info-block__social" aria-label="Social">
+                  <a href="https://www.facebook.com/FrankensteinTrikes/" aria-label="Facebook">Fb</a>
+                  <a href="https://www.instagram.com/frankensteintrikes" aria-label="Instagram">Ig</a>
+                  <a href="https://www.youtube.com/@frankensteintrikesusa" aria-label="YouTube">Yt</a>
+                  <a href="https://www.pinterest.com/frankensteintrikes/" aria-label="Pinterest">Pn</a>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         HOW TO ORDER + SHIPPING — two-column informational
+         ========================================================= -->
+    <section class="section">
+      <div class="container">
+        <div class="two-col">
+          <div class="reveal">
+            <span class="eyebrow">How to Order</span>
+            <h2 class="section__title">Simple Ordering Process.</h2>
+            <p class="install-overview">
+              You can purchase a complete Trike kit designed specifically for
+              your motorcycle, or order individual components to fabricate your
+              own custom trike. Orders can be placed directly with us or
+              through one of our authorized dealers.
+            </p>
+            <p class="install-overview">
+              To quote your kit, we need the <strong>year, make, and model</strong>
+              of your motorcycle. <strong>Payment in full is required at the
+              time of order.</strong>
+            </p>
+            <div class="btn-row">
+              <a href="pricing.html" class="btn btn--primary">View Pricing</a>
+              <a href="dealers.html" class="btn btn--ghost">Find a Dealer</a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <span class="eyebrow">Shipping &amp; Handling</span>
+            <h2 class="section__title">5 Days to Your Door.</h2>
+            <p class="install-overview">
+              Orders are <strong>usually shipped within 5 days</strong>. We ship
+              via insured domestic ground delivery to your business or home.
+            </p>
+            <p class="install-overview">
+              For easy handling, most Trike kits are packaged in
+              <strong>5 separate boxes</strong>, protected with expandable foam
+              to avoid shipping damage.
+            </p>
+            <p class="install-overview">
+              Tracking numbers are provided by phone or email as soon as your
+              kit leaves the shop.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CTA STRIP
+         ========================================================= -->
+    <section class="cta-strip">
+      <div class="container">
+        <div class="cta-strip__inner">
+          <div>
+            <h2 class="cta-strip__title">Prefer to Call?</h2>
+            <a href="tel:+19133526788" class="cta-strip__phone">(913) 352-6788 · Mon–Fri 8a–5p CT</a>
+          </div>
+          <div class="cta-strip__actions">
+            <a href="mailto:Info@FrankensteinTrikes.com" class="btn btn--primary">Email Us</a>
+            <a href="faq.html" class="btn btn--ghost">Read the FAQ</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -144,5 +308,44 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      var form = document.getElementById('contactForm');
+      var status = document.getElementById('cf-status');
+      if (!form || !status) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        status.style.color = '';
+
+        // Basic front-end validation
+        var required = form.querySelectorAll('[required]');
+        var missing = [];
+        required.forEach(function (el) {
+          if (!el.value.trim()) missing.push(el);
+        });
+
+        if (missing.length) {
+          status.textContent = 'Please complete all required fields.';
+          status.style.color = 'var(--accent)';
+          missing[0].focus();
+          return;
+        }
+
+        var email = form.querySelector('#cf-email');
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          status.textContent = 'Please enter a valid email address.';
+          status.style.color = 'var(--accent)';
+          email.focus();
+          return;
+        }
+
+        // Front-end only — no backend. Show confirmation.
+        status.textContent = 'Thanks — your message is queued. We\'ll be in touch shortly.';
+        form.reset();
+      });
+    })();
+  </script>
 </body>
 </html>

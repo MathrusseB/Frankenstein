@@ -2040,3 +2040,567 @@ html:not(.js-ready) .reveal {
 .become-dealer__contact:hover .become-dealer__contact-value {
   color: var(--accent);
 }
+
+/* =========================================================
+   INSTALLATION — TIPS LIST + PDF LINKS
+   ========================================================= */
+.install-overview {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.install-overview strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.tip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+  counter-reset: tip;
+}
+
+.tip-list > li {
+  position: relative;
+  padding: 28px 32px 28px 96px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  counter-increment: tip;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  transition: border-color 0.25s var(--ease);
+}
+
+.tip-list > li:hover {
+  border-color: rgba(178, 34, 34, 0.4);
+}
+
+.tip-list > li::before {
+  content: counter(tip, decimal-leading-zero);
+  position: absolute;
+  left: 32px;
+  top: 28px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  color: var(--accent);
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .tip-list > li {
+    padding: 24px 24px 24px 24px;
+  }
+  .tip-list > li::before {
+    position: static;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+.pdf-links {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.pdf-link {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 28px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+
+.pdf-link:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(178, 34, 34, 0.04);
+}
+
+.pdf-link__tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 6px 12px;
+  border: 1px solid rgba(178, 34, 34, 0.5);
+  line-height: 1;
+}
+
+.pdf-link__label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.pdf-link__arrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  color: var(--text-secondary);
+  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.pdf-link:hover .pdf-link__arrow {
+  color: var(--accent);
+  transform: translateX(6px);
+}
+
+@media (max-width: 560px) {
+  .pdf-link {
+    grid-template-columns: 1fr auto;
+  }
+  .pdf-link__tag {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+/* =========================================================
+   DOCUMENT LAYOUT (warranty)
+   ========================================================= */
+.doc {
+  max-width: 78ch;
+}
+
+.doc__section {
+  margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.doc__section:last-child {
+  margin-bottom: 0;
+}
+
+.doc__heading {
+  font-size: clamp(1.5rem, 2.75vw, 2.25rem);
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.doc__lead {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 28px;
+  max-width: 32ch;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.doc p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.doc p strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.doc ul {
+  padding: 0;
+  margin: 0 0 20px;
+  display: grid;
+  gap: 12px;
+  list-style: none;
+}
+
+.doc ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.doc ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 12px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.doc__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  padding: 8px 14px;
+  border: 1px solid rgba(212, 168, 75, 0.4);
+  margin-bottom: 24px;
+}
+
+/* =========================================================
+   PILLARS (Quality / Service / Value)
+   ========================================================= */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .pillars { grid-template-columns: 1fr; }
+}
+
+.pillar {
+  padding: clamp(40px, 5vw, 56px) clamp(32px, 3vw, 40px);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.pillar__num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.pillar__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.pillar__text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* =========================================================
+   EDITORIAL (Our Story)
+   ========================================================= */
+.editorial__lead {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  max-width: 26ch;
+  margin-bottom: 48px;
+}
+
+.editorial__body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(32px, 4vw, 64px);
+}
+
+@media (max-width: 900px) {
+  .editorial__body { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.editorial__body p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.editorial__body p strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.editorial__divider {
+  height: 1px;
+  background: var(--border);
+  margin: clamp(48px, 6vw, 80px) 0;
+}
+
+/* =========================================================
+   CONTACT — FORM + INFO
+   ========================================================= */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(48px, 5vw, 80px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+}
+
+.form {
+  display: grid;
+  gap: 24px;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form__row--three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 640px) {
+  .form__row,
+  .form__row--three { grid-template-columns: 1fr; }
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form__label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-secondary);
+}
+
+.form__label-required {
+  color: var(--accent);
+  margin-left: 4px;
+}
+
+.form__input,
+.form__textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+  border-radius: 0;
+}
+
+.form__input:focus,
+.form__textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg);
+}
+
+.form__input::placeholder,
+.form__textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 160px;
+}
+
+.form__status {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  min-height: 1em;
+}
+
+.form__actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.form__disclaimer {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 45ch;
+}
+
+/* Contact info stack */
+.info-stack {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.info-block {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-block:last-child {
+  border-bottom: 0;
+}
+
+.info-block__label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.info-block__value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.125rem, 1.75vw, 1.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.info-block__value a {
+  color: var(--text);
+}
+
+.info-block__value a:hover {
+  color: var(--accent);
+}
+
+.info-block__detail {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 6px;
+}
+
+.info-block__social {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.info-block__social a {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  transition: all 0.25s var(--ease);
+}
+
+.info-block__social a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* Section heading helper used across new pages */
+.section__title {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  margin-bottom: 16px;
+}
+
+.section__lede {
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 72ch;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+/* =========================================================
+   STORY CLOSING QUOTE
+   ========================================================= */
+.story-quote {
+  padding: clamp(80px, 10vw, 140px) 0;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.story-quote__text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 28ch;
+  margin: 0 auto 24px;
+  color: var(--text);
+}
+
+.story-quote__attr {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* =========================================================
+   SOCIAL ROW (our story)
+   ========================================================= */
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.social-row a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text);
+  transition: all 0.25s var(--ease);
+}
+
+.social-row a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
