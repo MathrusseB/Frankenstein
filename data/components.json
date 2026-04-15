@@ -1,3 +1,205 @@
-{
-  "components": []
-}
+[
+  {
+    "id": "rear-ends",
+    "name": "Rear Ends",
+    "slug": "rear-ends",
+    "category": "drivetrain",
+    "description": "Frankenstein Trikes rear end assemblies are built around 9\" Ford Street/Strip axles and engineered for a wide range of stock Harley-Davidson rear tire sizes. They are organized into four series based on tire capacity: the Standard Series for stock rear tires up to 170 (sprocket/pulley mounting surface 3 1/4\" from center); the 200 Series for tires up to 200 (mounting surface 4 1/4\" from center); the 250 Series for tires up to 250 (mounting surface 5 1/4\" from center); and the 300 Series for tires up to 300 (mounting surface 6 1/4\" from center). Each rear end is offered in a variety of widths (30\", 32\", 34\", 36\", 38\", 40\", 42\") to match the trike kit and wheel/tire package, and all use sealed bearings, a 5 on 4.5\" bolt pattern, and 1/2\"-20 threaded studs. Hot Rod and Sport versions feature 6061 T6 billet aluminum center sections, with optional billet 4-piston calipers and stainless steel rotors available for outboard brake configurations.",
+    "specs": [
+      "9\" Ford Street/Strip Axles",
+      "Sealed Bearings",
+      "5 on 4.5\" Bolt Pattern",
+      "1/2\"-20 Threaded Studs",
+      "6061 T6 Billet Aluminum",
+      "Billet 4 Piston Caliper",
+      "Stainless Steel Rotor",
+      "Standard Series: stock rear tires up to 170",
+      "200 Series: stock rear tires up to 200",
+      "250 Series: stock rear tires up to 250",
+      "300 Series: stock rear tires up to 300"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/Frankenstein Trikes 34 Light Sport Fan 260 001.jpg"
+  },
+  {
+    "id": "swing-arms",
+    "name": "Swing Arms",
+    "slug": "swing-arms",
+    "category": "suspension",
+    "description": "Frankenstein Trikes swing arms are purpose-built replacements for a wide variety of Harley-Davidson platforms, including Sportster '04 & up, Sportster '57-'03, Dyna Glide '06-'17, Dyna Glide '90-'05, Softail (multiple year ranges), Softail Rocker and Breakout, FLT/FLH & Road King, V-ROD '02-'17, FXR, FL & FX 4 Speed, and Street '14 & up. All swing arms are constructed from steel and powder coated matte black, and are compatible with Frankenstein rear end widths ranging from 30\" to 42\" depending on the model. Rear End Mounting Plates are also offered to tie the swing arm to the rear end assembly. A core charge applies to certain models and is refunded upon receipt and inspection of the returned stock swing arm; chrome swing arms will not be accepted, and core returns must be stock Harley-Davidson units for the correct year and model that the kit was purchased for.",
+    "specs": [
+      "Constructed from steel",
+      "Powder coated matte black",
+      "Fits 30\", 34\", 38\", 40\", and 42\" rear ends depending on model",
+      "Model-specific fitment for Harley-Davidson platforms",
+      "Core charge refunded upon receipt and inspection",
+      "Chrome swing arms not accepted as cores",
+      "Rear End Mounting Plates available"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/components_swingarms_04-upsportster_thumb.jpg"
+  },
+  {
+    "id": "triple-trees",
+    "name": "Triple Trees",
+    "slug": "triple-trees",
+    "category": "steering",
+    "description": "Frankenstein Trikes Raked Triple Trees (POWER STEER) are designed to make your trike easy to steer and are also suitable for motorcycles with sidecars. Each set is CNC-machined to the highest standard from 6061 T6 billet aluminum and is offered in both polished and machine finishes. A wide catalog of fitments is available, including Sportster (2011+ Custom, 1988+, Super-Low, Forty-Eight), Dyna (standard, Wide Glide, Fat Bob), Softail (standard and Fat Boy & Heritage), FXR, FLT/FLH Road King, and V-Rod (standard and Muscle). Rake angles range from 3 degrees through 8 degrees, with offset measurements from 39mm through 55mm so that geometry can be matched to the specific bike and trike kit. These triple trees are made in Pleasanton, KS USA and are not intended for use on stock two-wheel motorcycles.",
+    "specs": [
+      "6061 T6 billet aluminum construction",
+      "Available in polished and machine finish",
+      "Rake angles from 3 degrees through 8 degrees",
+      "Offset measurements from 39mm through 55mm",
+      "Model-specific fitment per motorcycle",
+      "Designed for trikes and motorcycles with sidecars",
+      "Not intended for stock two-wheel motorcycles",
+      "Made in Pleasanton, KS USA"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/raked-triple-trees-top-left.jpg"
+  },
+  {
+    "id": "wheels-tires",
+    "name": "Wheels & Tires",
+    "slug": "wheels-tires",
+    "category": "wheels",
+    "description": "Frankenstein Trikes offers a curated selection of wheels and tires packaged specifically for its trike conversion kits. The standard offering is the 15\" x 8\" ION Style 171 wheel, available in either polished (171-5865P) or matte black (171-5865MB) finish, paired with either General Altimax 215/60-15 tires or Hankook 265/50-15 tires. Every package ships as a set of two, mounted and balanced, with center caps, lug nuts, and valve stems included. Wheels use a 5 on 4 1/2\" bolt pattern with 3 1/4\" back spacing to fit the Frankenstein rear end and fender bracket geometry. Raised white letter tires can be mounted with the lettering facing inside or outside at the customer's preference. Customers considering custom wheel and tire combinations are directed to the site's measurement guide to confirm fender bracket compatibility.",
+    "specs": [
+      "15\" x 8\" ION Style 171 wheels",
+      "Available in Polished (171-5865P) or Matte Black (171-5865MB)",
+      "5 on 4 1/2\" bolt pattern",
+      "3 1/4\" back spacing",
+      "Center caps, lug nuts, and valve stems included",
+      "Tires mounted and balanced",
+      "Tire options: General Altimax 215/60-15 or Hankook 265/50-15",
+      "Raised white letters can be mounted inside or outside"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/Frankenstein Trikes 15 x 8 ION Style 171 Polished 260 001.jpg"
+  },
+  {
+    "id": "fenders-brackets",
+    "name": "Fenders & Brackets",
+    "slug": "fenders-brackets",
+    "category": "bodywork",
+    "description": "Frankenstein Trikes fenders are made from fiberglass and finished with a gray primer gel coat, pre-trimmed and drilled for fitment on the trike kit. Before installation, each fender should be washed with soap and water to eliminate any mold releasing agent residue; after mounting, alignment should be verified and the fender trimmed to specification as needed prior to paint and bodywork. Three styles are offered: 11\" short, 11\" long in the FL style, and a 12 3/4\" round fender. Fender brackets are made from steel and powder coated matte black, and are available in either one-piece or two-piece configurations to match the chosen fender. Custom wheel and tire combinations may require special order brackets supplied without powder coating so they can be modified and finished to suit the build. Pricing runs approximately $500-$1,100 with continental US shipping in the $55-$120 range.",
+    "specs": [
+      "Fenders made from fiberglass with gray primer gel coat",
+      "Fender sizes: 11\" short, 11\" long (FL style), 12 3/4\" round",
+      "Pre-trimmed and drilled for fitment",
+      "Brackets made from steel, powder coated matte black",
+      "Bracket options: one-piece or two-piece",
+      "Special order brackets available without powder coating for custom builds"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/frankenstein trikes 11 fenders.jpg"
+  },
+  {
+    "id": "exhaust",
+    "name": "Exhaust",
+    "slug": "exhaust",
+    "category": "exhaust",
+    "description": "Frankenstein Trikes offers model-specific exhaust systems engineered to clear the trike rear end, swing arm, and fender bracketry on converted Harley-Davidson platforms. Fitments include Sportster Exhaust, Dyna Exhaust, Softail Exhaust, Softail Fat Boy & Heritage Exhaust, and FL/FLH Road King Exhaust. Each system is designed as part of the complete Frankenstein trike conversion and is sold alongside the other components (rear ends, swing arms, wheels, brakes, and accessories) offered on the site. Detailed per-model specifications and pricing are provided on the individual category pages linked from this overview.",
+    "specs": [
+      "Sportster Exhaust",
+      "Dyna Exhaust",
+      "Softail Exhaust",
+      "Softail Fat Boy & Heritage Exhaust",
+      "FL/FLH Road King Exhaust"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/images/960header_footer_r1_c1.jpg"
+  },
+  {
+    "id": "trailer-hitch",
+    "name": "Trailer Hitch",
+    "slug": "trailer-hitch",
+    "category": "accessories",
+    "description": "The Frankenstein Trike's Trailer Hitch connects easily to the star plates on the Frankenstein rear end and accepts a standard 3/4\" shank. It is made from steel, powder coated matte black, and ships with grade 8 bolts for installation. The hitch is compatible with most Harley-Davidson models equipped with short stock rear fenders, but is not compatible with Fat Boy, Heritage, Deluxe, or FLT/FLH touring models. Pricing is $250.00 plus $30.00 shipping.",
+    "specs": [
+      "Connects to star plates",
+      "Accepts standard 3/4\" shank",
+      "Steel construction",
+      "Powder coated matte black",
+      "Grade 8 bolts included",
+      "Not compatible with Fat Boy, Heritage, Deluxe, or FLT/FLH touring models"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/images/components/trailer hitch/trailer_hitch_1.jpg"
+  },
+  {
+    "id": "parking-brake",
+    "name": "Parking Brake",
+    "slug": "parking-brake",
+    "category": "brakes",
+    "description": "The Frankenstein Trike's Parking Brake is a complete kit in which the caliper attaches to the rear end while the parking brake handle mounts to the fender bracket. The kit includes the caliper, parking brake handle, mounting brackets, cable, and all necessary hardware, so installation can be completed with the supplied parts. It is compatible with both the standard Frankenstein Trikes rear end and the Frankenstein Old School rear end. Pricing is $270.00 plus $35.00 shipping.",
+    "specs": [
+      "Compatible with Frankenstein Trikes rear end",
+      "Compatible with Frankenstein Old School rear end",
+      "Includes caliper",
+      "Includes parking brake handle",
+      "Includes mounting brackets, cable, and hardware",
+      "Caliper attaches to rear end; handle mounts to fender bracket"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/images/Frankenstein Parking Brake.jpg"
+  },
+  {
+    "id": "luggage-rack",
+    "name": "Luggage Rack",
+    "slug": "luggage-rack",
+    "category": "accessories",
+    "description": "The Frankenstein Trike's Luggage Rack connects easily to the rear fender struts of your bike. It is made from steel, powder coated matte black, and includes bolts for installation. The standard version fits Harley-Davidson Sportster, Harley Street, and Yamaha Bolt models, while the Two Up luggage rack is offered for Harley-Davidson Sportster and 2018 Harley-Davidson Softail Low Rider models. Both versions are priced at $180.00 plus $45.00 shipping.",
+    "specs": [
+      "Steel construction",
+      "Powder coated matte black",
+      "Bolts included for installation",
+      "Mounts to rear fender struts",
+      "Standard model fits Sportster, Harley Street, and Yamaha Bolt",
+      "Two Up model fits Sportster and 2018 Softail Low Rider"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/luggage rack 001.jpg"
+  },
+  {
+    "id": "outboard-brakes",
+    "name": "Outboard Brakes",
+    "slug": "outboard-brakes",
+    "category": "brakes",
+    "description": "The Frankenstein Outboard Brakes Complete Kit is a full brake system for the trike rear end, consisting of two rotors and rotor hats, one four-piston Hawg Halters caliper, two axle retainer/caliper brackets, brake lines with fittings, and ten longer axle studs. It is priced at $670.00 plus $45.00 shipping for customer installation, with an additional $600.00 for factory installation. Individual service parts are also sold separately: replacement Brake Pads for the four-piston Hawg Halters caliper at $39.00 per set plus $12.00 shipping; a Brake Rotor that fits 2000-and-newer Harley-Davidson motorcycles, matching Harley part number 41797-00, at $80.00 plus $24.00 shipping; and the four-piston Hawg Halters Caliper assembly at $325.00 plus $24.00 shipping, which includes brake pads, banjo bolt, and crush washers.",
+    "specs": [
+      "2 rotors and rotor hats",
+      "1 four-piston Hawg Halters caliper",
+      "2 axle retainer/caliper brackets",
+      "Brake lines and fittings",
+      "10 longer axle studs",
+      "Replacement brake pads available separately",
+      "Replacement rotor fits 2000+ HD (matches HD #41797-00)",
+      "Caliper kit includes pads, banjo bolt, and crush washers"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/Frankenstein Trikes Rotor.jpg"
+  },
+  {
+    "id": "t-shirts",
+    "name": "T-Shirts",
+    "slug": "t-shirts",
+    "category": "apparel",
+    "description": "Frankenstein Trikes branded apparel includes the Frankenstein Trikes 20th Anniversary Men's T-Shirt, the standard Frankenstein Trikes Men's T-Shirt, the Frankenstein Trikes Women's V-Neck T-Shirt, the Motorcycle Works 30th Anniversary Men's T-Shirt, and the Motorcycle Works Men's T-Shirt. The 20th Anniversary and Motorcycle Works 30th Anniversary designs commemorate company milestones, and the standard Frankenstein Trikes tees feature front and back graphics. All shirts are priced at $20.00 plus S/H, with sizing that varies by style: standard men's and women's styles are offered in Small through 3XL, while the 20th Anniversary shirt is only available in Large, XL, 2XL, and 3XL.",
+    "specs": [
+      "Frankenstein Trikes 20th Anniversary Men's T-Shirt",
+      "Frankenstein Trikes Men's T-Shirt",
+      "Frankenstein Trikes Women's V-Neck T-Shirt",
+      "Motorcycle Works 30th Anniversary Men's T-Shirt",
+      "Motorcycle Works Men's T-Shirt",
+      "Men's sizes: Small, Medium, Large, XL, 2XL, 3XL (varies by style)",
+      "Women's sizes: Small, Medium, Large, XL, 2XL, 3XL",
+      "20th Anniversary sizes: Large, XL, 2XL, 3XL only",
+      "$20.00 plus S/H"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/Frankenstein Trikes Mens Front.jpg"
+  },
+  {
+    "id": "patches",
+    "name": "Patches",
+    "slug": "patches",
+    "category": "apparel",
+    "description": "Frankenstein Trikes offers two embroidered patches for jackets and vests. The Frankenstein Trikes Large Patch is shown on the back of a jacket and is priced at $30.00. The Frankenstein Trikes Small Patch is shown on the front of a jacket and is priced at $7.00. Both patches feature the Frankenstein Trikes branding and are available directly from the company's website.",
+    "specs": [
+      "Large Patch - $30.00 (shown on back of jacket)",
+      "Small Patch - $7.00 (shown on front of jacket)",
+      "Frankenstein Trikes branded"
+    ],
+    "imageUrl": "https://frankensteintrikes.com/Frankenstein Trikes Big Patch 450 001.jpg"
+  }
+]

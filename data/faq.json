@@ -1,3 +1,116 @@
-{
-  "faq": []
-}
+[
+  {
+    "id": "faq-001",
+    "question": "Can I install the kit myself?",
+    "answer": "Yes, all kits are designed for owner installation. General mechanical knowledge is required. Trike kits are designed to be a simple bolt-on installation and can typically be completed in one day. If you are not comfortable installing the kit yourself, you can have it installed at any one of our authorized dealers.",
+    "category": "general"
+  },
+  {
+    "id": "faq-002",
+    "question": "Is it a straight axle?",
+    "answer": "No, it is a \"fixed axle\" with a Dana 30 Differential (spider gears) which allows the inside wheel to turn slower while turning a corner.",
+    "category": "general"
+  },
+  {
+    "id": "faq-003",
+    "question": "Does Frankenstein Trikes offer independent suspension?",
+    "answer": "No. During design we looked at the pros and cons of both. Additional weight and parts increase the chance of malfunction. While cornering, independent suspension tends to lean outward. Independent suspension has an advantage on very rough roads, but the disadvantages outweigh this. The H-D Tri Glide also uses a fixed axle.",
+    "category": "general"
+  },
+  {
+    "id": "faq-004",
+    "question": "How much weight does the Sport Trike add to the bike?",
+    "answer": "Our Sport Trike Kit adds only 120-150 lbs, compared to 300-700 lbs with other manufacturers.",
+    "category": "general"
+  },
+  {
+    "id": "faq-005",
+    "question": "What size tires and rims fit?",
+    "answer": "The hub accepts a Ford bolt pattern of 5 on 4.5\" with 1/2\"-20 threaded studs. Suggested wheel sizes are 15x8 with 3 1/4\" back spacing or 15x10 with 3 5/8\" back spacing. Custom wheels and tires may not work with our fenders and brackets.",
+    "category": "general"
+  },
+  {
+    "id": "faq-006",
+    "question": "Do I need dual outboard brakes?",
+    "answer": "Kits come standard with one caliper and rotor, providing plenty of stopping power for most riders. Outboard brakes are offered as an option for those towing heavy loads or trailers.",
+    "category": "general"
+  },
+  {
+    "id": "faq-007",
+    "question": "Do I have to install raked Triple Trees?",
+    "answer": "Raked triple trees are highly recommended to improve handling with the wider rear track. We offer our \"POWER STEER\" Triple Trees for all kits.",
+    "category": "general"
+  },
+  {
+    "id": "faq-008",
+    "question": "Would I have to change my shocks?",
+    "answer": "No, most applications accept the stock shocks. In the rare cases when they don't, new shocks are included with the kit.",
+    "category": "general"
+  },
+  {
+    "id": "faq-009",
+    "question": "Do I have to change electrical components?",
+    "answer": "No, our kits are designed so they do not affect the electrical components of the motorcycle.",
+    "category": "general"
+  },
+  {
+    "id": "faq-010",
+    "question": "Would I have to change my exhaust?",
+    "answer": "Yes. Stock exhaust will not work with the trike conversion. A short exhaust is typically used. We offer exhaust solutions designed specifically for our kits.",
+    "category": "general"
+  },
+  {
+    "id": "faq-011",
+    "question": "Is the trike stable in corners?",
+    "answer": "Yes, our trikes are very stable in corners thanks to the differential and car tires. As always, use your best judgment on sharp corners.",
+    "category": "general"
+  },
+  {
+    "id": "faq-012",
+    "question": "Can I convert a shaft drive motorcycle?",
+    "answer": "No, our kits are not compatible with shaft drive motorcycles.",
+    "category": "general"
+  },
+  {
+    "id": "faq-013",
+    "question": "How should I prepare before starting the installation?",
+    "answer": "Familiarize yourself with and inventory all components and hardware before starting. This ensures a smooth installation and lets you confirm every part arrived safely before you begin the job.",
+    "category": "installation-tips"
+  },
+  {
+    "id": "faq-014",
+    "question": "How do I install the center caps on the wheels?",
+    "answer": "Center caps on the wheels have a flange. Install them from the back of the wheel BEFORE mounting the wheel on the axle. Installing them afterward can be very difficult.",
+    "category": "installation-tips"
+  },
+  {
+    "id": "faq-015",
+    "question": "What tire pressure should I run?",
+    "answer": "Recommended tire pressure is 25 PSI on 15x8 tires. Running the correct pressure improves ride quality and tire wear.",
+    "category": "installation-tips"
+  },
+  {
+    "id": "faq-016",
+    "question": "I see some grease seepage from the bearings — is that normal?",
+    "answer": "Yes. Bearings are often overpacked by the manufacturer, so a small amount of grease seepage during initial break-in is normal and will subside.",
+    "category": "installation-tips"
+  },
+  {
+    "id": "faq-017",
+    "question": "What causes bearing failures?",
+    "answer": "In rare cases, bearing failures have been traced to installation errors — typically not using the supplied bolts for the pulley or using an incorrect spacer size. Always follow the installation instructions and use the supplied hardware.",
+    "category": "installation-tips"
+  },
+  {
+    "id": "faq-018",
+    "question": "How do I replace brake pads?",
+    "answer": "Brake pad replacement instructions are available as downloadable PDFs. We provide separate instructions for the Hawg Halters caliper and the MidWest caliper. Contact us or visit the installation resources page to download the correct PDF for your setup.",
+    "category": "installation-tips"
+  },
+  {
+    "id": "faq-019",
+    "question": "What are rake and trail?",
+    "answer": "Rake and trail are geometry measurements that affect steering feel and stability. A detailed explanation PDF is available on our installation resources page — we highly recommend reading it before installing raked triple trees.",
+    "category": "installation-tips"
+  }
+]

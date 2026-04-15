@@ -1,3 +1,90 @@
-{
-  "gallery": []
-}
+[
+  { "id": "sportster-001", "category": "Sportster", "imageUrl": "https://frankensteintrikes.com/images/Jess L 2015 Sportster Iron/Jess Frankenstein Trikes 2015 Sportster Iron 180 001.jpg", "caption": "Jessica's 2015 Sportster Iron" },
+  { "id": "sportster-002", "category": "Sportster", "imageUrl": "https://frankensteintrikes.com/images/frankensteintrikesmichellebartlettb.180.jpg", "caption": "Michelle's 2009 Nightster 1200" },
+  { "id": "sportster-003", "category": "Sportster", "imageUrl": "https://frankensteintrikes.com/images/frankensteintrikesvanparr2008sportster65.180.jpg", "caption": "Van Parr 2008" },
+  { "id": "sportster-004", "category": "Sportster", "imageUrl": "https://frankensteintrikes.com/images/Rich Field 08 sportster/richfield08sport3.180.jpg", "caption": "Rich 2008" },
+  { "id": "sportster-005", "category": "Sportster", "imageUrl": "https://frankensteintrikes.com/images/elizabeth 211 nightster/frankensteintrikes elizabeth11nightster.180.jpg", "caption": "Elizabeth 2011" },
+  { "id": "sportster-006", "category": "Sportster", "imageUrl": "https://frankensteintrikes.com/images/earl 06 sportster/FrankensteinTrikes earl 06 sportster 180.jpg", "caption": "Earl 2006" },
+  { "id": "sportster-007", "category": "Sportster", "imageUrl": "https://frankensteintrikes.com/images/Jack Gibson 2002 1200 Custom Harley/jack 02 right.180.jpg", "caption": "Jack 2002" },
+  { "id": "sportster-008", "category": "Sportster", "imageUrl": "https://frankensteintrikes.com/images/Lesley Harrison 2011 Sportster Custom/trike on beach.180.jpg", "caption": "Lesley 2011" },
+
+  { "id": "dyna-001", "category": "Dyna", "imageUrl": "https://frankensteintrikes.com/images/Daniel V 1998 Dyna Wide Glide/Daniel V Frankenstein Trikes 1998 Dyna Wide Glide 180 001.jpg", "caption": "Daniel's 1998 Dyna Wide Glide" },
+  { "id": "dyna-002", "category": "Dyna", "imageUrl": "https://frankensteintrikes.com/images/Allen E 2011 Dyna Super Glide/Allen E Frankenstein Trikes 2011 Dyna Super Glide 180 001.jpg", "caption": "Allen's 2011 Super Glide" },
+  { "id": "dyna-003", "category": "Dyna", "imageUrl": "https://frankensteintrikes.com/images/Troy Hendrix 2009 Dyna Fat Bob/Troy Frankenstein Trikes 2009 Dyna Fat Bob 180 002.jpg", "caption": "Troy's 2009 Fat Bob" },
+  { "id": "dyna-004", "category": "Dyna", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/dyna/frankenstein_dyna_trike_conversion_4.jpg", "caption": "Ron's 2009 Street Bob" },
+  { "id": "dyna-005", "category": "Dyna", "imageUrl": "https://frankensteintrikes.com/images/FrankensteinTrikesMarcJohnsonlftsde.180.jpg", "caption": "Mark's Dyna" },
+  { "id": "dyna-006", "category": "Dyna", "imageUrl": "https://frankensteintrikes.com/images/Frankensteintrikessherrycalkin2013dyna36.180.jpg", "caption": "Sherry 2013" },
+  { "id": "dyna-007", "category": "Dyna", "imageUrl": "https://frankensteintrikes.com/images/Eugina 03 Dyna Lowrider/eugina 03dynalowrider180.jpg", "caption": "Eugina 2003" },
+  { "id": "dyna-008", "category": "Dyna", "imageUrl": "https://frankensteintrikes.com/images/Harold Wentz 2005 Dyna Low Rider/Harold 2005 Dyna Low Rider 180 001.jpg", "caption": "Harold's 2005 Low Rider" },
+
+  { "id": "softail-001", "category": "Softail", "imageUrl": "https://frankensteintrikes.com/images/2018 Softail Low Rider/Frankenstein Trikes 2018 Softail Low Rider 180 001.jpg", "caption": "2018 Softail Low Rider" },
+  { "id": "softail-002", "category": "Softail", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/softail/frankensteintrikes_photo_softail_oles_thumb.jpg", "caption": "Helmer's 2000 Night Train" },
+  { "id": "softail-003", "category": "Softail", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/softail/frankensteintrikes_photo_softail_lars_thumb.jpg", "caption": "Lars' 2003 Night Train" },
+  { "id": "softail-004", "category": "Softail", "imageUrl": "https://frankensteintrikes.com/images/2015 Breakout/2015 Breakout 180 001.jpg", "caption": "2015 Softail Breakout" },
+  { "id": "softail-005", "category": "Softail", "imageUrl": "https://frankensteintrikes.com/images/FrankensteinTrikesChuckDsde.180.jpg", "caption": "Chuck 01 Softail Deuce" },
+  { "id": "softail-006", "category": "Softail", "imageUrl": "https://frankensteintrikes.com/images/FrankensteinTrikesStephenShea1988FXSTCfrtside.180.jpg", "caption": "Stephen 1988 FX Custom" },
+  { "id": "softail-007", "category": "Softail", "imageUrl": "https://frankensteintrikes.com/images/Lyle Allen 2009 Softtail/frankensteintrikeslyleallen09softtail1.180.jpg", "caption": "Lyle 2009 Softail" },
+  { "id": "softail-008", "category": "Softail", "imageUrl": "https://frankensteintrikes.com/images/Steve Hough 2016 Softail Slim/Frankenstein Trikes 2016 Softail Slim 001 180.jpg", "caption": "Steve's 2016 Softail Slim" },
+
+  { "id": "fatboy-heritage-001", "category": "Fat Boy & Heritage", "imageUrl": "https://frankensteintrikes.com/images/Performance Specialists 2022 FatBoy/Frankenstein Trikes 2022 FatBoy 180 001.jpg", "caption": "2022 Fatboy" },
+  { "id": "fatboy-heritage-002", "category": "Fat Boy & Heritage", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/fat boy heritage/frankensteintrikes_photo_heritage_pauls_thumb.jpg", "caption": "Paul's 1996 Fat Boy" },
+  { "id": "fatboy-heritage-003", "category": "Fat Boy & Heritage", "imageUrl": "https://frankensteintrikes.com/images/FrankensteinTrikesJackC2011Her.softleftsde.180.jpg", "caption": "Jack's 2011 Heritage" },
+  { "id": "fatboy-heritage-004", "category": "Fat Boy & Heritage", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/fat boy heritage/frankensteintrikes_photo_fatboy_dennis_thumb.jpg", "caption": "Dennis' 1991 Fat Boy" },
+  { "id": "fatboy-heritage-005", "category": "Fat Boy & Heritage", "imageUrl": "https://frankensteintrikes.com/images/John Lehnen 2013 Fatboy/use/2013 Fatboy w Razor Trunk 5e.180.jpg", "caption": "John 2013" },
+  { "id": "fatboy-heritage-006", "category": "Fat Boy & Heritage", "imageUrl": "https://frankensteintrikes.com/images/Dale Roeder 93 heritage/7.180.jpg", "caption": "Dale 1993" },
+  { "id": "fatboy-heritage-007", "category": "Fat Boy & Heritage", "imageUrl": "https://frankensteintrikes.com/images/Dot Ward 1999 heritage/6.180.jpg", "caption": "Dot's 1999 Heritage" },
+  { "id": "fatboy-heritage-008", "category": "Fat Boy & Heritage", "imageUrl": "https://frankensteintrikes.com/images/George Duke/George D Frankenstein Trikes 2004 Heritage 180 001.jpg", "caption": "George's 2004 Heritage" },
+
+  { "id": "flt-flh-roadking-001", "category": "FLT/FLH/Roadking", "imageUrl": "https://frankensteintrikes.com/images/Gyman Walton 2013 RoadGlide/Gyman 2013 RoadGlide Frankenstein Trikes 180 001.jpg", "caption": "Gyman's 2013 RoadGlide" },
+  { "id": "flt-flh-roadking-002", "category": "FLT/FLH/Roadking", "imageUrl": "https://frankensteintrikes.com/images/Robert Keniski 1999 RoadKing/Frankenstein Trikes Rob's 1999 RoadKing 180 001.jpg", "caption": "Robert's 1999 Road King" },
+  { "id": "flt-flh-roadking-003", "category": "FLT/FLH/Roadking", "imageUrl": "https://frankensteintrikes.com/images/Cory's 2005 FLT/Corys 2005 FLT Frankenstein Trike 180 001.jpg", "caption": "Cory's 2005 Ultra Classic" },
+  { "id": "flt-flh-roadking-004", "category": "FLT/FLH/Roadking", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/flt flh roadking/frankensteintrikes_photo_electraglide_dans09_thumb.jpg", "caption": "Dan's 1999 Electraglide" },
+  { "id": "flt-flh-roadking-005", "category": "FLT/FLH/Roadking", "imageUrl": "https://frankensteintrikes.com/images/Joseph D 2009 Ultra Classic/Joseph D Frankenstein trikes 2009 Ultra Classic 180 001.jpg", "caption": "Joseph's 2009 Ultra Classic" },
+  { "id": "flt-flh-roadking-006", "category": "FLT/FLH/Roadking", "imageUrl": "https://frankensteintrikes.com/images/Thomas Treadway 2006 Road King/thomas treadway06roadking180.jpg", "caption": "Thomas 2006 Road King" },
+  { "id": "flt-flh-roadking-007", "category": "FLT/FLH/Roadking", "imageUrl": "https://frankensteintrikes.com/images/Curtis 2003 Electra Glide/curtis 2003 Electra Glide 180 001.jpg", "caption": "Curtis' 2003 Electra Glide" },
+  { "id": "flt-flh-roadking-008", "category": "FLT/FLH/Roadking", "imageUrl": "https://frankensteintrikes.com/images/Greg Grieser 2018 Ultra Limited Shrine/Greg 2018 Ultra Limited Shrine Frankenstein Trikes 180 001.jpg", "caption": "Greg's 2018 Ultra Limited Shrine" },
+
+  { "id": "v-rod-001", "category": "V-Rod", "imageUrl": "https://frankensteintrikes.com/images/Frankenstein 2009 V-Rod/frankenstein 2009 V-Rod 180 001.jpg", "caption": "Frankenstein 2009 V-Rod" },
+  { "id": "v-rod-002", "category": "V-Rod", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankensteintrikes_photo_custom_v-rod03_lars_thumb.jpg", "caption": "Lars' 2003 V-Rod" },
+  { "id": "v-rod-003", "category": "V-Rod", "imageUrl": "https://frankensteintrikes.com/images/Frankenrod/Frankenstein Trikes 2004 V-Rod 180 001.jpg", "caption": "2004 Frankenrod" },
+  { "id": "v-rod-004", "category": "V-Rod", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/v-rod/frankensteintrikes_photo_v-rod_ron04_thumb.jpg", "caption": "Ron's 2004" },
+  { "id": "v-rod-005", "category": "V-Rod", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/v-rod/frankensteintrikes_photo_v-rod_frankp06_thumb.jpg", "caption": "Frank P's 2006" },
+  { "id": "v-rod-006", "category": "V-Rod", "imageUrl": "https://frankensteintrikes.com/images/Dieter Sowade 2006 V-Rod/Dieter 2006 vrod rgt side .180.jpg", "caption": "Dieter 2006" },
+  { "id": "v-rod-007", "category": "V-Rod", "imageUrl": "https://frankensteintrikes.com/images/Fred Hunter2002 v-rod/6.180.jpg", "caption": "Fred 2002" },
+  { "id": "v-rod-008", "category": "V-Rod", "imageUrl": "https://frankensteintrikes.com/images/Penny 2002 V-Rod/Penny 2002 V-Rod 180 001.jpg", "caption": "Penny's 2002" },
+
+  { "id": "fxr-001", "category": "FXR", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/fxr/frankensteintrikes_photo_fxr_93.jpg", "caption": "1993 FXR Hooligan" },
+  { "id": "fxr-002", "category": "FXR", "imageUrl": "https://frankensteintrikes.com/images/dale_dyna.jpg", "caption": "Harley Davidson FXR Trike Customer Review" },
+  { "id": "fxr-003", "category": "FXR", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/fxr/frankensteintrikes_photo_fxr_kit.jpg", "caption": "Frankenstein Trike Conversion Kit on H-D FXR" },
+
+  { "id": "4speed-001", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/4 speed/Frankenstein Trikes 1975 FL 4 Spd 001 small.jpg", "caption": "Ron's 1975 FL" },
+  { "id": "4speed-002", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/4 speed/Web and Face Book photos/1.180.jpg", "caption": "Frank's Chrome 4 Spd" },
+  { "id": "4speed-003", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/Eagle Nations78/Eagle Nations 78 FL 180.jpg", "caption": "Eagle Nation 78'" },
+  { "id": "4speed-004", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/Jeff Osborn 79 shovel head/1.180.jpg", "caption": "Jeff 1979 ShovelHead" },
+  { "id": "4speed-005", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankenstein_photo_custom_77-Harley-FX-Chopper.jpg", "caption": "1977 FX Chopper Trike" },
+  { "id": "4speed-006", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/Gary S FX 4 spd/Grary_S_Frankenstein_Trikes_FX_4_SPD_180_001.JPG", "caption": "Gary's ShovelHead" },
+
+  { "id": "street-001", "category": "Street", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/HD Street TL/used/right side 180.jpg", "caption": "Frank's 2015 Street 750" },
+  { "id": "street-002", "category": "Street", "imageUrl": "https://frankensteintrikes.com/images/Steven 2018 Street/Steven 2018 Harley Street Frankenstein Trikes 180 001.jpg", "caption": "Steven's 2018 Street 750" },
+  { "id": "street-003", "category": "Street", "imageUrl": "https://frankensteintrikes.com/images/dale_dyna.jpg", "caption": "Harley Davidson Street Trike Customer Review" },
+
+  { "id": "customs-001", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Kevin W 2006 Am. Iron Horse Texas Chopper/Kevin W Frankenstein Trikes 2006 American Ironhorse 180 001.jpg", "caption": "Kevin's 2006 Am. Ironhorse" },
+  { "id": "customs-002", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Patrick's 2021 Custom Trike/Patrick 2021 Custom Frankenstein Trike 180 001.jpg", "caption": "Patrick's 2021 Custom" },
+  { "id": "customs-003", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Forest W 2005 Thunder Mountain/Forest W 2005 Thunder Mountain Frankenstein Trike 180 001.jpg", "caption": "Forest's 2005 Thunder Mountain" },
+  { "id": "customs-004", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Rick's 2004 Big Dog Chopper/Rick's 2004 Big Dog Chopper Frankenstein Trike 180 001.jpg", "caption": "Rick's 2004 Big Dog Chopper" },
+  { "id": "customs-005", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankensteintrikes_photo_custom_prostreetframeworks_thumbnails.jpg", "caption": "Custom Rigid Chopper" },
+  { "id": "customs-006", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Victory kingpin/Frankenstein Trikes 2004 Victory Kingpin 180 001.jpg", "caption": "2004 Victory Kingpin" },
+  { "id": "customs-007", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Frank Bailey 2001 Indian Scout/Frankenstein Trikes 2001 Indian Scout 001 180.jpg", "caption": "Frank's 2001 Indian Scout" },
+  { "id": "customs-008", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankensteintrikes_photo_custom_v-rod03_lars.jpg", "caption": "Lars' 2003 V-Rod" },
+
+  { "id": "yamaha-001", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Yamaha/Trike pix/with body/web site use yamaha with body TL/2.180.jpg", "caption": "Frank's 2012 Yamaha Road Star 1600" },
+  { "id": "yamaha-002", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Yamaha/Trike pix/with fenders/website/2.180.jpg", "caption": "Frank's 2000 Yamaha Road Star 1600" },
+  { "id": "yamaha-003", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Yamaha/Bolt web photos/1.180.jpg", "caption": "Frank's 2015 Yamaha Bolt 950" },
+  { "id": "yamaha-004", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/Mike G 2012 Yamaha V-Star 950/Mike 2012 Frankenstein Trikes V-Star 950 180 001.jpg", "caption": "Mike's 2012 Yamaha V-Star 950" },
+  { "id": "yamaha-005", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/Dan Black 2011 Yamaha V-Star 1300/Frankenstein_Trikes_Dan_B_2011_Yamaha_V-Star_1300_180_001.jpg", "caption": "Dan's 2011 Yamaha V-Star 1300" },
+  { "id": "yamaha-006", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/Phil B 2008 Yamaha Raider/Phil B 2008 Yamaha Raider Frankenstein Trikes 180 001.jpg", "caption": "Phil's 2008 Yamaha Raider" },
+
+  { "id": "kawasaki-001", "category": "Kawasaki", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Kawasaki 1700/2011 kawasaki 1700 side 180 001.jpg", "caption": "2011 Kawasaki 1700" },
+  { "id": "kawasaki-002", "category": "Kawasaki", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Kawasaki 1700/2011 kawasaki 1700 front 180 002.jpg", "caption": "Kawasaki 1700 Front View" },
+  { "id": "kawasaki-003", "category": "Kawasaki", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Kawasaki 1700/2011 kawasaki 1700 rear 180 003.jpg", "caption": "Kawasaki 1700 Rear View" }
+]
