@@ -67,7 +67,7 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">Frequently Asked</span>
+        <span class="eyebrow">Answers to Common Questions</span>
         <h1 class="page-header__title">FAQ.</h1>
         <p class="page-header__sub">
           Straight answers about installation, specs, suspension, brakes,
@@ -78,7 +78,24 @@
 
     <section class="section">
       <div class="container">
-        <p class="text-secondary">FAQ entries populated from <code>data/faq.json</code>.</p>
+        <div id="faqContent" aria-live="polite">
+          <p class="kit-grid__empty">Loading FAQ…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-strip">
+      <div class="container">
+        <div class="cta-strip__inner">
+          <div>
+            <h2 class="cta-strip__title">Still Have Questions?</h2>
+            <a href="tel:+19133526788" class="cta-strip__phone">Call Us · (913) 352-6788</a>
+          </div>
+          <div class="cta-strip__actions">
+            <a href="contact.html" class="btn btn--primary">Contact Frankenstein</a>
+            <a href="pricing.html" class="btn btn--ghost">View Pricing</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -144,5 +161,87 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const mount = document.getElementById('faqContent');
+      if (!mount) return;
+
+      const GROUPS = [
+        { key: 'general',           title: 'General Questions' },
+        { key: 'installation-tips', title: 'Installation Tips' }
+      ];
+
+      function escapeHtml(str) {
+        return String(str == null ? '' : str).replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function renderGroup(group, items) {
+        const listItems = items.map((item, idx) => {
+          const openClass = idx === 0 ? ' is-open' : '';
+          const expanded = idx === 0 ? 'true' : 'false';
+          const panelId = `faq-panel-${escapeHtml(item.id)}`;
+          const btnId = `faq-btn-${escapeHtml(item.id)}`;
+          return `
+            <div class="faq-item${openClass}" data-faq-item>
+              <button type="button" class="faq-item__head" aria-expanded="${expanded}" aria-controls="${panelId}" id="${btnId}">
+                <span class="faq-item__question">${escapeHtml(item.question)}</span>
+                <span class="faq-item__icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-item__body" id="${panelId}" role="region" aria-labelledby="${btnId}">
+                <div class="faq-item__body-inner">
+                  <p class="faq-item__answer">${escapeHtml(item.answer)}</p>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="faq-group">
+            <h2 class="faq-group__heading">${escapeHtml(group.title)}</h2>
+            <div class="faq-list">${listItems}</div>
+          </div>
+        `;
+      }
+
+      function render(allFaqs) {
+        const sections = GROUPS
+          .map(group => {
+            const items = allFaqs.filter(f => f.category === group.key);
+            return items.length ? renderGroup(group, items) : '';
+          })
+          .filter(Boolean)
+          .join('');
+
+        mount.innerHTML = sections || '<p class="kit-grid__empty">No FAQ entries available.</p>';
+
+        mount.querySelectorAll('[data-faq-item]').forEach(item => {
+          const btn = item.querySelector('.faq-item__head');
+          if (!btn) return;
+          btn.addEventListener('click', () => {
+            const willOpen = !item.classList.contains('is-open');
+            item.classList.toggle('is-open', willOpen);
+            btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+          });
+        });
+      }
+
+      fetch('data/faq.json')
+        .then(r => {
+          if (!r.ok) throw new Error('Failed to load FAQ');
+          return r.json();
+        })
+        .then(data => {
+          render(Array.isArray(data) ? data : []);
+        })
+        .catch(err => {
+          mount.innerHTML = `<p class="kit-grid__empty">Unable to load FAQ — ${escapeHtml(err.message)}.</p>`;
+        });
+    })();
+  </script>
 </body>
 </html>
