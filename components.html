@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Components — Frankenstein Trikes</title>
-  <meta name="description" content="12 component categories: rear ends, swing arms, triple trees, wheels, fenders, exhaust, hitches, brakes, and more." />
+  <meta name="description" content="Individual parts and upgrades: rear ends, swing arms, triple trees, wheels, fenders, exhaust, hitches, brakes, and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/styles.css" />
@@ -22,19 +22,19 @@
         <li class="nav__item nav__item--has-dropdown">
           <a href="trike-kits.html" class="nav__link">Trike Kits <span class="nav__caret">▾</span></a>
           <div class="nav__dropdown">
-            <a href="kit-detail.html?kit=sportster">Sportster</a>
-            <a href="kit-detail.html?kit=dyna">Dyna</a>
-            <a href="kit-detail.html?kit=softail">Softail</a>
-            <a href="kit-detail.html?kit=rocker-breakout">Rocker &amp; Breakout</a>
-            <a href="kit-detail.html?kit=fatboy-heritage">Fat Boy &amp; Heritage</a>
-            <a href="kit-detail.html?kit=flt-flh-roadking">FLT FLH &amp; Roadking</a>
-            <a href="kit-detail.html?kit=vrod">V-Rod</a>
-            <a href="kit-detail.html?kit=fxr">FXR</a>
-            <a href="kit-detail.html?kit=4-speed-fl-fx">4 Speed FL/FX</a>
-            <a href="kit-detail.html?kit=street">Street</a>
-            <a href="kit-detail.html?kit=yamaha">Yamaha</a>
-            <a href="kit-detail.html?kit=kawasaki">Kawasaki 1700</a>
-            <a href="kit-detail.html?kit=old-school">Frankenstein Old School</a>
+            <a href="kit-detail.html?id=sportster">Sportster</a>
+            <a href="kit-detail.html?id=dyna">Dyna</a>
+            <a href="kit-detail.html?id=softail">Softail</a>
+            <a href="kit-detail.html?id=rocker-breakout">Rocker &amp; Breakout</a>
+            <a href="kit-detail.html?id=fatboy-heritage">Fat Boy &amp; Heritage</a>
+            <a href="kit-detail.html?id=flt-flh-roadking">FLT FLH &amp; Roadking</a>
+            <a href="kit-detail.html?id=v-rod">V-Rod</a>
+            <a href="kit-detail.html?id=fxr">FXR</a>
+            <a href="kit-detail.html?id=4-speed-fl-fx">4 Speed FL/FX</a>
+            <a href="kit-detail.html?id=street">Street</a>
+            <a href="kit-detail.html?id=yamaha">Yamaha</a>
+            <a href="kit-detail.html?id=kawasaki-1700">Kawasaki 1700</a>
+            <a href="kit-detail.html?id=dna-old-school">Frankenstein Old School</a>
           </div>
         </li>
         <li class="nav__item nav__item--has-dropdown">
@@ -67,18 +67,51 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">12 Categories</span>
+        <span class="eyebrow">Individual Parts &amp; Upgrades</span>
         <h1 class="page-header__title">Components.</h1>
         <p class="page-header__sub">
-          Individual parts for custom builds — from 9&rdquo; Ford street/strip axles
-          to T-shirts. All Frankenstein-quality.
+          Individual parts for custom builds — from 9&rdquo; Ford street/strip
+          rear ends to T-shirts. All Frankenstein-quality.
         </p>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <p class="text-secondary">Component listings populated from <code>data/components.json</code>.</p>
+        <div class="filter-bar" id="componentFilters" role="tablist" aria-label="Component categories">
+          <button type="button" class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button type="button" class="filter-chip" data-filter="rear-ends" role="tab">Rear Ends</button>
+          <button type="button" class="filter-chip" data-filter="swing-arms" role="tab">Swing Arms</button>
+          <button type="button" class="filter-chip" data-filter="triple-trees" role="tab">Triple Trees</button>
+          <button type="button" class="filter-chip" data-filter="wheels-tires" role="tab">Wheels &amp; Tires</button>
+          <button type="button" class="filter-chip" data-filter="fenders-brackets" role="tab">Fenders &amp; Brackets</button>
+          <button type="button" class="filter-chip" data-filter="exhaust" role="tab">Exhaust</button>
+          <button type="button" class="filter-chip" data-filter="trailer-hitch" role="tab">Trailer Hitch</button>
+          <button type="button" class="filter-chip" data-filter="parking-brake" role="tab">Parking Brake</button>
+          <button type="button" class="filter-chip" data-filter="luggage-rack" role="tab">Luggage Rack</button>
+          <button type="button" class="filter-chip" data-filter="outboard-brakes" role="tab">Outboard Brakes</button>
+          <button type="button" class="filter-chip" data-filter="t-shirts" role="tab">T-Shirts</button>
+          <button type="button" class="filter-chip" data-filter="patches" role="tab">Patches</button>
+        </div>
+
+        <div class="kit-grid" id="componentGrid" aria-live="polite">
+          <p class="kit-grid__empty">Loading components…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-strip">
+      <div class="container">
+        <div class="cta-strip__inner">
+          <div>
+            <h2 class="cta-strip__title">Ready to Build Your Monster?</h2>
+            <a href="tel:+19133526788" class="cta-strip__phone">Call to Order · (913) 352-6788</a>
+          </div>
+          <div class="cta-strip__actions">
+            <a href="tel:+19133526788" class="btn btn--primary">Call Now</a>
+            <a href="contact.html" class="btn btn--ghost">Email Us</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -144,5 +177,114 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const grid = document.getElementById('componentGrid');
+      const filterBar = document.getElementById('componentFilters');
+      let allComponents = [];
+      let activeFilter = 'all';
+      const SPEC_LIMIT = 5;
+
+      function escapeHtml(str) {
+        return String(str == null ? '' : str).replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function renderSpecs(specs) {
+        if (!Array.isArray(specs) || !specs.length) return '';
+        const items = specs.slice(0, SPEC_LIMIT)
+          .map(s => `<li>${escapeHtml(s)}</li>`)
+          .join('');
+        return `<ul class="kit-card__specs">${items}</ul>`;
+      }
+
+      function renderComponents() {
+        if (!grid) return;
+        const filtered = activeFilter === 'all'
+          ? allComponents
+          : allComponents.filter(c => c.id === activeFilter);
+
+        if (!filtered.length) {
+          grid.innerHTML = '<p class="kit-grid__empty">No components match this filter.</p>';
+          return;
+        }
+
+        grid.innerHTML = filtered.map(comp => `
+          <article class="kit-card reveal" id="${escapeHtml(comp.id)}">
+            <div class="kit-card__media">
+              <img src="${escapeHtml(comp.imageUrl)}" alt="${escapeHtml(comp.name)}" loading="lazy" />
+            </div>
+            <div class="kit-card__body">
+              <span class="kit-card__meta">${escapeHtml(comp.category || '')}</span>
+              <h3 class="kit-card__title">${escapeHtml(comp.name)}</h3>
+              <p class="kit-card__desc">${escapeHtml(comp.description)}</p>
+              ${renderSpecs(comp.specs)}
+            </div>
+          </article>
+        `).join('');
+
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+          grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        } else {
+          grid.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+        }
+      }
+
+      function applyHashFilter() {
+        const hash = (window.location.hash || '').replace(/^#/, '');
+        if (!hash) return;
+        const chip = filterBar && filterBar.querySelector(`.filter-chip[data-filter="${hash}"]`);
+        if (chip) {
+          activeFilter = hash;
+          filterBar.querySelectorAll('.filter-chip').forEach(c => {
+            const isActive = c === chip;
+            c.classList.toggle('is-active', isActive);
+            c.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+        }
+      }
+
+      if (filterBar) {
+        filterBar.addEventListener('click', (e) => {
+          const btn = e.target.closest('.filter-chip');
+          if (!btn) return;
+          activeFilter = btn.dataset.filter;
+          filterBar.querySelectorAll('.filter-chip').forEach(c => {
+            const isActive = c === btn;
+            c.classList.toggle('is-active', isActive);
+            c.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+          renderComponents();
+        });
+      }
+
+      fetch('data/components.json')
+        .then(r => {
+          if (!r.ok) throw new Error('Failed to load components');
+          return r.json();
+        })
+        .then(data => {
+          allComponents = Array.isArray(data) ? data : [];
+          applyHashFilter();
+          renderComponents();
+        })
+        .catch(err => {
+          if (grid) {
+            grid.innerHTML = `<p class="kit-grid__empty">Unable to load components — ${escapeHtml(err.message)}.</p>`;
+          }
+        });
+    })();
+  </script>
 </body>
 </html>
