@@ -5,143 +5,624 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin — Frankenstein Trikes</title>
   <meta name="description" content="Internal admin console for content management." />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body class="admin-body">
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Primary">
-      <a href="index.html" class="nav__brand">Franken<span>stein</span></a>
-      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+  <!-- ============================================================
+       PASSWORD GATE
+       ============================================================ -->
+  <div class="admin-gate" id="adminGate" aria-hidden="false">
+    <form class="admin-gate__card" id="adminGateForm" autocomplete="off">
+      <span class="admin-gate__eyebrow">Internal</span>
+      <h1 class="admin-gate__title">ADMIN</h1>
+      <p class="admin-gate__sub">Authentication required.</p>
+      <label class="admin-gate__label" for="adminPassword">Password</label>
+      <input
+        type="password"
+        id="adminPassword"
+        class="admin-gate__input"
+        placeholder="••••••••"
+        autocomplete="current-password"
+        required
+      />
+      <div class="admin-gate__error" id="adminGateError" role="alert" aria-live="polite"></div>
+      <button type="submit" class="admin-gate__submit">Enter</button>
+      <a href="index.html" class="admin-gate__back">← Back to site</a>
+    </form>
+  </div>
+
+  <!-- ============================================================
+       ADMIN PANEL
+       ============================================================ -->
+  <div class="admin-panel" id="adminPanel" hidden>
+
+    <header class="admin-panel__header">
+      <div class="admin-panel__brand">
+        <a href="index.html" class="admin-panel__logo">Franken<span>stein</span></a>
+        <span class="admin-panel__tag">Admin Console</span>
+      </div>
+      <div class="admin-panel__actions">
+        <a href="index.html" class="admin-panel__link">View Site ↗</a>
+        <button type="button" class="admin-panel__logout" id="adminLogout">Sign Out</button>
+      </div>
+    </header>
+
+    <nav class="admin-tabs" id="adminTabs" role="tablist" aria-label="Admin sections">
+      <button type="button" class="admin-tab is-active" role="tab" data-tab="kits" aria-selected="true">
+        <span class="admin-tab__label">Kits</span>
+        <span class="admin-tab__badge" data-badge="kits" hidden>override</span>
       </button>
-      <ul class="nav__menu" role="menubar">
-        <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
-        <li class="nav__item nav__item--has-dropdown">
-          <a href="trike-kits.html" class="nav__link">Trike Kits <span class="nav__caret">▾</span></a>
-          <div class="nav__dropdown">
-            <a href="kit-detail.html?kit=sportster">Sportster</a>
-            <a href="kit-detail.html?kit=dyna">Dyna</a>
-            <a href="kit-detail.html?kit=softail">Softail</a>
-            <a href="kit-detail.html?kit=rocker-breakout">Rocker &amp; Breakout</a>
-            <a href="kit-detail.html?kit=fatboy-heritage">Fat Boy &amp; Heritage</a>
-            <a href="kit-detail.html?kit=flt-flh-roadking">FLT FLH &amp; Roadking</a>
-            <a href="kit-detail.html?kit=vrod">V-Rod</a>
-            <a href="kit-detail.html?kit=fxr">FXR</a>
-            <a href="kit-detail.html?kit=4-speed-fl-fx">4 Speed FL/FX</a>
-            <a href="kit-detail.html?kit=street">Street</a>
-            <a href="kit-detail.html?kit=yamaha">Yamaha</a>
-            <a href="kit-detail.html?kit=kawasaki">Kawasaki 1700</a>
-            <a href="kit-detail.html?kit=old-school">Frankenstein Old School</a>
-          </div>
-        </li>
-        <li class="nav__item nav__item--has-dropdown">
-          <a href="components.html" class="nav__link">Components <span class="nav__caret">▾</span></a>
-          <div class="nav__dropdown">
-            <a href="components.html#rear-ends">Rear Ends</a>
-            <a href="components.html#swing-arms">Swing Arms</a>
-            <a href="components.html#triple-trees">Triple Trees</a>
-            <a href="components.html#wheels-tires">Wheels &amp; Tires</a>
-            <a href="components.html#fenders">Fenders &amp; Brackets</a>
-            <a href="components.html#exhaust">Exhaust</a>
-            <a href="components.html#trailer-hitch">Trailer Hitch</a>
-            <a href="components.html#parking-brake">Parking Brake</a>
-            <a href="components.html#luggage-rack">Luggage Rack</a>
-            <a href="components.html#brakes">Brakes / Outboard Brakes</a>
-            <a href="components.html#tshirts">T-Shirts</a>
-            <a href="components.html#patches">Patches</a>
-          </div>
-        </li>
-        <li class="nav__item"><a href="pricing.html" class="nav__link">Pricing</a></li>
-        <li class="nav__item"><a href="gallery.html" class="nav__link">Gallery</a></li>
-        <li class="nav__item"><a href="faq.html" class="nav__link">FAQ</a></li>
-        <li class="nav__item"><a href="dealers.html" class="nav__link">Dealers</a></li>
-        <li class="nav__item"><a href="our-story.html" class="nav__link">Our Story</a></li>
-        <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
-      </ul>
+      <button type="button" class="admin-tab" role="tab" data-tab="components" aria-selected="false">
+        <span class="admin-tab__label">Components</span>
+        <span class="admin-tab__badge" data-badge="components" hidden>override</span>
+      </button>
+      <button type="button" class="admin-tab" role="tab" data-tab="dealers" aria-selected="false">
+        <span class="admin-tab__label">Dealers</span>
+      </button>
+      <button type="button" class="admin-tab" role="tab" data-tab="faq" aria-selected="false">
+        <span class="admin-tab__label">FAQ</span>
+      </button>
+      <button type="button" class="admin-tab" role="tab" data-tab="gallery" aria-selected="false">
+        <span class="admin-tab__label">Gallery</span>
+      </button>
     </nav>
-  </header>
 
-  <main>
-    <section class="page-header">
-      <div class="container">
-        <span class="eyebrow">Internal</span>
-        <h1 class="page-header__title">Admin.</h1>
-        <p class="page-header__sub">
-          Internal admin console. Not linked from the public site.
-        </p>
-      </div>
-    </section>
+    <main class="admin-content">
 
-    <section class="section">
-      <div class="container">
-        <p class="text-secondary">Admin controls to be added.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span class="marquee__item">Create Your Own Monster</span>
-        <span class="marquee__item">Made in Pleasanton, Kansas</span>
-        <span class="marquee__item">Hot Rod Trike Kits</span>
-        <span class="marquee__item">Bolt-On in One Day</span>
-        <span class="marquee__item">Since 1995</span>
-        <span class="marquee__item">3 Year Warranty</span>
-      </div>
-    </div>
-    <div class="footer__main">
-      <div>
-        <div class="footer__brand">Franken<span>stein</span></div>
-        <p class="footer__tag">Create Your Own Monster</p>
-        <p class="text-secondary" style="margin-top: 24px; font-size: 14px; max-width: 40ch;">
-          Complete, bolt-on trike conversion kits for Harley-Davidson and select
-          Yamaha &amp; Kawasaki models. Designed and manufactured in Pleasanton, Kansas.
-        </p>
-      </div>
-      <div>
-        <h4 class="footer__heading">Shop</h4>
-        <ul class="footer__list">
-          <li><a href="trike-kits.html">Trike Kits</a></li>
-          <li><a href="components.html">Components</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="dealers.html">Dealers</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="footer__heading">Support</h4>
-        <ul class="footer__list">
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="installation.html">Installation</a></li>
-          <li><a href="warranty.html">Warranty</a></li>
-          <li><a href="our-story.html">Our Story</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <h4 class="footer__heading">Visit</h4>
-        <p>9453 Trump Terr.<br/>Pleasanton, KS</p>
-        <p><a href="tel:+19133526788">(913) 352-6788</a></p>
-        <p><a href="mailto:Info@FrankensteinTrikes.com">Info@FrankensteinTrikes.com</a></p>
-        <p>Mon–Fri · 8a–5p CT</p>
-        <div class="footer__social" aria-label="Social">
-          <a href="https://www.facebook.com/FrankensteinTrikes/" aria-label="Facebook">Fb</a>
-          <a href="https://www.instagram.com/frankensteintrikes" aria-label="Instagram">Ig</a>
-          <a href="https://www.youtube.com/@frankensteintrikesusa" aria-label="YouTube">Yt</a>
-          <a href="https://www.pinterest.com/frankensteintrikes/" aria-label="Pinterest">Pn</a>
+      <!-- KITS -->
+      <section class="admin-pane is-active" id="pane-kits" role="tabpanel" aria-labelledby="tab-kits">
+        <div class="admin-pane__head">
+          <div>
+            <h2 class="admin-pane__title">Kits</h2>
+            <p class="admin-pane__sub">Trike kit catalog. Changes are stored locally in your browser.</p>
+          </div>
+          <div class="admin-pane__toolbar">
+            <button type="button" class="admin-btn admin-btn--primary" data-action="add" data-entity="kits">+ Add New Kit</button>
+            <button type="button" class="admin-btn admin-btn--ghost" data-action="reset" data-entity="kits">Reset to Original</button>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <div>&copy; 2026 Frankenstein Unlimited. All rights reserved.</div>
-      <div>Built by <a href="https://kleosdesign.com" rel="noopener">Kleos.</a></div>
-    </div>
-  </footer>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="kitsTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Year Range</th>
+                <th class="admin-table__actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="kitsTbody">
+              <tr class="admin-table__loading"><td colspan="4">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-  <script src="js/main.js"></script>
+      <!-- COMPONENTS -->
+      <section class="admin-pane" id="pane-components" role="tabpanel" aria-labelledby="tab-components" hidden>
+        <div class="admin-pane__head">
+          <div>
+            <h2 class="admin-pane__title">Components</h2>
+            <p class="admin-pane__sub">Component catalog. Changes are stored locally in your browser.</p>
+          </div>
+          <div class="admin-pane__toolbar">
+            <button type="button" class="admin-btn admin-btn--primary" data-action="add" data-entity="components">+ Add New Component</button>
+            <button type="button" class="admin-btn admin-btn--ghost" data-action="reset" data-entity="components">Reset to Original</button>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="componentsTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th class="admin-table__actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="componentsTbody">
+              <tr class="admin-table__loading"><td colspan="3">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- DEALERS (placeholder for pass two) -->
+      <section class="admin-pane" id="pane-dealers" role="tabpanel" hidden>
+        <div class="admin-pane__head">
+          <div>
+            <h2 class="admin-pane__title">Dealers</h2>
+            <p class="admin-pane__sub">Dealer management coming in the next pass.</p>
+          </div>
+        </div>
+        <div class="admin-empty">Not yet wired up.</div>
+      </section>
+
+      <!-- FAQ (placeholder for pass two) -->
+      <section class="admin-pane" id="pane-faq" role="tabpanel" hidden>
+        <div class="admin-pane__head">
+          <div>
+            <h2 class="admin-pane__title">FAQ</h2>
+            <p class="admin-pane__sub">FAQ management coming in the next pass.</p>
+          </div>
+        </div>
+        <div class="admin-empty">Not yet wired up.</div>
+      </section>
+
+      <!-- GALLERY (placeholder for pass two) -->
+      <section class="admin-pane" id="pane-gallery" role="tabpanel" hidden>
+        <div class="admin-pane__head">
+          <div>
+            <h2 class="admin-pane__title">Gallery</h2>
+            <p class="admin-pane__sub">Gallery management coming in the next pass.</p>
+          </div>
+        </div>
+        <div class="admin-empty">Not yet wired up.</div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="admin-toast" id="adminToast" role="status" aria-live="polite" hidden></div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // =========================================================
+    // CONFIG
+    // =========================================================
+    var ADMIN_PASSWORD = 'kleos2026';
+    var SESSION_KEY    = 'admin_auth';
+    var STORAGE_KEYS   = { kits: 'admin_kits', components: 'admin_components' };
+    var DATA_SOURCES   = { kits: 'data/kits.json', components: 'data/components.json' };
+
+    // In-memory working copies
+    var state = { kits: [], components: [] };
+
+    // =========================================================
+    // ELEMENTS
+    // =========================================================
+    var gate       = document.getElementById('adminGate');
+    var gateForm   = document.getElementById('adminGateForm');
+    var gateInput  = document.getElementById('adminPassword');
+    var gateError  = document.getElementById('adminGateError');
+    var panel      = document.getElementById('adminPanel');
+    var tabsWrap   = document.getElementById('adminTabs');
+    var logoutBtn  = document.getElementById('adminLogout');
+    var toastEl    = document.getElementById('adminToast');
+
+    // =========================================================
+    // AUTH
+    // =========================================================
+    function isAuthed() {
+      try { return sessionStorage.getItem(SESSION_KEY) === 'true'; }
+      catch (e) { return false; }
+    }
+
+    function showPanel() {
+      gate.hidden = true;
+      gate.setAttribute('aria-hidden', 'true');
+      panel.hidden = false;
+      initAdmin();
+    }
+
+    function showGate() {
+      panel.hidden = true;
+      gate.hidden = false;
+      gate.setAttribute('aria-hidden', 'false');
+      setTimeout(function () { gateInput && gateInput.focus(); }, 30);
+    }
+
+    gateForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var val = (gateInput.value || '').trim();
+      if (val === ADMIN_PASSWORD) {
+        try { sessionStorage.setItem(SESSION_KEY, 'true'); } catch (err) {}
+        gateError.textContent = '';
+        gateError.classList.remove('is-visible');
+        gateInput.value = '';
+        showPanel();
+      } else {
+        gateError.textContent = 'Incorrect password. Try again.';
+        gateError.classList.add('is-visible');
+        gateInput.classList.add('is-error');
+        gateInput.focus();
+        gateInput.select();
+        setTimeout(function () { gateInput.classList.remove('is-error'); }, 600);
+      }
+    });
+
+    gateInput.addEventListener('input', function () {
+      if (gateError.textContent) {
+        gateError.textContent = '';
+        gateError.classList.remove('is-visible');
+      }
+    });
+
+    logoutBtn.addEventListener('click', function () {
+      try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
+      showGate();
+    });
+
+    // =========================================================
+    // TOAST
+    // =========================================================
+    var toastTimer = null;
+    function toast(message, kind) {
+      toastEl.textContent = message;
+      toastEl.className = 'admin-toast is-visible admin-toast--' + (kind || 'success');
+      toastEl.hidden = false;
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () {
+        toastEl.classList.remove('is-visible');
+        setTimeout(function () { toastEl.hidden = true; }, 300);
+      }, 3000);
+    }
+
+    // =========================================================
+    // TABS
+    // =========================================================
+    tabsWrap.addEventListener('click', function (e) {
+      var btn = e.target.closest('.admin-tab');
+      if (!btn) return;
+      var target = btn.getAttribute('data-tab');
+      setActiveTab(target);
+    });
+
+    function setActiveTab(name) {
+      var tabs = tabsWrap.querySelectorAll('.admin-tab');
+      tabs.forEach(function (t) {
+        var active = t.getAttribute('data-tab') === name;
+        t.classList.toggle('is-active', active);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      document.querySelectorAll('.admin-pane').forEach(function (p) {
+        var active = p.id === 'pane-' + name;
+        p.classList.toggle('is-active', active);
+        p.hidden = !active;
+      });
+    }
+
+    // =========================================================
+    // DATA LOAD
+    // =========================================================
+    function hasOverride(entity) {
+      try { return localStorage.getItem(STORAGE_KEYS[entity]) !== null; }
+      catch (e) { return false; }
+    }
+
+    function readOverride(entity) {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS[entity]);
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) { return null; }
+    }
+
+    function writeOverride(entity, data) {
+      try { localStorage.setItem(STORAGE_KEYS[entity], JSON.stringify(data)); }
+      catch (e) { console.error('Could not save', entity, e); }
+    }
+
+    function clearOverride(entity) {
+      try { localStorage.removeItem(STORAGE_KEYS[entity]); } catch (e) {}
+    }
+
+    function updateBadge(entity) {
+      var badge = document.querySelector('[data-badge="' + entity + '"]');
+      if (!badge) return;
+      badge.hidden = !hasOverride(entity);
+    }
+
+    function loadEntity(entity) {
+      var override = readOverride(entity);
+      if (override && Array.isArray(override)) {
+        state[entity] = override;
+        renderEntity(entity);
+        updateBadge(entity);
+        return Promise.resolve(state[entity]);
+      }
+      return fetch(DATA_SOURCES[entity])
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          state[entity] = Array.isArray(data) ? data : [];
+          renderEntity(entity);
+          updateBadge(entity);
+          return state[entity];
+        })
+        .catch(function (err) {
+          console.error('Failed to load', entity, err);
+          state[entity] = [];
+          renderEntity(entity);
+        });
+    }
+
+    // =========================================================
+    // RENDER
+    // =========================================================
+    function esc(v) {
+      return String(v == null ? '' : v)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function renderEntity(entity) {
+      if (entity === 'kits') renderKits();
+      else if (entity === 'components') renderComponents();
+    }
+
+    function renderKits() {
+      var tbody = document.getElementById('kitsTbody');
+      var items = state.kits;
+      if (!items.length) {
+        tbody.innerHTML = '<tr class="admin-table__empty"><td colspan="4">No kits yet. Click “Add New Kit”.</td></tr>';
+        return;
+      }
+      var html = '';
+      items.forEach(function (k, i) {
+        html += ''
+          + '<tr class="admin-row" data-index="' + i + '">'
+          +   '<td class="admin-row__name">' + esc(k.name) + '</td>'
+          +   '<td>' + esc(k.category) + '</td>'
+          +   '<td>' + esc(k.yearRange) + '</td>'
+          +   '<td class="admin-table__actions">'
+          +     '<button type="button" class="admin-btn admin-btn--sm" data-action="edit" data-entity="kits" data-index="' + i + '">Edit</button>'
+          +     '<button type="button" class="admin-btn admin-btn--sm admin-btn--danger" data-action="delete" data-entity="kits" data-index="' + i + '">Delete</button>'
+          +   '</td>'
+          + '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderComponents() {
+      var tbody = document.getElementById('componentsTbody');
+      var items = state.components;
+      if (!items.length) {
+        tbody.innerHTML = '<tr class="admin-table__empty"><td colspan="3">No components yet. Click “Add New Component”.</td></tr>';
+        return;
+      }
+      var html = '';
+      items.forEach(function (c, i) {
+        html += ''
+          + '<tr class="admin-row" data-index="' + i + '">'
+          +   '<td class="admin-row__name">' + esc(c.name) + '</td>'
+          +   '<td>' + esc(c.category) + '</td>'
+          +   '<td class="admin-table__actions">'
+          +     '<button type="button" class="admin-btn admin-btn--sm" data-action="edit" data-entity="components" data-index="' + i + '">Edit</button>'
+          +     '<button type="button" class="admin-btn admin-btn--sm admin-btn--danger" data-action="delete" data-entity="components" data-index="' + i + '">Delete</button>'
+          +   '</td>'
+          + '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    // =========================================================
+    // INLINE EDIT FORM
+    // =========================================================
+    function closeAllForms(entity) {
+      var tbody = document.getElementById(entity + 'Tbody');
+      if (!tbody) return;
+      tbody.querySelectorAll('.admin-form-row').forEach(function (fr) { fr.remove(); });
+      tbody.querySelectorAll('.admin-row.is-editing').forEach(function (r) { r.classList.remove('is-editing'); });
+    }
+
+    function openEditForm(entity, index) {
+      closeAllForms(entity);
+      var item = index === -1 ? blankItem(entity) : Object.assign({}, state[entity][index] || {});
+      var colspan = entity === 'kits' ? 4 : 3;
+      var tbody = document.getElementById(entity + 'Tbody');
+
+      var formRow = document.createElement('tr');
+      formRow.className = 'admin-form-row';
+      var td = document.createElement('td');
+      td.colSpan = colspan;
+      td.innerHTML = buildFormHtml(entity, item, index);
+      formRow.appendChild(td);
+
+      if (index === -1) {
+        tbody.insertBefore(formRow, tbody.firstChild);
+      } else {
+        var target = tbody.querySelector('.admin-row[data-index="' + index + '"]');
+        if (target) {
+          target.classList.add('is-editing');
+          target.parentNode.insertBefore(formRow, target.nextSibling);
+        } else {
+          tbody.appendChild(formRow);
+        }
+      }
+
+      var firstInput = formRow.querySelector('input, textarea');
+      if (firstInput) firstInput.focus();
+    }
+
+    function blankItem(entity) {
+      if (entity === 'kits') {
+        return { id: '', name: '', slug: '', category: '', yearRange: '', description: '' };
+      }
+      return { id: '', name: '', slug: '', category: '', description: '', specs: [] };
+    }
+
+    function buildFormHtml(entity, item, index) {
+      var title = index === -1
+        ? (entity === 'kits' ? 'Add New Kit' : 'Add New Component')
+        : 'Editing: ' + esc(item.name || '(untitled)');
+
+      var fields = '';
+      if (entity === 'kits') {
+        fields = ''
+          + fieldText('name', 'Name', item.name)
+          + fieldText('category', 'Category', item.category)
+          + fieldText('yearRange', 'Year Range', item.yearRange)
+          + fieldTextarea('description', 'Description', item.description);
+      } else {
+        var specsStr = Array.isArray(item.specs) ? item.specs.join(', ') : '';
+        fields = ''
+          + fieldText('name', 'Name', item.name)
+          + fieldText('category', 'Category', item.category)
+          + fieldTextarea('description', 'Description', item.description)
+          + fieldText('specs', 'Specs (comma-separated)', specsStr);
+      }
+
+      return ''
+        + '<div class="admin-form" data-entity="' + entity + '" data-index="' + index + '">'
+        +   '<div class="admin-form__head">'
+        +     '<h3 class="admin-form__title">' + title + '</h3>'
+        +   '</div>'
+        +   '<div class="admin-form__grid">' + fields + '</div>'
+        +   '<div class="admin-form__foot">'
+        +     '<button type="button" class="admin-btn admin-btn--primary" data-action="save">Save</button>'
+        +     '<button type="button" class="admin-btn admin-btn--ghost" data-action="cancel">Cancel</button>'
+        +   '</div>'
+        + '</div>';
+    }
+
+    function fieldText(name, label, val) {
+      return ''
+        + '<label class="admin-field">'
+        +   '<span class="admin-field__label">' + esc(label) + '</span>'
+        +   '<input type="text" class="admin-field__input" name="' + name + '" value="' + esc(val || '') + '" />'
+        + '</label>';
+    }
+
+    function fieldTextarea(name, label, val) {
+      return ''
+        + '<label class="admin-field admin-field--full">'
+        +   '<span class="admin-field__label">' + esc(label) + '</span>'
+        +   '<textarea class="admin-field__input admin-field__input--area" name="' + name + '" rows="4">' + esc(val || '') + '</textarea>'
+        + '</label>';
+    }
+
+    function readForm(formEl) {
+      var data = {};
+      formEl.querySelectorAll('[name]').forEach(function (el) {
+        data[el.name] = el.value;
+      });
+      return data;
+    }
+
+    function slugify(s) {
+      return String(s || '')
+        .toLowerCase().trim()
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    // =========================================================
+    // ACTIONS (delegated)
+    // =========================================================
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      var action = btn.getAttribute('data-action');
+      var entity = btn.getAttribute('data-entity');
+      var index  = parseInt(btn.getAttribute('data-index'), 10);
+
+      if (action === 'add')    { openEditForm(entity, -1); return; }
+      if (action === 'edit')   { openEditForm(entity, index); return; }
+      if (action === 'delete') { handleDelete(entity, index); return; }
+      if (action === 'reset')  { handleReset(entity); return; }
+
+      if (action === 'save' || action === 'cancel') {
+        var formEl = btn.closest('.admin-form');
+        if (!formEl) return;
+        var ent = formEl.getAttribute('data-entity');
+        var idx = parseInt(formEl.getAttribute('data-index'), 10);
+        if (action === 'cancel') { closeAllForms(ent); return; }
+        handleSave(ent, idx, formEl);
+      }
+    });
+
+    function handleSave(entity, index, formEl) {
+      var raw = readForm(formEl);
+      var list = state[entity].slice();
+      var existing = index === -1 ? {} : Object.assign({}, list[index] || {});
+
+      if (!raw.name || !raw.name.trim()) {
+        toast('Name is required.', 'delete');
+        return;
+      }
+
+      var next;
+      if (entity === 'kits') {
+        next = Object.assign(existing, {
+          name: raw.name.trim(),
+          category: (raw.category || '').trim(),
+          yearRange: (raw.yearRange || '').trim(),
+          description: (raw.description || '').trim()
+        });
+        if (!next.id)   next.id = slugify(next.name);
+        if (!next.slug) next.slug = next.id;
+      } else {
+        var specs = (raw.specs || '')
+          .split(',')
+          .map(function (s) { return s.trim(); })
+          .filter(function (s) { return s.length; });
+        next = Object.assign(existing, {
+          name: raw.name.trim(),
+          category: (raw.category || '').trim(),
+          description: (raw.description || '').trim(),
+          specs: specs
+        });
+        if (!next.id)   next.id = slugify(next.name);
+        if (!next.slug) next.slug = next.id;
+      }
+
+      if (index === -1) list.unshift(next);
+      else list[index] = next;
+
+      state[entity] = list;
+      writeOverride(entity, list);
+      updateBadge(entity);
+      renderEntity(entity);
+      toast(index === -1 ? 'Added successfully.' : 'Saved successfully.', 'success');
+    }
+
+    function handleDelete(entity, index) {
+      var item = state[entity][index];
+      if (!item) return;
+      var ok = window.confirm('Delete "' + (item.name || 'this item') + '"? This cannot be undone.');
+      if (!ok) return;
+      var list = state[entity].slice();
+      list.splice(index, 1);
+      state[entity] = list;
+      writeOverride(entity, list);
+      updateBadge(entity);
+      renderEntity(entity);
+      toast('Deleted.', 'delete');
+    }
+
+    function handleReset(entity) {
+      var ok = window.confirm('Reset ' + entity + ' to the original JSON data? Your local edits will be lost.');
+      if (!ok) return;
+      clearOverride(entity);
+      updateBadge(entity);
+      loadEntity(entity).then(function () {
+        toast(entity.charAt(0).toUpperCase() + entity.slice(1) + ' reset to original.', 'reset');
+      });
+    }
+
+    // =========================================================
+    // INIT
+    // =========================================================
+    function initAdmin() {
+      loadEntity('kits');
+      loadEntity('components');
+      updateBadge('kits');
+      updateBadge('components');
+    }
+
+    // Boot
+    if (isAuthed()) {
+      showPanel();
+    } else {
+      showGate();
+    }
+  })();
+  </script>
 </body>
 </html>
