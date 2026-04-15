@@ -67,7 +67,7 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">Customer Builds</span>
+        <span class="eyebrow">Customer Builds &amp; Product Photos</span>
         <h1 class="page-header__title">Gallery.</h1>
         <p class="page-header__sub">
           Completed trikes from customers across the US, Tasmania, and beyond.
@@ -78,10 +78,38 @@
 
     <section class="section">
       <div class="container">
-        <p class="text-secondary">Gallery images populated from <code>data/gallery.json</code>.</p>
+        <div class="filter-bar" id="galleryFilters" role="tablist" aria-label="Gallery categories">
+          <button type="button" class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button type="button" class="filter-chip" data-filter="sportster" role="tab">Sportster</button>
+          <button type="button" class="filter-chip" data-filter="dyna" role="tab">Dyna</button>
+          <button type="button" class="filter-chip" data-filter="softail" role="tab">Softail</button>
+          <button type="button" class="filter-chip" data-filter="fatboy-heritage" role="tab">Fat Boy &amp; Heritage</button>
+          <button type="button" class="filter-chip" data-filter="flt-flh-roadking" role="tab">FLT/FLH/Roadking</button>
+          <button type="button" class="filter-chip" data-filter="v-rod" role="tab">V-Rod</button>
+          <button type="button" class="filter-chip" data-filter="fxr" role="tab">FXR</button>
+          <button type="button" class="filter-chip" data-filter="4-speed" role="tab">4 Speed</button>
+          <button type="button" class="filter-chip" data-filter="street" role="tab">Street</button>
+          <button type="button" class="filter-chip" data-filter="customs" role="tab">Customs</button>
+          <button type="button" class="filter-chip" data-filter="yamaha" role="tab">Yamaha</button>
+          <button type="button" class="filter-chip" data-filter="kawasaki" role="tab">Kawasaki</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid" aria-live="polite">
+          <p class="kit-grid__empty">Loading photos…</p>
+        </div>
       </div>
     </section>
   </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous photo">&#8249;</button>
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next photo">&#8250;</button>
+    <figure class="lightbox__figure" id="lightboxFigure">
+      <img class="lightbox__img" id="lightboxImg" alt="" />
+      <figcaption class="lightbox__caption" id="lightboxCaption"></figcaption>
+    </figure>
+  </div>
 
   <footer class="site-footer">
     <div class="marquee" aria-hidden="true">
@@ -144,5 +172,195 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const grid = document.getElementById('galleryGrid');
+      const filterBar = document.getElementById('galleryFilters');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxClose = document.getElementById('lightboxClose');
+      const lightboxPrev = document.getElementById('lightboxPrev');
+      const lightboxNext = document.getElementById('lightboxNext');
+
+      let allPhotos = [];
+      let filteredPhotos = [];
+      let activeFilter = 'all';
+      let lightboxIndex = -1;
+
+      const CATEGORY_TO_SLUG = {
+        'Sportster': 'sportster',
+        'Dyna': 'dyna',
+        'Softail': 'softail',
+        'Fat Boy & Heritage': 'fatboy-heritage',
+        'FLT/FLH/Roadking': 'flt-flh-roadking',
+        'V-Rod': 'v-rod',
+        'FXR': 'fxr',
+        '4 Speed FL/FX': '4-speed',
+        'Street': 'street',
+        'Customs': 'customs',
+        'Yamaha': 'yamaha',
+        'Kawasaki': 'kawasaki'
+      };
+
+      const VALID_SLUGS = new Set(['all'].concat(Object.values(CATEGORY_TO_SLUG)));
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function categorySlug(category) {
+        return CATEGORY_TO_SLUG[category] || '';
+      }
+
+      function applyFilter() {
+        filteredPhotos = activeFilter === 'all'
+          ? allPhotos.slice()
+          : allPhotos.filter(p => categorySlug(p.category) === activeFilter);
+      }
+
+      function renderGrid() {
+        if (!grid) return;
+        applyFilter();
+
+        if (!filteredPhotos.length) {
+          grid.innerHTML = '<p class="kit-grid__empty">No photos in this category.</p>';
+          return;
+        }
+
+        grid.innerHTML = filteredPhotos.map((photo, i) => `
+          <figure class="gallery-card reveal" data-index="${i}">
+            <img src="${escapeHtml(photo.imageUrl)}" alt="${escapeHtml(photo.caption)}" loading="lazy" />
+            <figcaption class="gallery-card__caption">${escapeHtml(photo.caption)}</figcaption>
+          </figure>
+        `).join('');
+
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+          grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        } else {
+          grid.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+        }
+      }
+
+      function setActiveChip(slug) {
+        if (!filterBar) return;
+        filterBar.querySelectorAll('.filter-chip').forEach(c => {
+          const isActive = c.dataset.filter === slug;
+          c.classList.toggle('is-active', isActive);
+          c.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+      }
+
+      function setFilter(slug, updateHash) {
+        if (!VALID_SLUGS.has(slug)) slug = 'all';
+        activeFilter = slug;
+        setActiveChip(slug);
+        renderGrid();
+        if (updateHash) {
+          const newHash = slug === 'all' ? '' : '#' + slug;
+          if (window.location.hash !== newHash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
+          }
+        }
+      }
+
+      function openLightbox(index) {
+        if (index < 0 || index >= filteredPhotos.length) return;
+        lightboxIndex = index;
+        const photo = filteredPhotos[index];
+        lightboxImg.src = photo.imageUrl;
+        lightboxImg.alt = photo.caption || '';
+        lightboxCaption.textContent = photo.caption || '';
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+        lightboxIndex = -1;
+        document.body.style.overflow = '';
+      }
+
+      function showNext() {
+        if (!filteredPhotos.length) return;
+        openLightbox((lightboxIndex + 1) % filteredPhotos.length);
+      }
+
+      function showPrev() {
+        if (!filteredPhotos.length) return;
+        openLightbox((lightboxIndex - 1 + filteredPhotos.length) % filteredPhotos.length);
+      }
+
+      if (filterBar) {
+        filterBar.addEventListener('click', (e) => {
+          const btn = e.target.closest('.filter-chip');
+          if (!btn) return;
+          setFilter(btn.dataset.filter, true);
+        });
+      }
+
+      if (grid) {
+        grid.addEventListener('click', (e) => {
+          const card = e.target.closest('.gallery-card');
+          if (!card) return;
+          const idx = parseInt(card.dataset.index, 10);
+          if (!isNaN(idx)) openLightbox(idx);
+        });
+      }
+
+      if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+      if (lightboxNext) lightboxNext.addEventListener('click', showNext);
+      if (lightboxPrev) lightboxPrev.addEventListener('click', showPrev);
+
+      if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        else if (e.key === 'ArrowRight') showNext();
+        else if (e.key === 'ArrowLeft') showPrev();
+      });
+
+      window.addEventListener('hashchange', () => {
+        const slug = (window.location.hash || '').replace(/^#/, '') || 'all';
+        setFilter(slug, false);
+      });
+
+      fetch('data/gallery.json')
+        .then(r => {
+          if (!r.ok) throw new Error('Failed to load gallery');
+          return r.json();
+        })
+        .then(data => {
+          allPhotos = Array.isArray(data) ? data : [];
+          const initial = (window.location.hash || '').replace(/^#/, '') || 'all';
+          setFilter(initial, false);
+        })
+        .catch(err => {
+          if (grid) {
+            grid.innerHTML = `<p class="kit-grid__empty">Unable to load gallery — ${escapeHtml(err.message)}.</p>`;
+          }
+        });
+    })();
+  </script>
 </body>
 </html>
