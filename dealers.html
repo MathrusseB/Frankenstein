@@ -67,9 +67,9 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">Authorized Dealers Nationwide</span>
-        <h1 class="page-header__title">Dealers.</h1>
-        <p class="page-header__sub">
+        <span class="eyebrow reveal">Authorized Dealers Nationwide</span>
+        <h1 class="page-header__title reveal">Dealers.</h1>
+        <p class="page-header__sub reveal">
           Authorized dealers across the US and internationally. Sales,
           installation, and service support.
         </p>
@@ -78,7 +78,7 @@
 
     <section class="section">
       <div class="container">
-        <label class="dealer-search" for="dealerSearch">
+        <label class="dealer-search reveal" for="dealerSearch">
           <span class="dealer-search__icon" aria-hidden="true">Find</span>
           <input
             id="dealerSearch"
@@ -100,7 +100,7 @@
     <section class="become-dealer">
       <div class="container">
         <div class="become-dealer__inner">
-          <div>
+          <div class="reveal">
             <span class="eyebrow">Join the Network</span>
             <h2 class="become-dealer__title">Become a Dealer.</h2>
             <p class="become-dealer__desc">
@@ -110,7 +110,7 @@
               pricing, training, and territory.
             </p>
           </div>
-          <div class="become-dealer__contacts">
+          <div class="become-dealer__contacts reveal">
             <a class="become-dealer__contact" href="tel:+19133526788">
               <span class="become-dealer__contact-label">Call</span>
               <span class="become-dealer__contact-value">(913) 352-6788</span>
@@ -322,6 +322,8 @@
         if (countEl) {
           countEl.textContent = `${dealers.length} ${dealers.length === 1 ? 'Result' : 'Results'}`;
         }
+
+        if (window.FrankReveal) window.FrankReveal.apply(groupsMount);
       }
 
       function filterDealers(all, query) {

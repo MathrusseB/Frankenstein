@@ -67,9 +67,9 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <span class="eyebrow">Complete Conversion Kits</span>
-        <h1 class="page-header__title">Trike Kits.</h1>
-        <p class="page-header__sub">
+        <span class="eyebrow reveal">Complete Conversion Kits</span>
+        <h1 class="page-header__title reveal">Trike Kits.</h1>
+        <p class="page-header__sub reveal">
           Complete bolt-on conversion kits for Harley-Davidson, Yamaha, and
           Kawasaki. Filter by platform to find the kit engineered for your bike.
         </p>
@@ -78,7 +78,7 @@
 
     <section class="section">
       <div class="container">
-        <div class="filter-bar" id="kitFilters" role="tablist" aria-label="Kit categories">
+        <div class="filter-bar reveal" id="kitFilters" role="tablist" aria-label="Kit categories">
           <button type="button" class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
           <button type="button" class="filter-chip" data-filter="sportster" role="tab">Sportster</button>
           <button type="button" class="filter-chip" data-filter="dyna" role="tab">Dyna</button>
@@ -103,7 +103,7 @@
 
     <section class="cta-strip">
       <div class="container">
-        <div class="cta-strip__inner">
+        <div class="cta-strip__inner reveal">
           <div>
             <h2 class="cta-strip__title">Ready to Build Your Monster?</h2>
             <a href="tel:+19133526788" class="cta-strip__phone">Call to Order · (913) 352-6788</a>
@@ -218,17 +218,9 @@
           </a>
         `).join('');
 
-        // Wire up reveal observer for newly-rendered cards
-        if ('IntersectionObserver' in window) {
-          const io = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                io.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-          grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        // Stagger + reveal via shared helper (defined in main.js)
+        if (window.FrankReveal) {
+          window.FrankReveal.apply(grid);
         } else {
           grid.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
         }
