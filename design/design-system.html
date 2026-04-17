@@ -1,0 +1,1520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Frankenstein Trikes — Design System v1</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  :root {
+    /* Core */
+    --ink: #0A0A0B;
+    --ink-2: #141416;
+    --ink-3: #1E1E22;
+    --line: #2A2A2F;
+    --line-soft: #1A1A1E;
+    --paper: #F4F1EA;
+    --paper-dim: #CFCBC1;
+    --paper-mute: #8C8A82;
+
+    /* Accent — Frankenstein monster green */
+    --mon: oklch(82% 0.22 135);
+    --mon-dim: oklch(62% 0.18 135);
+    --mon-deep: oklch(42% 0.14 138);
+
+    /* Danger / CTA red — stoplight, chrome-era */
+    --red: oklch(62% 0.22 28);
+    --red-deep: oklch(48% 0.20 28);
+
+    /* Radii — almost none. This is steel, not plastic. */
+    --r-0: 0px;
+    --r-1: 2px;
+    --r-2: 4px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  /* ---------- Type ---------- */
+  .display {
+    font-family: 'Anton', 'Oswald', Impact, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    line-height: 0.88;
+  }
+  .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mon);
+  }
+  .eyebrow.muted { color: var(--paper-mute); }
+
+  a { color: inherit; }
+
+  /* ---------- Layout shell ---------- */
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
+  .wrap-wide { max-width: 1680px; margin: 0 auto; padding: 0 40px; }
+
+  .hairline { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+  /* Dot grid backdrop */
+  .dotgrid {
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+  }
+
+  /* Section frame */
+  section.sys {
+    padding: 120px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  section.sys:last-child { border-bottom: 0; }
+
+  .sect-head {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 64px;
+  }
+  .sect-head .num {
+    font-family: 'Anton', sans-serif;
+    font-size: 88px;
+    line-height: 0.85;
+    color: var(--mon);
+  }
+  .sect-head h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 72px;
+    line-height: 0.88;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    letter-spacing: 0.005em;
+  }
+  .sect-head p {
+    color: var(--paper-dim);
+    max-width: 62ch;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  /* Cards / panels */
+  .panel {
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    padding: 24px;
+  }
+  .panel.dark { background: var(--ink); }
+  .panel.paper {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper-dim);
+  }
+
+  .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+
+  /* --- Swatch --- */
+  .swatch {
+    border: 1px solid var(--line);
+    background: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    min-height: 160px;
+  }
+  .swatch .fill { flex: 1; min-height: 90px; position: relative; }
+  .swatch .meta {
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+  .swatch .meta .nm { color: var(--paper); }
+  .swatch .meta .hx { color: var(--paper-mute); }
+
+  /* Type specimen */
+  .specimen {
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    padding: 32px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+    border-radius: 0;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary {
+    background: var(--mon);
+    color: var(--ink);
+  }
+  .btn-primary:hover { background: #C1FF4D; }
+  .btn-dark {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--line);
+  }
+  .btn-dark:hover { background: var(--ink-3); border-color: var(--paper-mute); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--paper);
+    border-color: var(--paper-mute);
+  }
+  .btn-ghost:hover { border-color: var(--paper); }
+  .btn-danger {
+    background: var(--red);
+    color: var(--paper);
+  }
+  .btn-danger:hover { background: var(--red-deep); }
+
+  .btn .arrow { font-weight: 400; font-family: 'JetBrains Mono', monospace; }
+
+  /* Placeholder image treatment */
+  .ph {
+    position: relative;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        #1a1a1d 0 12px,
+        #141418 12px 24px
+      );
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 16px 18px;
+    color: var(--paper-mute);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    overflow: hidden;
+  }
+  .ph::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px dashed rgba(255,255,255,0.08);
+  }
+  .ph .ph-tag { position: relative; }
+
+  /* Table */
+  table.spec {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.spec th, table.spec td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  table.spec th {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+  table.spec tr:last-child td { border-bottom: 0; }
+
+  /* Corner ticks (muscle touch) */
+  .ticked {
+    position: relative;
+  }
+  .ticked::before, .ticked::after,
+  .ticked > .tick-b::before, .ticked > .tick-b::after {
+    content: ""; position: absolute; width: 10px; height: 10px;
+    border-color: var(--mon); border-style: solid; border-width: 0;
+  }
+  .ticked::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+  .ticked::after  { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; }
+  .ticked > .tick-b { position: absolute; inset: 0; pointer-events: none; }
+  .ticked > .tick-b::before { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
+  .ticked > .tick-b::after  { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  /* grid helpers */
+  .grid { display: grid; gap: 16px; }
+  .g-2 { grid-template-columns: repeat(2, 1fr); }
+  .g-3 { grid-template-columns: repeat(3, 1fr); }
+  .g-4 { grid-template-columns: repeat(4, 1fr); }
+  .g-5 { grid-template-columns: repeat(5, 1fr); }
+  .g-6 { grid-template-columns: repeat(6, 1fr); }
+
+  /* Top nav */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10,10,11,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topnav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+    gap: 24px;
+    white-space: nowrap;
+  }
+  .topnav-left {
+    display: flex; align-items: center;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .topnav-left::-webkit-scrollbar { display: none; }
+  .topnav a {
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    margin-right: 24px;
+    transition: color 120ms;
+    flex: 0 0 auto;
+  }
+  .topnav a:hover { color: var(--paper); }
+  .topnav a.active { color: var(--mon); }
+  .topnav .brand {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-right: 32px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .topnav .version {
+    flex: 0 0 auto;
+  }
+  @media (max-width: 1200px) {
+    .topnav .section-link { display: none; }
+    .topnav .brand { margin-right: 0; }
+  }
+
+  /* Cover */
+  .cover {
+    padding: 120px 0 160px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .cover .stamp {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+  .cover h1 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(80px, 14vw, 220px);
+    line-height: 0.82;
+    margin: 0;
+    letter-spacing: 0.005em;
+  }
+  .cover .sub {
+    margin-top: 32px;
+    max-width: 56ch;
+    color: var(--paper-dim);
+    font-size: 18px;
+  }
+  .cover .mono-line {
+    margin-top: 48px;
+    display: flex; gap: 24px; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+  .cover .mono-line span { display: inline-flex; gap: 8px; align-items: center; }
+  .cover .mono-line .dot { width: 6px; height: 6px; background: var(--mon); display: inline-block; }
+
+  /* --- Badge --- */
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    color: var(--paper-dim);
+    background: var(--ink-2);
+  }
+  .badge.mon { color: var(--mon); border-color: color-mix(in oklab, var(--mon) 40%, transparent); }
+  .badge .dot { width: 6px; height: 6px; background: var(--mon); display: inline-block; }
+
+  /* Kit card */
+  .kit-card { background: var(--ink-2); border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .kit-card .ph { border: 0; border-bottom: 1px solid var(--line); min-height: 220px; }
+  .kit-card .body { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .kit-card .name { font-family: 'Anton', sans-serif; font-size: 32px; line-height: 0.9; text-transform: uppercase; }
+  .kit-card .desc { font-size: 13px; color: var(--paper-dim); }
+  .kit-card .foot { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--line-soft); margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--paper-mute); }
+  .kit-card .foot .go { color: var(--mon); }
+
+  /* --- Stat --- */
+  .stat { padding: 28px 0; border-top: 1px solid var(--line); }
+  .stat .v { font-family: 'Anton', sans-serif; font-size: 72px; line-height: 0.88; }
+  .stat .v .unit { color: var(--mon); }
+  .stat .l { margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-mute); }
+
+  /* --- Finder UI (prototype) --- */
+  .finder {
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    padding: 28px;
+  }
+  .finder-row { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; }
+  .field { flex: 1 1 180px; display: flex; flex-direction: column; gap: 8px; }
+  .field label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-mute); }
+  .field select, .field input {
+    appearance: none;
+    background: var(--ink);
+    border: 1px solid var(--line);
+    color: var(--paper);
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    border-radius: 0;
+    cursor: pointer;
+    transition: border-color 120ms;
+  }
+  .field select:hover, .field input:hover { border-color: var(--paper-mute); }
+  .field select:focus, .field input:focus { outline: 0; border-color: var(--mon); }
+  .field select:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* FAQ mock */
+  .faq-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 28px 0; border-top: 1px solid var(--line); gap: 32px; cursor: pointer; }
+  .faq-row .q { font-family: 'Anton', sans-serif; font-size: 28px; text-transform: uppercase; line-height: 1; letter-spacing: 0.005em; flex: 1; }
+  .faq-row .plus { color: var(--mon); font-family: 'JetBrains Mono', monospace; font-size: 18px; }
+  .faq-row.open .a { display: block; }
+  .faq-row .a { display: none; }
+  .faq-col { flex: 1; }
+  .faq-row .a { color: var(--paper-dim); margin-top: 16px; max-width: 56ch; }
+
+  /* Nav preview */
+  .nav-demo {
+    background: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .nav-demo .top { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--line); }
+  .nav-demo .brand { font-family: 'Anton', sans-serif; font-size: 26px; letter-spacing: 0.02em; text-transform: uppercase; }
+  .nav-demo .links { display: flex; gap: 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-mute); }
+  .nav-demo .links a { color: inherit; text-decoration: none; }
+  .nav-demo .links a.active { color: var(--mon); }
+  .nav-demo .util { display: flex; gap: 16px; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-mute); }
+
+  /* Footer demo */
+  .foot-demo { background: var(--ink-2); border: 1px solid var(--line); padding: 48px; }
+
+  /* Side-by-side before/after */
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ba .slot { border: 1px solid var(--line); background: var(--ink-2); }
+  .ba .slot .hd { padding: 10px 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .ba .slot .hd .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .ba .slot .hd .tag.before { color: var(--paper-mute); }
+  .ba .slot .hd .tag.after { color: var(--mon); }
+  .ba .slot .body { padding: 24px; min-height: 260px; }
+
+  /* Callout note for Frank's voice */
+  .pullquote {
+    border-left: 3px solid var(--mon);
+    padding: 24px 32px;
+    background: var(--ink-2);
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .pullquote .sig {
+    display: block;
+    margin-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+  }
+
+  /* Hero mock */
+  .hero-mock {
+    position: relative;
+    background: var(--ink);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    min-height: 640px;
+  }
+  .hero-mock .bg-ph {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.06), transparent 60%),
+      repeating-linear-gradient(135deg, #131316 0 14px, #0e0e11 14px 28px);
+  }
+  .hero-mock .bg-ph::after {
+    content: "PRODUCT SHOT — BLACK FATBOY TRIKE, 3/4 REAR, HARD RIM LIGHT";
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.35);
+  }
+  .hero-mock .overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,11,0.85) 0%, rgba(10,10,11,0.35) 55%, rgba(10,10,11,0) 100%); }
+  .hero-mock .content {
+    position: relative;
+    padding: 64px;
+    max-width: 860px;
+    display: flex; flex-direction: column; gap: 24px;
+    height: 100%;
+  }
+  .hero-mock .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mon);
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .hero-mock .kicker .bar { width: 28px; height: 1px; background: var(--mon); }
+  .hero-mock h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(72px, 9vw, 160px);
+    line-height: 0.82;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 0.005em;
+  }
+  .hero-mock h1 .g { color: var(--mon); }
+  .hero-mock .lede { color: var(--paper-dim); font-size: 16px; max-width: 52ch; }
+  .hero-mock .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-mock .bottom-rail {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 20px 64px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    background: rgba(10,10,11,0.6);
+    backdrop-filter: blur(8px);
+  }
+  .hero-mock .bottom-rail .ticker { display: flex; gap: 32px; }
+  .hero-mock .bottom-rail .ticker span::before {
+    content: "◆"; color: var(--mon); margin-right: 8px;
+  }
+
+  /* dot list */
+  .feat {
+    display: grid; grid-template-columns: 32px 1fr; gap: 20px;
+    padding: 20px 0; border-top: 1px solid var(--line-soft);
+  }
+  .feat .num { font-family: 'Anton', sans-serif; font-size: 22px; color: var(--mon); }
+  .feat h4 { font-family: 'Anton', sans-serif; font-size: 22px; text-transform: uppercase; margin: 0 0 6px; letter-spacing: 0.005em; }
+  .feat p { color: var(--paper-dim); margin: 0; font-size: 14px; }
+
+  /* principle card */
+  .principle { padding: 28px; border: 1px solid var(--line); background: var(--ink-2); }
+  .principle .k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mon); text-transform: uppercase; margin-bottom: 16px; }
+  .principle h3 { font-family: 'Anton', sans-serif; font-size: 34px; text-transform: uppercase; margin: 0 0 12px; line-height: 0.95; letter-spacing: 0.005em; }
+  .principle p { color: var(--paper-dim); font-size: 14px; margin: 0; }
+
+  /* token chip list */
+  .tokens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tok { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--ink-2); border: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  .tok .k { color: var(--paper-mute); }
+  .tok .v { color: var(--paper); }
+
+  /* Utility */
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .mt-32 { margin-top: 32px; }
+  .mt-48 { margin-top: 48px; }
+  .mt-64 { margin-top: 64px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .sp { flex: 1; }
+
+  /* Sub-header row */
+  .subhead {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin: 48px 0 20px;
+  }
+  .subhead h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 34px;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 0.005em;
+  }
+  .subhead .note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+
+  /* scroll margin */
+  [id] { scroll-margin-top: 80px; }
+
+  /* Footer of doc */
+  .doc-foot { padding: 64px 0; color: var(--paper-mute); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
+
+  /* Selection */
+  ::selection { background: var(--mon); color: var(--ink); }
+
+  /* Arrow */
+  .arrow::after { content: "→"; font-family: 'JetBrains Mono', monospace; }
+</style>
+</head>
+<body class="dotgrid">
+
+<!-- ============== TOP NAV ============== -->
+<nav class="topnav">
+  <div class="wrap topnav-inner">
+    <div class="topnav-left">
+      <div class="brand">Frankenstein<span style="color:var(--mon);">/</span></div>
+      <a href="#overview" class="active section-link">00 Overview</a>
+      <a href="#principles" class="section-link">01 Principles</a>
+      <a href="#color" class="section-link">02 Color</a>
+      <a href="#type" class="section-link">03 Type</a>
+      <a href="#components" class="section-link">04 Components</a>
+      <a href="#hero" class="section-link">05 Hero</a>
+      <a href="#finder" class="section-link">06 Kit Finder</a>
+      <a href="#homepage" class="section-link">07 Homepage</a>
+    </div>
+    <div class="version mono" style="font-size:11px; letter-spacing:0.18em; color: var(--paper-mute); text-transform: uppercase;">v1 · 04.17.26</div>
+  </div>
+</nav>
+
+<!-- ============== COVER ============== -->
+<header class="cover">
+  <div class="wrap">
+    <div class="stamp">
+      Frankenstein Unlimited / 013<br/>
+      Pleasanton, Kansas · Since 1995<br/>
+      Design System · Version 01
+    </div>
+    <div class="eyebrow" style="margin-bottom:32px;">◆ Modern Muscle · A visual language for the rebuild</div>
+    <h1 class="display">Create<br/>Your Own<br/><span style="color:var(--mon)">Monster.</span></h1>
+    <p class="sub">A design system for the Frankenstein Trikes rebuild. Built to feel like the shop floor: heavy iron, hard light, zero fluff. Every token, component, and page layout in one place — ready to rebuild against.</p>
+    <div class="mono-line">
+      <span><span class="dot"></span>1 Brand</span>
+      <span><span class="dot"></span>2 Colors</span>
+      <span><span class="dot"></span>3 Typefaces</span>
+      <span><span class="dot"></span>14 Components</span>
+      <span><span class="dot"></span>1 System</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============== OVERVIEW / DIAGNOSIS ============== -->
+<section class="sys" id="overview">
+  <div class="wrap">
+    <div class="sect-head">
+      <div class="num">00</div>
+      <div>
+        <div class="eyebrow">Diagnosis</div>
+        <h2 style="margin-top:8px;">What's working<br/>What we're pushing.</h2>
+        <p>Your rebuild is already a huge leap from the legacy site. The structure is sound — clean IA, real hierarchy, honest copy in Frank's voice. Here's where we push to "real muscle-shop premium": tighter typographic system, a single loud accent instead of generic dark-mode neutrality, more confident photography treatment, and one standout interaction (the Kit Finder) that pays off the "Create Your Own Monster" promise.</p>
+      </div>
+    </div>
+
+    <div class="subhead">
+      <h3>Where the current rebuild lands</h3>
+      <div class="note">/ Honest take</div>
+    </div>
+
+    <div class="grid g-3">
+      <div class="principle">
+        <div class="k">✓ Wins</div>
+        <h3>Solid bones.</h3>
+        <p>Clean IA. Real content hierarchy. Readable. The Frank & Stein story is finally front and center. Clear CTAs. "01 / Trike Kits" navigation is confident.</p>
+      </div>
+      <div class="principle">
+        <div class="k" style="color: var(--red);">△ Soft spots</div>
+        <h3>Feels tech-y, not mechanical.</h3>
+        <p>Reads like a clean SaaS dark mode. Nothing in the palette, type or texture tells you this is iron, grease, horsepower. No single thing is wrong — nothing is distinctively Frankenstein.</p>
+      </div>
+      <div class="principle">
+        <div class="k" style="color: var(--mon);">→ Push</div>
+        <h3>One idea, louder.</h3>
+        <p>Lean hard into the name. Monster green as the ONE accent. Condensed display type. Industrial monospace labels. Hero that shows the bike instead of logo-over-logo.</p>
+      </div>
+    </div>
+
+    <div class="subhead">
+      <h3>Before / After at a glance</h3>
+      <div class="note">/ Same content, different volume</div>
+    </div>
+
+    <div class="ba">
+      <div class="slot">
+        <div class="hd"><div class="tag before">// BEFORE · Current rebuild</div><div class="mono" style="font-size:10px; color: var(--paper-mute);">Clean but generic</div></div>
+        <div class="body">
+          <div style="font-family: 'Inter'; font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -0.02em;">Create Your Own Monster.</div>
+          <div class="mt-16" style="color: var(--paper-dim);">Complete trike conversion kits for Harley-Davidson. Bolt-on. American-made. Built in Kansas since 1995.</div>
+          <div class="row mt-32">
+            <a class="btn" style="background:#fff; color:#000; border-radius:6px;">Browse Trike Kits</a>
+            <a class="btn" style="background:transparent; color:#fff; border:1px solid #333; border-radius:6px;">Find a Dealer</a>
+          </div>
+        </div>
+      </div>
+      <div class="slot">
+        <div class="hd"><div class="tag after">// AFTER · Modern Muscle</div><div class="mono" style="font-size:10px; color: var(--mon);">Heavier · Louder · Ours</div></div>
+        <div class="body">
+          <div class="eyebrow" style="margin-bottom:16px;"><span style="display:inline-block; width:28px; height:1px; background: var(--mon); vertical-align: middle; margin-right: 8px;"></span>Since 1995 · Pleasanton, Kansas</div>
+          <div class="display" style="font-size: 88px;">Create Your Own<br/><span style="color:var(--mon);">Monster.</span></div>
+          <div class="mt-24" style="color: var(--paper-dim); max-width: 44ch;">Complete trike conversion kits for Harley-Davidson. Bolt-on. American-made. Built in Kansas since 1995.</div>
+          <div class="row mt-32">
+            <a class="btn btn-primary arrow">Browse Kits</a>
+            <a class="btn btn-ghost arrow">Find a Dealer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRINCIPLES ============== -->
+<section class="sys" id="principles">
+  <div class="wrap">
+    <div class="sect-head">
+      <div class="num">01</div>
+      <div>
+        <div class="eyebrow">Principles</div>
+        <h2 style="margin-top:8px;">How the brand<br/>should feel online.</h2>
+        <p>Five rules that decide every design choice downstream. When something feels off, one of these is broken.</p>
+      </div>
+    </div>
+
+    <div class="grid g-3">
+      <div class="principle">
+        <div class="k">01 / Weight</div>
+        <h3>Heavy over light.</h3>
+        <p>This is iron. Thin type, glassmorphism, soft gradients all lie about the product. Condensed display. Dense layouts. Hard edges. Zero radii above 4px.</p>
+      </div>
+      <div class="principle">
+        <div class="k">02 / Contrast</div>
+        <h3>Hard light.</h3>
+        <p>Near-black backgrounds. Warm off-white foregrounds. Photography lit like a shop — hard rim light, deep shadows. No moody grey mid-tones.</p>
+      </div>
+      <div class="principle">
+        <div class="k">03 / Voice</div>
+        <h3>Frank talks, we listen.</h3>
+        <p>Keep the founder's voice. Owner's Promise stays. Monospace labels frame the content like a spec sheet. No marketing boilerplate.</p>
+      </div>
+      <div class="principle">
+        <div class="k">04 / Evidence</div>
+        <h3>Show the iron.</h3>
+        <p>Every kit, every component, a photo — not an icon. Dana diffs, 9" axles, billet calipers: those are the hero shots. If we don't have a photo, we say so out loud.</p>
+      </div>
+      <div class="principle">
+        <div class="k">05 / One loud color</div>
+        <h3>Monster green, everywhere.</h3>
+        <p>A single accent — Frankenstein acid green — for CTAs, active states, key numbers. No rainbow chart palettes. Red only for warnings or shock CTAs.</p>
+      </div>
+      <div class="principle">
+        <div class="k">06 / Restraint</div>
+        <h3>One interaction that pays off.</h3>
+        <p>Skip the animations parade. Land one thing: the Kit Finder (Year → Make → Model). That's the only "wow" moment the site needs.</p>
+      </div>
+    </div>
+
+    <div class="pullquote mt-48">
+      “Choosing a trike kit is an important decision. We expect you to compare ours to the competition. The more you compare, the better we look.”
+      <span class="sig">— Frank Pedersen, Founder</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COLOR ============== -->
+<section class="sys" id="color">
+  <div class="wrap">
+    <div class="sect-head">
+      <div class="num">02</div>
+      <div>
+        <div class="eyebrow">Color</div>
+        <h2 style="margin-top:8px;">Iron, paper,<br/>and one shot of green.</h2>
+        <p>A tight palette: near-black workshop ink, warm paper off-white, and a single saturated accent pulled from the "monster" in the name. Red is reserved for urgency — price, stock, warning.</p>
+      </div>
+    </div>
+
+    <div class="subhead"><h3>Core</h3><div class="note">/ Foundation</div></div>
+    <div class="grid g-4">
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--ink);"></div>
+        <div class="meta"><span class="nm">Ink</span><span class="hx">#0A0A0B</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--ink-2);"></div>
+        <div class="meta"><span class="nm">Ink 2 · Panel</span><span class="hx">#141416</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--ink-3);"></div>
+        <div class="meta"><span class="nm">Ink 3 · Hover</span><span class="hx">#1E1E22</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--line);"></div>
+        <div class="meta"><span class="nm">Line</span><span class="hx">#2A2A2F</span></div>
+      </div>
+    </div>
+
+    <div class="subhead"><h3>Paper</h3><div class="note">/ Foreground + light mode</div></div>
+    <div class="grid g-4">
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--paper);"></div>
+        <div class="meta"><span class="nm" style="color:#0A0A0B;">Paper · Text on dark</span><span class="hx" style="color:#555;">#F4F1EA</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--paper-dim);"></div>
+        <div class="meta"><span class="nm" style="color:#0A0A0B;">Paper Dim</span><span class="hx" style="color:#555;">#CFCBC1</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--paper-mute);"></div>
+        <div class="meta"><span class="nm">Paper Mute</span><span class="hx">#8C8A82</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: #fff;"></div>
+        <div class="meta"><span class="nm" style="color:#000;">Pure White · Rare</span><span class="hx" style="color:#555;">#FFFFFF</span></div>
+      </div>
+    </div>
+
+    <div class="subhead"><h3>Accent</h3><div class="note">/ Monster green — the single loud move</div></div>
+    <div class="grid g-4">
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--mon);"></div>
+        <div class="meta"><span class="nm" style="color:#0A0A0B;">Monster</span><span class="hx" style="color:#333;">oklch(82 .22 135)</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--mon-dim);"></div>
+        <div class="meta"><span class="nm">Monster Dim · Hover</span><span class="hx">oklch(62 .18 135)</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--mon-deep);"></div>
+        <div class="meta"><span class="nm">Monster Deep · Text</span><span class="hx">oklch(42 .14 138)</span></div>
+      </div>
+      <div class="swatch ticked"><span class="tick-b"></span>
+        <div class="fill" style="background: var(--red);"></div>
+        <div class="meta"><span class="nm">Stoplight · Urgency</span><span class="hx">oklch(62 .22 28)</span></div>
+      </div>
+    </div>
+
+    <div class="subhead"><h3>Usage rules</h3><div class="note">/ Don't bend these</div></div>
+    <div class="grid g-2">
+      <div class="panel">
+        <div class="label">DO</div>
+        <ul style="margin:12px 0 0; padding-left: 20px; color: var(--paper-dim); font-size: 14px;">
+          <li>Use Monster on ONE thing per view: the primary CTA, or a single data point.</li>
+          <li>Default every page to Ink background. Paper backgrounds only for "Our Story" / long-form.</li>
+          <li>Hairline rules (1px Line) between sections instead of boxes and drop shadows.</li>
+          <li>Monospace for numbers, specs, labels, and timestamps — never for body copy.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="label" style="color: var(--red);">DON'T</div>
+        <ul style="margin:12px 0 0; padding-left: 20px; color: var(--paper-dim); font-size: 14px;">
+          <li>Tint buttons or cards with Monster green. It's not a fill color, it's a highlighter.</li>
+          <li>Gradients. Ever. This is paint, not plasma.</li>
+          <li>Rounded corners above 4px. It turns the site into a SaaS dashboard.</li>
+          <li>More than two accents on a page. The whole point is one shot of green.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TYPE ============== -->
+<section class="sys" id="type">
+  <div class="wrap">
+    <div class="sect-head">
+      <div class="num">03</div>
+      <div>
+        <div class="eyebrow">Typography</div>
+        <h2 style="margin-top:8px;">Anton. Inter.<br/>JetBrains Mono.</h2>
+        <p>Three families, each with a clear job. Anton does all the shouting. Inter handles reading. JetBrains Mono is the shop-floor label — every spec, part number, timestamp.</p>
+      </div>
+    </div>
+
+    <div class="specimen">
+      <div class="eyebrow">Display · Anton</div>
+      <div class="display mt-16" style="font-size: 140px;">CREATE YOUR<br/>OWN MONSTER.</div>
+      <div class="mt-24" style="display:flex; gap:32px; flex-wrap: wrap;">
+        <div><div class="label">Family</div><div class="mono">Anton, Regular 400</div></div>
+        <div><div class="label">Usage</div><div class="mono">H1 · H2 · Kit Names · Stat Values</div></div>
+        <div><div class="label">Tracking</div><div class="mono">+0.5%</div></div>
+        <div><div class="label">Leading</div><div class="mono">0.88</div></div>
+        <div><div class="label">Case</div><div class="mono">UPPERCASE</div></div>
+      </div>
+    </div>
+
+    <div class="specimen mt-16">
+      <div class="eyebrow">Scale</div>
+      <div class="display mt-16" style="font-size: 160px;">160 / Hero</div>
+      <div class="display" style="font-size: 112px;">112 / H1</div>
+      <div class="display" style="font-size: 72px;">72 / H2 — Section</div>
+      <div class="display" style="font-size: 48px;">48 / H3 — Card</div>
+      <div class="display" style="font-size: 32px;">32 / H4 — Kit Name</div>
+      <div class="display" style="font-size: 22px;">22 / Subhead</div>
+    </div>
+
+    <div class="grid g-2 mt-16">
+      <div class="specimen">
+        <div class="eyebrow">Body · Inter</div>
+        <p class="mt-16" style="font-size: 20px; line-height: 1.5; color: var(--paper);">Kits typically ship within five days. Every Hot Rod Billet and Light Sport kit is still manufactured right here in Pleasanton, Kansas.</p>
+        <p style="font-size: 16px; line-height: 1.55; color: var(--paper-dim);">Kits typically ship within five days. Every Hot Rod Billet and Light Sport kit is still manufactured right here in Pleasanton, Kansas.</p>
+        <p style="font-size: 13px; line-height: 1.5; color: var(--paper-dim);">Kits typically ship within five days. Every Hot Rod Billet and Light Sport kit is still manufactured right here in Pleasanton, Kansas.</p>
+        <div class="mt-16" style="display:flex; gap:24px;">
+          <div><div class="label">Weights</div><div class="mono">300 · 400 · 500 · 600 · 700</div></div>
+          <div><div class="label">Usage</div><div class="mono">Body · UI · Forms</div></div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="eyebrow">Label · JetBrains Mono</div>
+        <div class="mono mt-16" style="font-size: 22px; color: var(--mon);">◆ SINCE 1995 / PLEASANTON KS</div>
+        <div class="mono" style="font-size: 16px;">PART №  RE-9IN-30-BLK</div>
+        <div class="mono" style="font-size: 13px; color: var(--paper-mute);">TIME TO INSTALL · ONE BUSINESS DAY</div>
+        <div class="mono" style="font-size: 11px; letter-spacing: 0.2em; color: var(--paper-mute);">03 / 13 KIT PLATFORMS AVAILABLE</div>
+        <div class="mt-16" style="display:flex; gap:24px;">
+          <div><div class="label">Usage</div><div class="mono">Eyebrows · Specs · Numbers</div></div>
+          <div><div class="label">Tracking</div><div class="mono">+18% on micro</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COMPONENTS ============== -->
+<section class="sys" id="components">
+  <div class="wrap">
+    <div class="sect-head">
+      <div class="num">04</div>
+      <div>
+        <div class="eyebrow">Components</div>
+        <h2 style="margin-top:8px;">The parts bin.</h2>
+        <p>Every screen is built from these pieces. Each one exists because the current rebuild is missing it, or because it'll get reused across Kit Detail, Gallery, Components, Pricing and Dealers pages.</p>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="subhead"><h3>Buttons</h3><div class="note">/ 4 variants · 1 size · 0 rounding</div></div>
+    <div class="panel">
+      <div class="row" style="gap: 12px;">
+        <button class="btn btn-primary arrow">Browse Kits</button>
+        <button class="btn btn-dark arrow">Find a Dealer</button>
+        <button class="btn btn-ghost arrow">Download Catalog</button>
+        <button class="btn btn-danger arrow">Call To Order</button>
+      </div>
+      <hr class="hairline mt-24" />
+      <div class="row mt-24" style="gap: 12px;">
+        <div>
+          <div class="label">Primary</div>
+          <div class="mono mt-8" style="font-size: 11px; color: var(--paper-mute);">Monster · Ink text · One per view</div>
+        </div>
+        <div>
+          <div class="label">Dark</div>
+          <div class="mono mt-8" style="font-size: 11px; color: var(--paper-mute);">Ink · Paper text · Secondary</div>
+        </div>
+        <div>
+          <div class="label">Ghost</div>
+          <div class="mono mt-8" style="font-size: 11px; color: var(--paper-mute);">Transparent · Hairline border</div>
+        </div>
+        <div>
+          <div class="label">Danger / Call</div>
+          <div class="mono mt-8" style="font-size: 11px; color: var(--paper-mute);">Stoplight red · Urgency · Phone-first CTAs</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="subhead"><h3>Badges &amp; Tags</h3><div class="note">/ Metadata pills</div></div>
+    <div class="panel">
+      <div class="row">
+        <span class="badge mon"><span class="dot"></span>In Stock</span>
+        <span class="badge">Bolt-On · 1 Day</span>
+        <span class="badge">Fits '99 — Current</span>
+        <span class="badge" style="color: var(--red); border-color: color-mix(in oklab, var(--red) 50%, transparent);">● 3 Remaining</span>
+        <span class="badge">HD Softail</span>
+        <span class="badge">Hot Rod Billet</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="subhead"><h3>Navigation</h3><div class="note">/ Primary + utility rail</div></div>
+    <div class="nav-demo">
+      <div class="top" style="padding: 10px 24px; border-bottom: 1px solid var(--line-soft); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-mute); display: flex; justify-content: space-between;">
+        <div>◆ Free shipping on orders over $500 · Kits ship in 5 days</div>
+        <div style="display: flex; gap: 24px;">
+          <span>CALL (913) 352-6788</span>
+          <span style="color: var(--mon);">FIND A DEALER →</span>
+        </div>
+      </div>
+      <div class="top">
+        <div style="display: flex; align-items: center; gap: 32px;">
+          <div class="brand">Frankenstein<span style="color:var(--mon);">/</span></div>
+          <div class="links">
+            <a class="active">Kits</a>
+            <a>Components</a>
+            <a>Gallery</a>
+            <a>Pricing</a>
+            <a>Dealers</a>
+            <a>FAQ</a>
+          </div>
+        </div>
+        <div class="util">
+          <a>Our Story</a>
+          <a>Contact</a>
+          <button class="btn btn-primary" style="padding: 10px 16px;">Build Yours →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kit cards -->
+    <div class="subhead"><h3>Kit cards</h3><div class="note">/ Grid unit for Trike Kits + homepage</div></div>
+    <div class="grid g-3">
+      <div class="kit-card ticked"><span class="tick-b"></span>
+        <div class="ph"><div class="ph-tag">// PRODUCT · SOFTAIL TRIKE · 3/4 REAR</div><div class="ph-tag">01 / 06</div></div>
+        <div class="body">
+          <div class="row" style="gap:8px;">
+            <span class="badge mon"><span class="dot"></span>Most Popular</span>
+            <span class="badge">Hot Rod Billet</span>
+          </div>
+          <div class="name mt-8">Softail</div>
+          <div class="desc">Fits Fat Boy, Heritage, Deluxe, Slim. 30" or 40" rear ends. Dana diff, 9" Ford street/strip axle.</div>
+          <div class="foot">
+            <span>From $9,995</span>
+            <span class="go">View Kit →</span>
+          </div>
+        </div>
+      </div>
+      <div class="kit-card ticked"><span class="tick-b"></span>
+        <div class="ph"><div class="ph-tag">// PRODUCT · FLT FLH · PROFILE</div><div class="ph-tag">02 / 06</div></div>
+        <div class="body">
+          <div class="row" style="gap:8px;">
+            <span class="badge">Hot Rod Billet</span>
+          </div>
+          <div class="name mt-8">FLT FLH<br/>Roadking</div>
+          <div class="desc">Fits Road King, Road Glide, Street Glide, Electra Glide. '99 — current.</div>
+          <div class="foot">
+            <span>From $10,495</span>
+            <span class="go">View Kit →</span>
+          </div>
+        </div>
+      </div>
+      <div class="kit-card ticked"><span class="tick-b"></span>
+        <div class="ph"><div class="ph-tag">// PRODUCT · DYNA · STAGED</div><div class="ph-tag">03 / 06</div></div>
+        <div class="body">
+          <div class="row" style="gap:8px;">
+            <span class="badge">Light Sport</span>
+          </div>
+          <div class="name mt-8">Dyna</div>
+          <div class="desc">Super Glide, Low Rider, Wide Glide, Street Bob, FXR. Lightweight Sport rear end.</div>
+          <div class="foot">
+            <span>From $8,995</span>
+            <span class="go">View Kit →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="subhead"><h3>Stats strip</h3><div class="note">/ The "since 1995" numbers, turned up</div></div>
+    <div class="panel" style="padding: 0 24px;">
+      <div class="grid g-4" style="gap: 0;">
+        <div class="stat" style="padding-right: 24px; border-right: 1px solid var(--line);"><div class="v">1995<span class="unit">.</span></div><div class="l">Year one · Pleasanton KS</div></div>
+        <div class="stat" style="padding: 28px 24px; border-right: 1px solid var(--line);"><div class="v">13<span class="unit">×</span></div><div class="l">Harley platforms supported</div></div>
+        <div class="stat" style="padding: 28px 24px; border-right: 1px solid var(--line);"><div class="v">1<span class="unit">day</span></div><div class="l">Typical install time</div></div>
+        <div class="stat" style="padding: 28px 0 28px 24px;"><div class="v">3<span class="unit">yr</span></div><div class="l">Unlimited miles warranty</div></div>
+      </div>
+    </div>
+
+    <!-- FAQ row -->
+    <div class="subhead"><h3>FAQ rows</h3><div class="note">/ Used on Homepage + FAQ page</div></div>
+    <div class="panel" style="padding: 0 24px;">
+      <div class="faq-row open">
+        <div class="faq-col"><div class="q">Will your kit fit my bike?</div><div class="a">If your Harley is on this page, yes. We manufacture kits for 13 HD platforms plus select Yamaha and Kawasaki models — use the Kit Finder at the top of the site to confirm your year, make and model.</div></div>
+        <div class="plus">−</div>
+      </div>
+      <div class="faq-row"><div class="faq-col"><div class="q">How long does install take?</div></div><div class="plus">+</div></div>
+      <div class="faq-row"><div class="faq-col"><div class="q">What's in the box?</div></div><div class="plus">+</div></div>
+      <div class="faq-row"><div class="faq-col"><div class="q">Do you ship internationally?</div></div><div class="plus">+</div></div>
+    </div>
+
+    <!-- Quote -->
+    <div class="subhead"><h3>Pull quote</h3><div class="note">/ Frank's voice — Owner's Promise</div></div>
+    <div class="pullquote">
+      “Choosing a trike kit is an important decision. We expect you to compare ours to the competition. The more you compare, the better we look.”
+      <span class="sig">— Frank Pedersen, Founder · Pleasanton, Kansas</span>
+    </div>
+
+    <!-- Feature list -->
+    <div class="subhead"><h3>Feature list</h3><div class="note">/ Spec-sheet style — anti-icon</div></div>
+    <div class="panel">
+      <div class="feat">
+        <div class="num">01</div>
+        <div>
+          <h4>Dana differential</h4>
+          <p>Same diff you'll find under a truck rear end. Over-engineered on purpose — no one has ever called us about a failed one.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="num">02</div>
+        <div>
+          <h4>9" Ford street/strip axle</h4>
+          <p>Drag-racing heritage. Rated well past anything a V-twin can throw at it.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="num">03</div>
+        <div>
+          <h4>Billet 4-piston calipers</h4>
+          <p>Machined from solid billet in Kansas. Paired with stainless rotors and grade 8 hardware throughout.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tokens -->
+    <div class="subhead"><h3>Design tokens</h3><div class="note">/ Ready for a theme file</div></div>
+    <div class="tokens">
+      <div class="tok"><span class="k">--ink</span><span class="v">#0A0A0B</span></div>
+      <div class="tok"><span class="k">--ink-2</span><span class="v">#141416</span></div>
+      <div class="tok"><span class="k">--ink-3</span><span class="v">#1E1E22</span></div>
+      <div class="tok"><span class="k">--line</span><span class="v">#2A2A2F</span></div>
+      <div class="tok"><span class="k">--paper</span><span class="v">#F4F1EA</span></div>
+      <div class="tok"><span class="k">--paper-dim</span><span class="v">#CFCBC1</span></div>
+      <div class="tok"><span class="k">--paper-mute</span><span class="v">#8C8A82</span></div>
+      <div class="tok"><span class="k">--mon</span><span class="v">oklch(82% .22 135)</span></div>
+      <div class="tok"><span class="k">--red</span><span class="v">oklch(62% .22 28)</span></div>
+      <div class="tok"><span class="k">--radius-1</span><span class="v">2px</span></div>
+      <div class="tok"><span class="k">--radius-2</span><span class="v">4px</span></div>
+      <div class="tok"><span class="k">font-display</span><span class="v">Anton</span></div>
+      <div class="tok"><span class="k">font-body</span><span class="v">Inter</span></div>
+      <div class="tok"><span class="k">font-mono</span><span class="v">JetBrains Mono</span></div>
+      <div class="tok"><span class="k">grid</span><span class="v">12 col · 80px gutter</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== HERO ============== -->
+<section class="sys" id="hero">
+  <div class="wrap-wide">
+    <div class="sect-head">
+      <div class="num">05</div>
+      <div>
+        <div class="eyebrow">Page · Hero</div>
+        <h2 style="margin-top:8px;">Homepage hero —<br/>full bleed, one photo, one promise.</h2>
+        <p>Replaces the current logo-over-logo hero. The job of this block: in five seconds, a visitor knows what you sell, who it's for, that you've been doing this 30 years, and what to do next. Everything else is deleted.</p>
+      </div>
+    </div>
+
+    <div class="hero-mock">
+      <div class="bg-ph"></div>
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="kicker"><span class="bar"></span>SINCE 1995 · PLEASANTON, KANSAS</div>
+        <h1 class="display">CREATE<br/>YOUR OWN<br/><span class="g">MONSTER.</span></h1>
+        <div class="lede">Complete, bolt-on trike conversion kits for Harley-Davidson — plus select Yamaha and Kawasaki. Installed in a day. Built one at a time in Kansas.</div>
+        <div class="ctas">
+          <a class="btn btn-primary arrow">Find My Kit</a>
+          <a class="btn btn-ghost arrow">Watch The Build (0:45)</a>
+        </div>
+      </div>
+      <div class="bottom-rail">
+        <div class="ticker">
+          <span>13 HD Platforms</span>
+          <span>Dana Diff / 9" Ford Axle</span>
+          <span>Installs in One Day</span>
+          <span>3 Year Unlimited Warranty</span>
+        </div>
+        <div>◆ REEL № 013 / 2026</div>
+      </div>
+    </div>
+
+    <div class="grid g-3 mt-32">
+      <div class="panel">
+        <div class="label">Swap A · Story-first</div>
+        <div class="display mt-16" style="font-size: 28px;">"TWO BUILDERS.<br/>ONE REVOLUTION."</div>
+        <p class="mt-16" style="color: var(--paper-dim); font-size: 13px;">Alt hero for the "Our Story" push. Leads with Frank + Stein's portrait, the trike in the background.</p>
+      </div>
+      <div class="panel">
+        <div class="label">Swap B · Build-first</div>
+        <div class="display mt-16" style="font-size: 28px;">BOLT IT ON.<br/>RIDE IT HOME.</div>
+        <p class="mt-16" style="color: var(--paper-dim); font-size: 13px;">Alt hero for installation / dealer audience. Time-lapse loop of a one-day install.</p>
+      </div>
+      <div class="panel">
+        <div class="label">Swap C · Product-first</div>
+        <div class="display mt-16" style="font-size: 28px;">HOT ROD BILLET<br/>REAR ENDS.</div>
+        <p class="mt-16" style="color: var(--paper-dim); font-size: 13px;">Alt hero for the spec-head audience. Macro shot of the billet rear end, specs laid over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== KIT FINDER PROTO ============== -->
+<section class="sys" id="finder">
+  <div class="wrap">
+    <div class="sect-head">
+      <div class="num">06</div>
+      <div>
+        <div class="eyebrow">Interaction · Kit Finder</div>
+        <h2 style="margin-top:8px;">One interaction<br/>that earns its keep.</h2>
+        <p>The single "wow" moment on the site. Year → Make → Model → matching kit. Lives in the hero and as a dedicated /find page. Real, interactive mock below — try it.</p>
+      </div>
+    </div>
+
+    <div id="finder-mount"></div>
+
+    <div class="grid g-3 mt-32">
+      <div class="panel">
+        <div class="label">Behavior</div>
+        <p class="mt-16" style="color: var(--paper-dim); font-size: 14px;">Each selection enables the next. Model → match shows the matching kit inline, with photo, price, install time, and a "View Kit" button.</p>
+      </div>
+      <div class="panel">
+        <div class="label">Fallback</div>
+        <p class="mt-16" style="color: var(--paper-dim); font-size: 14px;">Bike not found? Panel flips to "Tell us what you ride" with a short form that pings Frank directly. No dead ends.</p>
+      </div>
+      <div class="panel">
+        <div class="label">Persistence</div>
+        <p class="mt-16" style="color: var(--paper-dim); font-size: 14px;">Selected bike saved in localStorage — every kit page, gallery filter, and pricing row reflects "your" bike for the rest of the session.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== HOMEPAGE VISION ============== -->
+<section class="sys" id="homepage">
+  <div class="wrap-wide">
+    <div class="sect-head">
+      <div class="num">07</div>
+      <div>
+        <div class="eyebrow">Page · Homepage</div>
+        <h2 style="margin-top:8px;">Section rhythm<br/>for the homepage.</h2>
+        <p>How it all stacks. Every section does one job. No "three column feature grid with icons." No generic testimonials slider.</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 180px 1fr; gap: 32px;">
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">01 / Hero</div>
+      <div class="panel" style="min-height: 180px;">
+        <div class="display" style="font-size: 54px;">Create Your Own <span style="color:var(--mon);">Monster.</span></div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">Full-bleed photo + headline + [Find My Kit] + stat rail</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">02 / Kit Finder</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">Year → Make → Model</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">Inline version of the Kit Finder. Sticky CTA if the user selects a bike.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">03 / Proof</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">1995 · 13 · 1 Day · 3 Yrs</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">Stats strip. Hairline separators. No icons.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">04 / Kits</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">13 Platforms.</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">Horizontally-scrolling kit cards. Each with photo, price-from, install time.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">05 / Story</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">Two builders. One revolution.</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">Full-bleed portrait (Frank &amp; Stein or the shop). 2-col layout: story left, building photo right. Ends with [Read Our Full Story].</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">06 / Build</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">Bolt it on. Ride it home.</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">Four-photo timelapse strip — same bike, 4 stages from stock 2-wheeler to finished trike. Time stamps in monospace.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">07 / Promise</div>
+      <div class="panel" style="background: var(--paper); color: var(--ink);">
+        <div class="display" style="font-size: 36px;">Owner's Promise.</div>
+        <div class="mt-16 mono" style="color: #555; font-size: 11px;">ONLY PAPER-BG SECTION ON THE SITE. Full pull-quote from Frank, signed. Texture shifts from machine-shop to letterhead.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">08 / Dealers</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">Find installation near you.</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">US map SVG with dealer pins in Monster green. ZIP search box. Top 5 nearest dealers listed.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">09 / Gallery</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">Customer builds.</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">12-up photo mosaic. Each with owner name + city + model. Feels like a wall of Polaroids in the shop.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">10 / FAQ</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">Questions we get weekly.</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">Top 5 FAQ rows with expand. Styled like a parts sheet.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">11 / CTA</div>
+      <div class="panel">
+        <div class="display" style="font-size: 36px;">Ready to build your monster?</div>
+        <div class="mt-16 mono" style="color: var(--paper-mute); font-size: 11px;">Giant call-to-action block. Phone number as h2. "Kits ship in 5 days." Frank's signature underneath.</div>
+      </div>
+
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mon);">12 / Footer</div>
+      <div class="foot-demo">
+        <div class="grid g-4">
+          <div>
+            <div class="display" style="font-size: 28px;">Frankenstein<span style="color:var(--mon);">/</span></div>
+            <div class="mt-16 mono" style="font-size: 11px; color: var(--paper-mute); letter-spacing: 0.18em; text-transform: uppercase;">Since 1995<br/>Pleasanton, Kansas</div>
+          </div>
+          <div>
+            <div class="label">Shop</div>
+            <div class="mt-16" style="display:flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--paper-dim);">
+              <div>Trike Kits</div><div>Components</div><div>Pricing</div><div>Gallery</div><div>Dealers</div>
+            </div>
+          </div>
+          <div>
+            <div class="label">Support</div>
+            <div class="mt-16" style="display:flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--paper-dim);">
+              <div>FAQ</div><div>Installation</div><div>Warranty</div><div>Our Story</div><div>Contact</div>
+            </div>
+          </div>
+          <div>
+            <div class="label">Visit</div>
+            <div class="mt-16" style="font-size: 13px; color: var(--paper-dim);">
+              9453 Trump Terr.<br/>
+              Pleasanton, KS<br/><br/>
+              <span style="color: var(--mon);">(913) 352-6788</span><br/>
+              Mon–Fri · 8a–5p CT
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="subhead" style="margin-top: 80px;"><h3>Next steps for the rebuild</h3><div class="note">/ In order</div></div>
+    <div class="grid g-3">
+      <div class="principle">
+        <div class="k">Phase 1 · This week</div>
+        <h3>Apply the system.</h3>
+        <p>Swap fonts, swap accent color, swap buttons across the current rebuild. No structural changes. 80% of the visual lift comes from this alone.</p>
+      </div>
+      <div class="principle">
+        <div class="k">Phase 2 · Next</div>
+        <h3>Shoot real photography.</h3>
+        <p>One afternoon in the shop with a photographer. 13 hero shots (one per kit) + a Frank portrait + a full install sequence. Everything else is a placeholder until these exist.</p>
+      </div>
+      <div class="principle">
+        <div class="k">Phase 3 · Then</div>
+        <h3>Ship the Kit Finder.</h3>
+        <p>Wire up the Year/Make/Model selector to the real kit catalog. This single interaction is worth more than 5 new pages.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="doc-foot">
+    <div>Frankenstein Trikes · Design System · v1 · Modern Muscle</div>
+    <div>← Scroll to top</div>
+  </div>
+</div>
+
+<!-- ============== KIT FINDER REACT ============== -->
+<script type="text/babel" data-presets="react">
+const { useState, useMemo } = React;
+
+const DATA = {
+  "Harley-Davidson": {
+    years: [2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999],
+    models: {
+      "Softail": { kit: "Softail", platform: "Hot Rod Billet", price: "$9,995", img: "SOFTAIL TRIKE / 3/4 REAR" },
+      "Fat Boy": { kit: "Fat Boy & Heritage", platform: "Hot Rod Billet", price: "$10,295", img: "FAT BOY TRIKE / PROFILE" },
+      "Heritage": { kit: "Fat Boy & Heritage", platform: "Hot Rod Billet", price: "$10,295", img: "HERITAGE TRIKE / PROFILE" },
+      "Road King": { kit: "FLT FLH Roadking", platform: "Hot Rod Billet", price: "$10,495", img: "ROAD KING TRIKE / 3/4" },
+      "Street Glide": { kit: "FLT FLH Roadking", platform: "Hot Rod Billet", price: "$10,495", img: "STREET GLIDE TRIKE" },
+      "Road Glide": { kit: "FLT FLH Roadking", platform: "Hot Rod Billet", price: "$10,495", img: "ROAD GLIDE TRIKE" },
+      "Dyna": { kit: "Dyna", platform: "Light Sport", price: "$8,995", img: "DYNA TRIKE / STAGED" },
+      "Sportster": { kit: "Sportster", platform: "Light Sport", price: "$7,995", img: "SPORTSTER TRIKE / 3/4" },
+      "V-Rod": { kit: "V-Rod", platform: "Hot Rod Billet", price: "$10,995", img: "V-ROD TRIKE / STUDIO" },
+      "FXR": { kit: "FXR", platform: "Light Sport", price: "$8,995", img: "FXR TRIKE / 3/4" },
+      "Rocker": { kit: "Rocker & Breakout", platform: "Hot Rod Billet", price: "$10,495", img: "ROCKER TRIKE / PROFILE" },
+      "Breakout": { kit: "Rocker & Breakout", platform: "Hot Rod Billet", price: "$10,495", img: "BREAKOUT TRIKE / PROFILE" },
+      "Street 500/750": { kit: "Street", platform: "Light Sport", price: "$7,495", img: "STREET 750 TRIKE" },
+    }
+  },
+  "Yamaha": {
+    years: [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012],
+    models: {
+      "Road Star": { kit: "Yamaha", platform: "Hot Rod Billet", price: "$10,995", img: "YAMAHA TRIKE" },
+      "V-Star": { kit: "Yamaha", platform: "Light Sport", price: "$8,995", img: "V-STAR TRIKE" },
+    }
+  },
+  "Kawasaki": {
+    years: [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004],
+    models: {
+      "Vulcan 1700": { kit: "Kawasaki 1700", platform: "Hot Rod Billet", price: "$10,995", img: "VULCAN 1700 TRIKE" },
+    }
+  }
+};
+
+function Finder() {
+  const [year, setYear] = useState('');
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
+
+  const years = make ? DATA[make].years : [];
+  const models = make ? Object.keys(DATA[make].models) : [];
+  const match = (make && model) ? DATA[make].models[model] : null;
+
+  const reset = () => { setYear(''); setMake(''); setModel(''); };
+
+  return (
+    <div>
+      <div className="finder ticked">
+        <span className="tick-b"></span>
+        <div style={{display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 20}}>
+          <div>
+            <div className="eyebrow">◆ Kit Finder · Step {match ? 4 : model ? 3 : make ? 2 : year ? 2 : 1} of 4</div>
+            <div className="display" style={{fontSize: 40, marginTop: 8}}>Find the kit for your bike.</div>
+          </div>
+          {(year || make || model) && (
+            <button className="btn btn-ghost" style={{padding:'8px 14px', fontSize: 11}} onClick={reset}>Reset</button>
+          )}
+        </div>
+
+        <div className="finder-row">
+          <div className="field">
+            <label>01 · Make</label>
+            <select value={make} onChange={e => { setMake(e.target.value); setModel(''); setYear(''); }}>
+              <option value="">Select your make</option>
+              {Object.keys(DATA).map(k => <option key={k} value={k}>{k}</option>)}
+            </select>
+          </div>
+          <div className="field">
+            <label>02 · Year</label>
+            <select value={year} onChange={e => setYear(e.target.value)} disabled={!make}>
+              <option value="">{make ? 'Select year' : '— Pick a make first'}</option>
+              {years.map(y => <option key={y} value={y}>{y}</option>)}
+            </select>
+          </div>
+          <div className="field">
+            <label>03 · Model</label>
+            <select value={model} onChange={e => setModel(e.target.value)} disabled={!make || !year}>
+              <option value="">{(make && year) ? 'Select model' : '— Pick make + year'}</option>
+              {models.map(m => <option key={m} value={m}>{m}</option>)}
+            </select>
+          </div>
+          <div className="field" style={{flex:'0 1 auto'}}>
+            <label>&nbsp;</label>
+            <button className="btn btn-primary arrow" disabled={!match} style={{opacity: match ? 1 : 0.4, cursor: match ? 'pointer' : 'not-allowed'}}>
+              {match ? 'View Your Kit' : 'Find Kit'}
+            </button>
+          </div>
+        </div>
+
+        {match && (
+          <div style={{marginTop: 28, borderTop: '1px solid var(--line)', paddingTop: 28}}>
+            <div style={{display:'grid', gridTemplateColumns:'1.2fr 1fr', gap: 24}}>
+              <div className="ph" style={{minHeight: 260}}>
+                <div className="ph-tag">// PRODUCT · {match.img}</div>
+                <div className="ph-tag">MATCH FOUND</div>
+              </div>
+              <div>
+                <div className="eyebrow" style={{color: 'var(--mon)'}}>◆ MATCH FOUND</div>
+                <div className="display" style={{fontSize: 56, marginTop: 12}}>{match.kit}<br/>Trike Kit.</div>
+                <div style={{marginTop: 16, color: 'var(--paper-dim)'}}>For your {year} {make} {model}. {match.platform} rear end. Installs in one day.</div>
+                <table className="spec" style={{marginTop: 20}}>
+                  <tbody>
+                    <tr><th>Platform</th><td>{match.platform}</td></tr>
+                    <tr><th>Rear End</th><td>30" / 40" billet, Dana diff, 9" Ford axle</td></tr>
+                    <tr><th>Install</th><td>One business day · Any HD-experienced shop</td></tr>
+                    <tr><th>Warranty</th><td>3 years, unlimited miles</td></tr>
+                    <tr><th>Price from</th><td><span style={{color:'var(--mon)', fontWeight:600}}>{match.price}</span></td></tr>
+                  </tbody>
+                </table>
+                <div style={{display:'flex', gap: 12, marginTop: 20}}>
+                  <button className="btn btn-primary arrow">View Kit Page</button>
+                  <button className="btn btn-ghost arrow">Find a Dealer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {!match && (year || make || model) && (
+          <div style={{marginTop: 20, fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--paper-mute)'}}>
+            ◆ {make || '—'} / {year || '—'} / {model || '—'} · Keep going to see your match
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('finder-mount')).render(<Finder />);
+</script>
+
+</body>
+</html>
