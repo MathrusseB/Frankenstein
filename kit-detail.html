@@ -74,6 +74,13 @@
     </section>
   </main>
 
+  <div class="lightbox" id="docLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Document viewer">
+    <button type="button" class="lightbox__close" id="docLightboxClose" aria-label="Close">&times;</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" id="docLightboxImg" alt="" />
+    </figure>
+  </div>
+
   <footer class="site-footer">
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
@@ -274,8 +281,35 @@
         `;
       }
 
+      function renderOldSchoolDoc(kit) {
+        return `
+          <section class="section section--tight">
+            <div class="container">
+              <div class="eyebrow">Reference</div>
+              <h2 class="section__heading">The Old School DNA story.</h2>
+              <p class="lede" style="margin-bottom:32px">A one-pager Frank put together explaining what makes the Old School kit a Frankenstein original — DNA rear end, classic proportions, heritage styling. Click to read.</p>
+              <a href="${escapeHtml(kit.imageUrl)}" class="doc-thumb" data-doc-thumb>
+                <img src="${escapeHtml(kit.imageUrl)}" alt="Old School DNA trike reference document by Frank Pedersen">
+                <span class="doc-thumb__label">Click to expand<span class="doc-thumb__icon">⤢</span></span>
+              </a>
+            </div>
+          </section>
+        `;
+      }
+
       function renderKit(kit, allKits) {
         document.title = `${kit.name} Trike Kit — Frankenstein Trikes`;
+
+        const isOldSchool = kit.id === 'dna-old-school';
+        const heroMedia = isOldSchool
+          ? `<div class="kit-hero__media reveal">
+                  <div class="ph" style="aspect-ratio: 4 / 3;">
+                    <span class="ph-tag">// PRODUCT SHOT NEEDED — OLD SCHOOL DNA TRIKE · 3/4 REAR</span>
+                  </div>
+                </div>`
+          : `<div class="kit-hero__media reveal">
+                  <img src="${escapeHtml(kit.imageUrl)}" alt="${escapeHtml(kit.name)} trike kit" />
+                </div>`;
 
         main.innerHTML = `
           <section class="kit-hero">
@@ -291,14 +325,13 @@
                     <a href="trike-kits.html" class="btn btn--ghost">All Kits</a>
                   </div>
                 </div>
-                <div class="kit-hero__media reveal">
-                  <img src="${escapeHtml(kit.imageUrl)}" alt="${escapeHtml(kit.name)} trike kit" />
-                </div>
+                ${heroMedia}
               </div>
             </div>
           </section>
 
           ${renderSubmodels(kit.subModels)}
+          ${isOldSchool ? renderOldSchoolDoc(kit) : ''}
           ${renderSpecs(kit.specs)}
           ${renderCtaStrip(kit)}
           ${renderRelated(allKits, kit.id)}
@@ -321,6 +354,43 @@
           main.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
         }
       }
+
+      // Lightbox for [data-doc-thumb] links
+      const docLightbox = document.getElementById('docLightbox');
+      const docLightboxImg = document.getElementById('docLightboxImg');
+      const docLightboxClose = document.getElementById('docLightboxClose');
+
+      function openDocLightbox(src, alt) {
+        docLightboxImg.src = src;
+        docLightboxImg.alt = alt || '';
+        docLightbox.classList.add('is-open');
+        docLightbox.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeDocLightbox() {
+        docLightbox.classList.remove('is-open');
+        docLightbox.setAttribute('aria-hidden', 'true');
+        docLightboxImg.src = '';
+      }
+
+      main.addEventListener('click', (e) => {
+        const thumb = e.target.closest('[data-doc-thumb]');
+        if (!thumb) return;
+        e.preventDefault();
+        const img = thumb.querySelector('img');
+        openDocLightbox(thumb.getAttribute('href'), img ? img.getAttribute('alt') : '');
+      });
+
+      if (docLightboxClose) docLightboxClose.addEventListener('click', closeDocLightbox);
+      if (docLightbox) {
+        docLightbox.addEventListener('click', (e) => {
+          if (e.target === docLightbox) closeDocLightbox();
+        });
+      }
+      document.addEventListener('keydown', (e) => {
+        if (!docLightbox.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closeDocLightbox();
+      });
 
       const id = getParam('id');
 
