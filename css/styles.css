@@ -8,6 +8,7 @@
 /* Task 02 — type system — 2026-04-17 */
 /* Task 03 — component overrides — 2026-04-17 */
 /* Task 04 — retire gold — 2026-04-17 */
+/* Logo sizing — 2026-04-17 */
 
 /* =========================================================
    RESET / BASE
@@ -429,7 +430,7 @@ ul, ol {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 96px;
   padding: 0 var(--gutter);
   max-width: var(--max-width);
   margin: 0 auto;
@@ -446,7 +447,7 @@ ul, ol {
 
 .nav__logo {
   display: block;
-  height: 52px;
+  height: 72px;
   width: auto;
   max-width: 100%;
   flex-shrink: 0;
@@ -472,7 +473,7 @@ ul, ol {
 }
 
 @media (max-width: 560px) {
-  .nav__logo { height: 44px; }
+  .nav__logo { height: 56px; }
 }
 
 .nav__menu {
@@ -1050,7 +1051,7 @@ html:not(.js-ready) .nav__dropdown {
 
 .footer__logo {
   display: block;
-  height: 48px;
+  height: 64px;
   width: auto;
   flex-shrink: 0;
 }
