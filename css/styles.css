@@ -449,7 +449,7 @@ ul, ol {
 
 .nav__logo {
   display: block;
-  height: 72px;
+  height: 96px;
   width: auto;
   flex-shrink: 0;
 }
@@ -471,11 +471,11 @@ ul, ol {
 /* On mobile (where the hamburger takes over) show the logo alone. */
 @media (max-width: 1024px) {
   .nav__brand-text { display: none; }
-  .nav__logo { height: 56px; }
+  .nav__logo { height: 72px; }
 }
 
 @media (max-width: 560px) {
-  .nav__logo { height: 44px; }
+  .nav__logo { height: 56px; }
 }
 
 .nav__menu {
@@ -1054,7 +1054,7 @@ html:not(.js-ready) .nav__dropdown {
 
 .footer__logo {
   display: block;
-  height: 96px;
+  height: 128px;
   width: auto;
   flex-shrink: 0;
 }
@@ -3689,7 +3689,7 @@ select { max-width: 100%; }
 
 /* ---------- Footer logo lockup (compact tweaks per breakpoint) ---------- */
 @media (max-width: 900px) {
-  .footer__logo { height: 72px; }
+  .footer__logo { height: 96px; }
 }
 
 @media (max-width: 560px) {
