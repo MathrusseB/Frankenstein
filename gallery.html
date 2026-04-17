@@ -116,7 +116,11 @@
     <button type="button" class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next photo">&#8250;</button>
     <figure class="lightbox__figure" id="lightboxFigure">
       <img class="lightbox__img" id="lightboxImg" alt="" />
-      <figcaption class="lightbox__caption" id="lightboxCaption"></figcaption>
+      <div class="lightbox__meta">
+        <span class="lightbox__tag" id="lightboxTag"></span>
+        <figcaption class="lightbox__caption" id="lightboxCaption"></figcaption>
+        <span class="lightbox__counter" id="lightboxCounter"></span>
+      </div>
     </figure>
   </div>
 
@@ -244,7 +248,8 @@
         }
 
         grid.innerHTML = filteredPhotos.map((photo, i) => `
-          <figure class="gallery-card reveal" data-index="${i}">
+          <figure class="gallery-card reveal" data-index="${i}" tabindex="0">
+            <span class="gallery-card__tag">${escapeHtml(photo.category || '')}</span>
             <img src="${escapeHtml(photo.imageUrl)}" alt="${escapeHtml(photo.caption)}" loading="lazy" />
             <figcaption class="gallery-card__caption">${escapeHtml(photo.caption)}</figcaption>
           </figure>
@@ -286,6 +291,10 @@
         lightboxImg.src = photo.imageUrl;
         lightboxImg.alt = photo.caption || '';
         lightboxCaption.textContent = photo.caption || '';
+        const tagEl = document.getElementById('lightboxTag');
+        const counterEl = document.getElementById('lightboxCounter');
+        if (tagEl) tagEl.textContent = photo.category || '';
+        if (counterEl) counterEl.textContent = `${index + 1} / ${filteredPhotos.length}`;
         lightbox.classList.add('is-open');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';

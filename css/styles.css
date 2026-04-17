@@ -1194,6 +1194,26 @@ html:not(.js-ready) .nav__dropdown {
   margin-bottom: clamp(40px, 5vw, 64px);
 }
 
+@media (max-width: 900px) {
+  .filter-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+  }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-chip {
+    flex-shrink: 0;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}
+
 .filter-chip {
   display: inline-flex;
   align-items: center;
@@ -1212,13 +1232,13 @@ html:not(.js-ready) .nav__dropdown {
 
 .filter-chip:hover {
   color: var(--accent);
-  border-color: rgba(178, 34, 34, 0.5);
+  border-color: var(--accent-dim);
 }
 
 .filter-chip.is-active {
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(178, 34, 34, 0.08);
+  background: color-mix(in oklch, var(--accent) 10%, transparent);
 }
 
 /* =========================================================
@@ -1608,6 +1628,7 @@ html:not(.js-ready) .reveal {
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
   border-radius: 0;
+  transition: transform 0.4s var(--ease);
 }
 
 @media (max-width: 1024px) {
@@ -1622,24 +1643,48 @@ html:not(.js-ready) .reveal {
   transition: transform 0.6s var(--ease);
 }
 
+.gallery-card:hover {
+  transform: translateY(-2px);
+}
+
 .gallery-card:hover img {
   transform: scale(1.04);
 }
 
+/* Always-visible category tag, top-left */
+.gallery-card__tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(10, 10, 11, 0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 6px 10px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* Hover-only full caption at bottom */
 .gallery-card__caption {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: flex-end;
   padding: 24px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 1.125rem;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 1.15;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
   color: #fff;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.88) 100%);
   opacity: 0;
   transition: opacity 0.3s var(--ease);
   pointer-events: none;
@@ -1648,6 +1693,12 @@ html:not(.js-ready) .reveal {
 .gallery-card:hover .gallery-card__caption,
 .gallery-card:focus-within .gallery-card__caption {
   opacity: 1;
+}
+
+/* Keyboard focus ring — accent green outline */
+.gallery-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (hover: none) {
@@ -1693,15 +1744,60 @@ html:not(.js-ready) .reveal {
   border-radius: 0;
 }
 
-.lightbox__caption {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
+.lightbox__meta {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 80ch;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  background: rgba(10, 10, 11, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.lightbox__tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  color: var(--accent);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.lightbox__caption {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0;
   color: var(--text);
-  text-align: center;
+  text-align: left;
+  line-height: 1.4;
   max-width: 60ch;
+  margin: 0;
+}
+
+.lightbox__counter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .lightbox__meta {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .lightbox__tag, .lightbox__counter { justify-self: start; }
 }
 
 .lightbox__close {
@@ -1795,7 +1891,7 @@ html:not(.js-ready) .reveal {
 }
 
 .faq-item.is-open {
-  border-color: rgba(178, 34, 34, 0.4);
+  border-color: color-mix(in oklch, var(--accent) 40%, transparent);
 }
 
 .faq-item__head {
@@ -2285,7 +2381,7 @@ html:not(.js-ready) .reveal {
 }
 
 .tip-list > li:hover {
-  border-color: rgba(178, 34, 34, 0.4);
+  border-color: color-mix(in oklch, var(--accent) 40%, transparent);
 }
 
 .tip-list > li::before {
@@ -2333,7 +2429,7 @@ html:not(.js-ready) .reveal {
 .pdf-link:hover {
   border-color: var(--accent);
   color: var(--text);
-  background: rgba(178, 34, 34, 0.04);
+  background: color-mix(in oklch, var(--accent) 4%, transparent);
 }
 
 .pdf-link__tag {
@@ -2342,7 +2438,7 @@ html:not(.js-ready) .reveal {
   text-transform: uppercase;
   color: var(--accent);
   padding: 6px 12px;
-  border: 1px solid rgba(178, 34, 34, 0.5);
+  border: 1px solid color-mix(in oklch, var(--accent) 50%, transparent);
   line-height: 1;
 }
 
@@ -3181,7 +3277,7 @@ html:not(.js-ready) .reveal {
 }
 
 .admin-btn--danger {
-  border-color: rgba(178, 34, 34, 0.5);
+  border-color: color-mix(in oklch, var(--accent) 50%, transparent);
   color: #e57373;
 }
 
@@ -3241,7 +3337,7 @@ html:not(.js-ready) .reveal {
 .admin-row:hover td { background: rgba(255, 255, 255, 0.02); }
 
 .admin-row.is-editing td {
-  background: rgba(178, 34, 34, 0.06);
+  background: color-mix(in oklch, var(--accent) 6%, transparent);
   border-bottom-color: transparent;
 }
 
@@ -3707,7 +3803,7 @@ select { max-width: 100%; }
   width: auto;
   max-width: 100%;
   margin: 0 auto 16px;
-  filter: drop-shadow(0 0 18px rgba(178, 34, 34, 0.35));
+  filter: drop-shadow(0 0 18px color-mix(in oklch, var(--accent) 35%, transparent));
 }
 
 /* ---------- Admin panel header logo lockup ---------- */
@@ -3751,7 +3847,7 @@ select { max-width: 100%; }
   height: clamp(56px, 7vw, 80px);
   width: auto;
   max-width: 100%;
-  filter: drop-shadow(0 0 16px rgba(178, 34, 34, 0.3));
+  filter: drop-shadow(0 0 16px color-mix(in oklch, var(--accent) 30%, transparent));
 }
 
 /* =========================================================
