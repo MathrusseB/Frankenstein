@@ -2,9 +2,7 @@
    FRANKENSTEIN TRIKES — GLOBAL STYLES
    Kleos Design Studio · Cold Build · April 2026
    ========================================================= */
-
-/* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&display=swap');
+/* Edited against design/CLAUDE.md v1 — 2026-04-17 */
 
 /* =========================================================
    RESET / BASE
@@ -17,18 +15,60 @@
   padding: 0;
 }
 
+/* =========================================================
+   FRANKENSTEIN TRIKES — DESIGN TOKENS
+   Modern Muscle v1 — drop-in replacement for :root block
+   Edit against design/CLAUDE.md before changing values.
+   ========================================================= */
+
 :root {
-  --bg: #0A0A0A;
-  --surface: #1c1c1c;
-  --text: #F0F0F0;
-  --text-secondary: rgba(255, 255, 255, 0.5);
-  --accent: #B22222;
-  --gold: #D4A84B;
-  --border: rgba(255, 255, 255, 0.08);
+  /* -------- Surfaces (Ink) -------- */
+  --bg:           #0A0A0B;            /* Page background */
+  --surface:      #141416;            /* Panels, cards */
+  --surface-2:    #1E1E22;            /* Hover panels */
+  --border:       #2A2A2F;            /* Hairline rules */
+  --border-soft:  #1A1A1E;            /* Inner dividers */
+
+  /* -------- Foreground (Paper) -------- */
+  --text:           #F4F1EA;          /* Body text, headlines */
+  --text-secondary: #CFCBC1;          /* Paragraphs, muted copy */
+  --text-mute:      #8C8A82;          /* Monospace labels, metadata */
+
+  /* -------- Accent: Monster Green --------
+     One loud color. Use on ONE thing per view.
+     Primary CTAs, active nav state, key numbers. */
+  --accent:      oklch(82% 0.22 135);
+  --accent-dim:  oklch(62% 0.18 135); /* Hover */
+  --accent-deep: oklch(42% 0.14 138); /* Deep green text on paper */
+
+  /* Legacy alias — keep for old references; points to accent.
+     Remove once all .btn--primary etc confirmed restyled. */
+  /* --accent-legacy: #B22222; */
+
+  /* -------- Danger / Urgency --------
+     RESERVED: phone CTAs, stock warnings, form errors.
+     Never decorative. */
+  --danger:      oklch(62% 0.22 28);
+  --danger-deep: oklch(48% 0.20 28);
+
+  /* -------- Layout -------- */
   --max-width: 1440px;
   --gutter: 40px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* -------- Radii -------- */
+  --r-0: 0px;
+  --r-1: 2px;
+  --r-2: 4px;
+  /* Radii above 4px are forbidden. */
+
+  /* -------- Type families -------- */
+  --font-display: 'Anton', 'Oswald', Impact, 'Helvetica Neue', sans-serif;
+  --font-body:    'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
+
+::selection { background: var(--accent); color: var(--bg); }
 
 html {
   background: var(--bg);
