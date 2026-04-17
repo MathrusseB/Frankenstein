@@ -1,46 +1,38 @@
+// Kit data seeded from Harley production years — verify with Frank before launch.
 /* =========================================================
    FRANKENSTEIN TRIKES — KIT FINDER
-   Year → Make → Model → matching kit.
+   Model → Year → matching kit.
    Mount: add `data-kit-finder` to any container.
    Persists last selection in localStorage.
    ========================================================= */
 
-const KIT_DATA = {
-  "Harley-Davidson": {
-    years: [2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999],
-    models: {
-      "Softail":       { slug: "softail",           kit: "Softail",            platform: "Hot Rod Billet", priceFrom: "$9,995" },
-      "Fat Boy":       { slug: "fatboy-heritage",   kit: "Fat Boy & Heritage", platform: "Hot Rod Billet", priceFrom: "$10,295" },
-      "Heritage":      { slug: "fatboy-heritage",   kit: "Fat Boy & Heritage", platform: "Hot Rod Billet", priceFrom: "$10,295" },
-      "Road King":     { slug: "flt-flh-roadking",  kit: "FLT FLH Roadking",   platform: "Hot Rod Billet", priceFrom: "$10,495" },
-      "Street Glide":  { slug: "flt-flh-roadking",  kit: "FLT FLH Roadking",   platform: "Hot Rod Billet", priceFrom: "$10,495" },
-      "Road Glide":    { slug: "flt-flh-roadking",  kit: "FLT FLH Roadking",   platform: "Hot Rod Billet", priceFrom: "$10,495" },
-      "Electra Glide": { slug: "flt-flh-roadking",  kit: "FLT FLH Roadking",   platform: "Hot Rod Billet", priceFrom: "$10,495" },
-      "Dyna":          { slug: "dyna",              kit: "Dyna",               platform: "Light Sport",    priceFrom: "$8,995" },
-      "Sportster":     { slug: "sportster",         kit: "Sportster",          platform: "Light Sport",    priceFrom: "$7,995" },
-      "V-Rod":         { slug: "v-rod",             kit: "V-Rod",              platform: "Hot Rod Billet", priceFrom: "$10,995" },
-      "FXR":           { slug: "fxr",               kit: "FXR",                platform: "Light Sport",    priceFrom: "$8,995" },
-      "Rocker":        { slug: "rocker-breakout",   kit: "Rocker & Breakout",  platform: "Hot Rod Billet", priceFrom: "$10,495" },
-      "Breakout":      { slug: "rocker-breakout",   kit: "Rocker & Breakout",  platform: "Hot Rod Billet", priceFrom: "$10,495" },
-      "Street 500/750":{ slug: "street",            kit: "Street",             platform: "Light Sport",    priceFrom: "$7,495" }
-    }
-  },
-  "Yamaha": {
-    years: [2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012],
-    models: {
-      "Road Star": { slug: "yamaha", kit: "Yamaha", platform: "Hot Rod Billet", priceFrom: "$10,995" },
-      "V-Star":    { slug: "yamaha", kit: "Yamaha", platform: "Light Sport",    priceFrom: "$8,995" }
-    }
-  },
-  "Kawasaki": {
-    years: [2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004],
-    models: {
-      "Vulcan 1700": { slug: "kawasaki-1700", kit: "Kawasaki 1700", platform: "Hot Rod Billet", priceFrom: "$10,995" }
-    }
-  }
-};
+const KITS = [
+  { id: 'sportster',         label: 'Sportster',              yearStart: 1957, yearEnd: 2022 },
+  { id: 'dyna',              label: 'Dyna',                   yearStart: 1991, yearEnd: 2017 },
+  { id: 'softail',           label: 'Softail',                yearStart: 1984, yearEnd: 2025 },
+  { id: 'rocker-breakout',   label: 'Rocker & Breakout',      yearStart: 2008, yearEnd: 2025 },
+  { id: 'fatboy-heritage',   label: 'Fat Boy & Heritage',     yearStart: 1990, yearEnd: 2025 },
+  { id: 'flt-flh-roadking',  label: 'FLT / FLH / Road King',  yearStart: 1980, yearEnd: 2025 },
+  { id: 'v-rod',             label: 'V-Rod',                  yearStart: 2002, yearEnd: 2017 },
+  { id: 'fxr',               label: 'FXR',                    yearStart: 1982, yearEnd: 2000 },
+  { id: '4-speed-fl-fx',     label: '4-Speed FL / FX',        yearStart: 1965, yearEnd: 1984 },
+  { id: 'street',            label: 'Street 500 / 750',       yearStart: 2014, yearEnd: 2020 },
+  { id: 'yamaha',            label: 'Yamaha',                 yearStart: 1999, yearEnd: 2025 },
+  { id: 'kawasaki-1700',     label: 'Kawasaki 1700',          yearStart: 2004, yearEnd: 2025 },
+  { id: 'dna-old-school',    label: 'Frankenstein Old School',yearStart: 1936, yearEnd: 2025 }
+];
 
 const STORAGE_KEY = 'frankenstein.bike';
+
+function getKit(id) {
+  return KITS.find(k => k.id === id);
+}
+
+function yearsFor(kit) {
+  const years = [];
+  for (let y = kit.yearEnd; y >= kit.yearStart; y--) years.push(y);
+  return years;
+}
 
 function render(container) {
   container.innerHTML = `
@@ -54,76 +46,61 @@ function render(container) {
 
     <div class="kit-finder__row">
       <div class="kit-finder__field">
-        <label for="kf-make">01 · Make</label>
-        <select id="kf-make" data-kf-make>
-          <option value="">Select your make</option>
-          ${Object.keys(KIT_DATA).map(m => `<option value="${m}">${m}</option>`).join('')}
+        <label for="kf-model">01 · Model</label>
+        <select id="kf-model" data-kf-model>
+          <option value="">Select your model</option>
+          ${KITS.map(k => `<option value="${k.id}">${k.label}</option>`).join('')}
         </select>
       </div>
       <div class="kit-finder__field">
         <label for="kf-year">02 · Year</label>
         <select id="kf-year" data-kf-year disabled>
-          <option value="">— Pick a make first</option>
-        </select>
-      </div>
-      <div class="kit-finder__field">
-        <label for="kf-model">03 · Model</label>
-        <select id="kf-model" data-kf-model disabled>
-          <option value="">— Pick make + year</option>
+          <option value="">— Pick a model first</option>
         </select>
       </div>
       <div class="kit-finder__field" style="flex:0 1 auto">
         <label>&nbsp;</label>
-        <a href="#" class="btn btn--primary" data-kf-go hidden>View Your Kit</a>
+        <a href="#" class="btn btn--primary" data-kf-go hidden>Find My Kit</a>
       </div>
     </div>
 
     <div class="kit-finder__result" data-kf-result hidden></div>
   `;
 
-  const makeEl  = container.querySelector('[data-kf-make]');
-  const yearEl  = container.querySelector('[data-kf-year]');
   const modelEl = container.querySelector('[data-kf-model]');
+  const yearEl  = container.querySelector('[data-kf-year]');
   const goEl    = container.querySelector('[data-kf-go]');
   const resetEl = container.querySelector('[data-kf-reset]');
   const resultEl= container.querySelector('[data-kf-result]');
 
-  function populateYears(make) {
+  function populateYears(id) {
+    const kit = getKit(id);
+    if (!kit) return;
     yearEl.innerHTML = '<option value="">Select year</option>' +
-      KIT_DATA[make].years.map(y => `<option value="${y}">${y}</option>`).join('');
+      yearsFor(kit).map(y => `<option value="${y}">${y}</option>`).join('');
     yearEl.disabled = false;
-  }
-  function populateModels(make) {
-    modelEl.innerHTML = '<option value="">Select model</option>' +
-      Object.keys(KIT_DATA[make].models).map(m => `<option value="${m}">${m}</option>`).join('');
   }
 
   function showResult() {
-    const make = makeEl.value, year = yearEl.value, model = modelEl.value;
-    if (!make || !year || !model) { resultEl.hidden = true; goEl.hidden = true; return; }
-    const match = KIT_DATA[make].models[model];
-    if (!match) { resultEl.hidden = true; goEl.hidden = true; return; }
+    const id = modelEl.value, year = yearEl.value;
+    if (!id || !year) { resultEl.hidden = true; goEl.hidden = true; return; }
+    const kit = getKit(id);
+    if (!kit) { resultEl.hidden = true; goEl.hidden = true; return; }
 
-    goEl.href = `kit-detail.html?id=${match.slug}`;
+    goEl.href = `kit-detail.html?id=${kit.id}`;
     goEl.hidden = false;
 
     resultEl.innerHTML = `
       <div class="ph" style="min-height:240px">
-        <div class="ph-tag">// ${match.kit} trike · ${year} ${make} ${model}</div>
+        <div class="ph-tag">// ${kit.label} trike · ${year}</div>
         <div class="ph-tag">Match</div>
       </div>
       <div>
         <div class="eyebrow">Match Found</div>
-        <div class="display" style="font-size:clamp(1.75rem,3vw,2.75rem);line-height:0.9">${match.kit}<br>Trike Kit.</div>
-        <p class="text-secondary" style="margin-top:16px">For your ${year} ${make} ${model}. ${match.platform} rear end. Installs in one day.</p>
-        <dl class="kit-finder__specs" style="margin-top:16px;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:13px">
-          <dt class="mono" style="color:var(--text-mute)">Platform</dt><dd>${match.platform}</dd>
-          <dt class="mono" style="color:var(--text-mute)">Install</dt><dd>One business day</dd>
-          <dt class="mono" style="color:var(--text-mute)">Warranty</dt><dd>3 years, unlimited miles</dd>
-          <dt class="mono" style="color:var(--text-mute)">From</dt><dd style="color:var(--accent);font-weight:600">${match.priceFrom}</dd>
-        </dl>
+        <div class="display" style="font-size:clamp(1.75rem,3vw,2.75rem);line-height:0.9">${kit.label}<br>Trike Kit.</div>
+        <p class="text-secondary" style="margin-top:16px">For your ${year} ${kit.label}. Installs in one day.</p>
         <div class="btn-row" style="margin-top:20px">
-          <a href="kit-detail.html?id=${match.slug}" class="btn btn--primary">View Kit Page</a>
+          <a href="kit-detail.html?id=${kit.id}" class="btn btn--primary">View Kit Page</a>
           <a href="dealers.html" class="btn btn--ghost">Find a Dealer</a>
         </div>
       </div>
@@ -131,36 +108,30 @@ function render(container) {
     resultEl.hidden = false;
 
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ make, year, model, slug: match.slug }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ id, year }));
     } catch(e) {}
   }
 
-  makeEl.addEventListener('change', () => {
-    const m = makeEl.value;
-    yearEl.disabled = !m;
-    modelEl.disabled = true;
-    modelEl.innerHTML = '<option value="">— Pick year</option>';
-    if (m) { populateYears(m); populateModels(m); }
-    else { yearEl.innerHTML = '<option value="">— Pick a make first</option>'; }
-    toggleReset();
-    showResult();
-  });
-  yearEl.addEventListener('change', () => {
-    modelEl.disabled = !(makeEl.value && yearEl.value);
-    toggleReset();
-    showResult();
-  });
-  modelEl.addEventListener('change', () => { toggleReset(); showResult(); });
-
   function toggleReset() {
-    resetEl.hidden = !(makeEl.value || yearEl.value || modelEl.value);
+    resetEl.hidden = !(modelEl.value || yearEl.value);
   }
 
+  modelEl.addEventListener('change', () => {
+    const id = modelEl.value;
+    if (id) { populateYears(id); }
+    else {
+      yearEl.disabled = true;
+      yearEl.innerHTML = '<option value="">— Pick a model first</option>';
+    }
+    toggleReset();
+    showResult();
+  });
+  yearEl.addEventListener('change', () => { toggleReset(); showResult(); });
+
   resetEl.addEventListener('click', () => {
-    makeEl.value = ''; yearEl.value = ''; modelEl.value = '';
-    yearEl.disabled = true; modelEl.disabled = true;
-    yearEl.innerHTML = '<option value="">— Pick a make first</option>';
-    modelEl.innerHTML = '<option value="">— Pick make + year</option>';
+    modelEl.value = ''; yearEl.value = '';
+    yearEl.disabled = true;
+    yearEl.innerHTML = '<option value="">— Pick a model first</option>';
     resultEl.hidden = true; goEl.hidden = true; resetEl.hidden = true;
     try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
   });
@@ -168,14 +139,20 @@ function render(container) {
   // Restore from localStorage
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-    if (saved && saved.make && KIT_DATA[saved.make]) {
-      makeEl.value = saved.make; populateYears(saved.make); populateModels(saved.make);
-      yearEl.disabled = false;
-      if (saved.year) { yearEl.value = saved.year; modelEl.disabled = false; }
-      if (saved.model) { modelEl.value = saved.model; showResult(); }
+    if (saved && saved.id && getKit(saved.id)) {
+      modelEl.value = saved.id; populateYears(saved.id);
+      if (saved.year) { yearEl.value = saved.year; showResult(); }
       toggleReset();
     }
   } catch(e) {}
 }
 
-document.querySelectorAll('[data-kit-finder]').forEach(render);
+function mountAll() {
+  document.querySelectorAll('[data-kit-finder]').forEach(render);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', mountAll);
+} else {
+  mountAll();
+}
