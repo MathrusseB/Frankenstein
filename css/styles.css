@@ -7,6 +7,7 @@
 /* Edited against design/CLAUDE.md v1 — 2026-04-17 */
 /* Task 02 — type system — 2026-04-17 */
 /* Task 03 — component overrides — 2026-04-17 */
+/* Task 04 — retire gold — 2026-04-17 */
 
 /* =========================================================
    RESET / BASE
@@ -1167,7 +1168,6 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .accent { color: var(--accent); }
-.gold { color: var(--gold); }
 
 .divider {
   height: 1px;
@@ -1420,7 +1420,7 @@ html:not(.js-ready) .nav__dropdown {
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  color: var(--gold);
+  color: var(--accent-deep);
   margin-bottom: 16px;
 }
 
@@ -1479,7 +1479,7 @@ html:not(.js-ready) .nav__dropdown {
 .submodel__years {
   font-size: 12px;
   letter-spacing: 0.25em;
-  color: var(--gold);
+  color: var(--accent-deep);
   margin-right: 16px;
 }
 
@@ -2451,9 +2451,9 @@ html:not(.js-ready) .reveal {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  color: var(--gold);
+  color: var(--accent-deep);
   padding: 8px 14px;
-  border: 1px solid rgba(212, 168, 75, 0.4);
+  border: 1px solid color-mix(in oklab, var(--accent-deep) 40%, transparent);
   margin-bottom: 24px;
 }
 
@@ -2635,7 +2635,7 @@ html:not(.js-ready) .reveal {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  color: var(--gold);
+  color: var(--text-mute);
   min-height: 1em;
 }
 
