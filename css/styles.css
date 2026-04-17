@@ -9,6 +9,7 @@
 /* Task 03 — component overrides — 2026-04-17 */
 /* Task 04 — retire gold — 2026-04-17 */
 /* Logo sizing — 2026-04-17 */
+/* Logo sizing v2 — transform scale approach — 2026-04-17 */
 /* Old School DNA doc — 2026-04-17 */
 
 /* =========================================================
@@ -431,7 +432,7 @@ ul, ol {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 96px;
+  height: 112px;
   padding: 0 var(--gutter);
   max-width: var(--max-width);
   margin: 0 auto;
@@ -448,10 +449,13 @@ ul, ol {
 
 .nav__logo {
   display: block;
-  height: 72px;
+  height: 64px;
   width: auto;
-  max-width: 100%;
+  max-width: 260px;
   flex-shrink: 0;
+  transform: scale(1.35);
+  transform-origin: left center;
+  margin-right: 24px;
 }
 
 .nav__brand-text {
@@ -471,10 +475,11 @@ ul, ol {
 /* On mobile (where the hamburger takes over) show the logo alone. */
 @media (max-width: 1024px) {
   .nav__brand-text { display: none; }
+  .nav__logo { transform: scale(1.2); height: 56px; }
 }
 
 @media (max-width: 560px) {
-  .nav__logo { height: 56px; }
+  .nav__logo { transform: scale(1.15); height: 48px; margin-right: 8px; }
 }
 
 .nav__menu {
@@ -673,7 +678,7 @@ html:not(.js-ready) .nav__dropdown {
   position: relative;
   z-index: 2;
   padding-bottom: clamp(80px, 10vw, 140px);
-  padding-top: 120px;
+  padding-top: 80px;
 }
 
 .hero__headline {
@@ -1047,13 +1052,16 @@ html:not(.js-ready) .nav__dropdown {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .footer__logo {
   display: block;
-  height: 64px;
+  height: 80px;
   width: auto;
+  transform: scale(1.3);
+  transform-origin: left center;
+  margin-right: 16px;
   flex-shrink: 0;
 }
 
