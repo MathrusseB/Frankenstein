@@ -9,6 +9,7 @@
 /* Task 03 — component overrides — 2026-04-17 */
 /* Task 04 — retire gold — 2026-04-17 */
 /* Logo sizing — 2026-04-17 */
+/* Old School DNA doc — 2026-04-17 */
 
 /* =========================================================
    RESET / BASE
@@ -4081,3 +4082,31 @@ body::after { opacity: 0.03; }
   color: var(--text-mute);
 }
 .util-bar a { color: var(--accent); }
+
+/* Clickable document thumbnail */
+.doc-thumb {
+  display: inline-block;
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  cursor: zoom-in;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.doc-thumb:hover { border-color: var(--accent); transform: translateY(-2px); }
+.doc-thumb img { width: 100%; height: auto; display: block; }
+.doc-thumb__label {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.doc-thumb:hover .doc-thumb__label { color: var(--accent); }
+.doc-thumb__icon { font-size: 14px; }
