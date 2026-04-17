@@ -76,7 +76,7 @@
     "category": "harley-davidson",
     "yearRange": "1980-Up",
     "description": "Sport Trike Kit for FLT, FLH & Roadking. Selecting the correct motorcycle year is essential because Harley-Davidson has made small design changes over the years. Frankenstein Trikes has made components specific to each year to ensure proper fitment.",
-    "imageUrl": "https://frankensteintrikes.com/images/trikekit_flt-flh-roadking-submenu-year-selection.jpg",
+    "imageUrl": "https://frankensteintrikes.com/images/flt-flh-roadking-trike-kit-page/trikekit_flt-flh-roadking-submenu-year-selection.jpg",
     "subModels": [
       { "name": "1980-2008", "yearRange": "1980-2008" },
       { "name": "2009 and Up", "yearRange": "2009-Up" }
@@ -111,7 +111,7 @@
     "category": "harley-davidson",
     "yearRange": "1971-1985",
     "description": "Frankenstein Sport Trike Kit for Harley-Davidson 4 Speed FL/FX. Designed specifically for the classic 1971-1985 4-speed Harley-Davidson FL and FX models. Includes a one-year warranty and is engineered to fit the vintage 4-speed platform.",
-    "imageUrl": "https://frankensteintrikes.com/images/package trike kit page 4 speed.jpg"
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/4 speed/package trike kit page 4 speed.jpg"
   },
   {
     "id": "street",
@@ -120,7 +120,7 @@
     "category": "harley-davidson",
     "yearRange": "2014-2020",
     "description": "Frankenstein Sport Trike Kit for Harley-Davidson Street. Engineered to convert the Harley-Davidson Street motorcycle platform into a trike. Mechanics have praised the rear end design and construction quality of Frankenstein's kits.",
-    "imageUrl": "https://frankensteintrikes.com/images/package trike kit page street.jpg"
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Street/package trike kit page street.jpg"
   },
   {
     "id": "yamaha",
@@ -129,7 +129,7 @@
     "category": "yamaha",
     "yearRange": "Multiple",
     "description": "Sport Trike Kit for Yamaha. Frankenstein Trikes offers trike conversion kits for a variety of Yamaha motorcycle models. Please click on your model to continue: Yamaha Road Star 1600/1700, Yamaha Road Star Raider 1900, Yamaha Bolt 950, Yamaha V-Star 950, and Yamaha V-Star 1300.",
-    "imageUrl": "https://frankensteintrikes.com/images/Yamaha Road Star body clipped.jpg",
+    "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Yamaha/Yamaha website/Yamaha Road Star body clipped.jpg",
     "subModels": [
       { "name": "Road Star 1600 / 1700", "yearRange": "Multiple" },
       { "name": "Road Star Raider 1900", "yearRange": "Multiple" },
