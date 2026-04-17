@@ -6,6 +6,7 @@
    ========================================================= */
 /* Edited against design/CLAUDE.md v1 — 2026-04-17 */
 /* Task 02 — type system — 2026-04-17 */
+/* Task 03 — component overrides — 2026-04-17 */
 
 /* =========================================================
    RESET / BASE
@@ -272,7 +273,6 @@ ul, ol {
 }
 
 .eyebrow {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.25em;
@@ -341,7 +341,6 @@ ul, ol {
   justify-content: center;
   gap: 12px;
   padding: 20px 32px;
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 15px;
   text-transform: uppercase;
@@ -692,7 +691,6 @@ html:not(.js-ready) .nav__dropdown {
   position: absolute;
   bottom: 32px;
   right: var(--gutter);
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -787,7 +785,6 @@ html:not(.js-ready) .nav__dropdown {
 .stats__item:last-child { border-right: 0; }
 
 .stats__value {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
   font-size: clamp(2rem, 4vw, 3.25rem);
   text-transform: uppercase;
@@ -839,14 +836,12 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .gateway__num {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 14px;
   letter-spacing: 0.2em;
   color: var(--text-secondary);
 }
 
 .gateway__title {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
   font-size: clamp(2rem, 5vw, 4rem);
   text-transform: uppercase;
@@ -879,7 +874,6 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .pullquote__text {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: clamp(2rem, 4vw, 3.5rem);
   line-height: 1.05;
@@ -952,7 +946,6 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .contact-strip__value {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   text-transform: uppercase;
@@ -1005,7 +998,6 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .marquee__item {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
   font-size: clamp(2rem, 4vw, 3rem);
   text-transform: uppercase;
@@ -1082,7 +1074,6 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .footer__heading {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 14px;
   text-transform: uppercase;
@@ -1202,7 +1193,6 @@ html:not(.js-ready) .nav__dropdown {
   padding: 12px 20px;
   background: var(--surface);
   border: 1px solid var(--border);
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
@@ -1288,7 +1278,6 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .kit-card__meta {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.25em;
@@ -1296,7 +1285,6 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .kit-card__title {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
   font-size: 1.75rem;
   text-transform: uppercase;
@@ -1429,7 +1417,6 @@ html:not(.js-ready) .nav__dropdown {
 }
 
 .kit-hero__years {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.25em;
@@ -1914,7 +1901,6 @@ html:not(.js-ready) .reveal {
 
 .dealer-search__icon {
   flex-shrink: 0;
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -1938,7 +1924,6 @@ html:not(.js-ready) .reveal {
 }
 
 .dealer-search__count {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -1957,7 +1942,6 @@ html:not(.js-ready) .reveal {
   align-items: baseline;
   justify-content: space-between;
   gap: 24px;
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   text-transform: uppercase;
@@ -2098,7 +2082,6 @@ html:not(.js-ready) .reveal {
 }
 
 .pricing-card__num {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -2106,7 +2089,6 @@ html:not(.js-ready) .reveal {
 }
 
 .pricing-card__title {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
   font-size: clamp(1.5rem, 2.2vw, 2rem);
   text-transform: uppercase;
@@ -2123,7 +2105,6 @@ html:not(.js-ready) .reveal {
 }
 
 .pricing-card__meta {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -2241,7 +2222,6 @@ html:not(.js-ready) .reveal {
 }
 
 .become-dealer__contact-label {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -2350,7 +2330,6 @@ html:not(.js-ready) .reveal {
 }
 
 .pdf-link__tag {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -3829,3 +3808,275 @@ html:not(.js-ready) .hero__logo-wrap {
   filter: drop-shadow(0 0 16px rgba(178, 34, 34, 0.3));
 }
 
+/* =========================================================
+   FRANKENSTEIN TRIKES — NEW + OVERRIDDEN COMPONENTS
+   Append AFTER tokens.css + type.css. Overrides and adds to
+   the existing styles.css classes.
+   ========================================================= */
+
+/* ---------- Buttons (overrides existing) ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  border: 1px solid transparent;
+  color: var(--text);
+  background: transparent;
+  border-radius: 0;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease), transform 0.1s var(--ease);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn::after { content: "→"; font-family: var(--font-mono); font-weight: 400; }
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.btn--primary:hover { background: var(--accent-dim); color: var(--bg); border-color: var(--accent-dim); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--text-mute);
+}
+.btn--ghost:hover { border-color: var(--text); color: var(--text); background: transparent; }
+
+.btn--dark {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn--dark:hover { background: var(--surface-2); border-color: var(--text-mute); }
+
+/* Red is ONLY for urgency / phone CTAs */
+.btn--danger {
+  background: var(--danger);
+  color: var(--text);
+  border-color: var(--danger);
+}
+.btn--danger:hover { background: var(--danger-deep); border-color: var(--danger-deep); }
+
+/* ---------- Hairline section rules (replaces borders) ---------- */
+.section { border-bottom: 1px solid var(--border); }
+
+/* ---------- Corner ticks (new decorative) ---------- */
+.ticked { position: relative; }
+.ticked::before, .ticked::after,
+.ticked > .tick-b::before, .ticked > .tick-b::after {
+  content: ""; position: absolute; width: 10px; height: 10px;
+  border-color: var(--accent); border-style: solid; border-width: 0;
+  pointer-events: none;
+}
+.ticked::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.ticked::after  { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; }
+.ticked > .tick-b { position: absolute; inset: 0; pointer-events: none; }
+.ticked > .tick-b::before { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
+.ticked > .tick-b::after  { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* ---------- Placeholder image treatment ---------- */
+.ph {
+  position: relative;
+  background:
+    repeating-linear-gradient(135deg, #1a1a1d 0 12px, #141418 12px 24px);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 16px 18px;
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  overflow: hidden;
+  min-height: 200px;
+}
+.ph::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed rgba(255,255,255,0.08);
+}
+.ph .ph-tag { position: relative; }
+
+/* ---------- Stats strip (overrides) ---------- */
+.stats__value { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.005em; }
+.stats__value .unit { color: var(--accent); }
+
+/* ---------- Pull quote (overrides) ---------- */
+.pullquote__text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  line-height: 1.02;
+  max-width: 22ch;
+}
+.pullquote {
+  border-left: 3px solid var(--accent);
+  padding-left: clamp(24px, 4vw, 64px);
+}
+
+/* ---------- Kit card (overrides) ---------- */
+.kit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 0; }
+.kit-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.kit-card__title { color: var(--text); }
+.kit-card__title:hover { color: var(--text); }
+.kit-card__meta { color: var(--accent); }
+
+/* ---------- Gateway (overrides) ---------- */
+.gateway__num { color: var(--accent); }
+.gateway__item:hover .gateway__title { color: var(--accent); }
+
+/* ---------- Film grain — keep but soften ---------- */
+body::after { opacity: 0.03; }
+
+/* ---------- Marquee accent dot ---------- */
+.marquee__item::after { content: "◆"; color: var(--accent); }
+
+/* =========================================================
+   NEW COMPONENT — KIT FINDER
+   Year → Make → Model → matching kit.
+   Mount point: <div class="kit-finder" data-kit-finder></div>
+   See design/TASKS.md Task 04 for the JS module.
+   ========================================================= */
+
+.kit-finder {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+}
+
+.kit-finder__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.kit-finder__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: 0.005em;
+}
+
+.kit-finder__row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.kit-finder__field {
+  flex: 1 1 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kit-finder__field label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.kit-finder__field select {
+  appearance: none;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  border-radius: 0;
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.kit-finder__field select:hover { border-color: var(--text-mute); }
+.kit-finder__field select:focus { outline: 0; border-color: var(--accent); }
+.kit-finder__field select:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.kit-finder__result {
+  margin-top: 28px;
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .kit-finder__result { grid-template-columns: 1fr; }
+}
+
+.kit-finder__result[hidden] { display: none; }
+
+/* =========================================================
+   NEW UTILITY CLASSES
+   ========================================================= */
+
+.mono { font-family: var(--font-mono); }
+.display { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.005em; text-transform: uppercase; line-height: 0.88; }
+
+/* Badge — metadata pill */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  background: var(--surface);
+}
+.badge--accent {
+  color: var(--accent);
+  border-color: color-mix(in oklab, var(--accent) 40%, transparent);
+}
+.badge--accent .badge__dot,
+.badge .badge__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  display: inline-block;
+}
+.badge--danger {
+  color: var(--danger);
+  border-color: color-mix(in oklab, var(--danger) 50%, transparent);
+}
+
+/* Utility bar / announcement strip above nav */
+.util-bar {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 10px var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.util-bar a { color: var(--accent); }
