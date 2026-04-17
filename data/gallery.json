@@ -55,13 +55,13 @@
 
   { "id": "fxr-001", "category": "FXR", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/fxr/frankensteintrikes_photo_fxr_93.jpg", "caption": "1993 FXR Hooligan" },
   { "id": "fxr-002", "category": "FXR", "imageUrl": "https://frankensteintrikes.com/images/dale_dyna.jpg", "caption": "Harley Davidson FXR Trike Customer Review" },
-  { "id": "fxr-003", "category": "FXR", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/fxr/frankensteintrikes_photo_fxr_kit.jpg", "caption": "Frankenstein Trike Conversion Kit on H-D FXR" },
+  { "id": "fxr-003", "category": "FXR", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/fxr/trikekit_fxr_package.jpg", "caption": "Frankenstein Trike Conversion Kit on H-D FXR" },
 
   { "id": "4speed-001", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/4 speed/Frankenstein Trikes 1975 FL 4 Spd 001 small.jpg", "caption": "Ron's 1975 FL" },
   { "id": "4speed-002", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/4 speed/Web and Face Book photos/1.180.jpg", "caption": "Frank's Chrome 4 Spd" },
   { "id": "4speed-003", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/Eagle Nations78/Eagle Nations 78 FL 180.jpg", "caption": "Eagle Nation 78'" },
   { "id": "4speed-004", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/Jeff Osborn 79 shovel head/1.180.jpg", "caption": "Jeff 1979 ShovelHead" },
-  { "id": "4speed-005", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankenstein_photo_custom_77-Harley-FX-Chopper.jpg", "caption": "1977 FX Chopper Trike" },
+  { "id": "4speed-005", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankenstein_photo_custom_77-Harley-FX-Chopper_thumb.jpg", "caption": "1977 FX Chopper Trike" },
   { "id": "4speed-006", "category": "4 Speed FL/FX", "imageUrl": "https://frankensteintrikes.com/images/Gary S FX 4 spd/Grary_S_Frankenstein_Trikes_FX_4_SPD_180_001.JPG", "caption": "Gary's ShovelHead" },
 
   { "id": "street-001", "category": "Street", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/HD Street TL/used/right side 180.jpg", "caption": "Frank's 2015 Street 750" },
@@ -74,8 +74,8 @@
   { "id": "customs-004", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Rick's 2004 Big Dog Chopper/Rick's 2004 Big Dog Chopper Frankenstein Trike 180 001.jpg", "caption": "Rick's 2004 Big Dog Chopper" },
   { "id": "customs-005", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankensteintrikes_photo_custom_prostreetframeworks_thumbnails.jpg", "caption": "Custom Rigid Chopper" },
   { "id": "customs-006", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Victory kingpin/Frankenstein Trikes 2004 Victory Kingpin 180 001.jpg", "caption": "2004 Victory Kingpin" },
-  { "id": "customs-007", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Frank Bailey 2001 Indian Scout/Frankenstein Trikes 2001 Indian Scout 001 180.jpg", "caption": "Frank's 2001 Indian Scout" },
-  { "id": "customs-008", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankensteintrikes_photo_custom_v-rod03_lars.jpg", "caption": "Lars' 2003 V-Rod" },
+  { "id": "customs-007", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/Frank Bailey 2001  Indian Scout/Frankenstein Trikes 2001 Indian Scout 001 180.jpg", "caption": "Frank's 2001 Indian Scout" },
+  { "id": "customs-008", "category": "Customs", "imageUrl": "https://frankensteintrikes.com/images/photo-gallery-images/custom gallery/frankensteintrikes_photo_custom_v-rod03_lars_thumb.jpg", "caption": "Lars' 2003 V-Rod" },
 
   { "id": "yamaha-001", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Yamaha/Trike pix/with body/web site use yamaha with body TL/2.180.jpg", "caption": "Frank's 2012 Yamaha Road Star 1600" },
   { "id": "yamaha-002", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Yamaha/Trike pix/with fenders/website/2.180.jpg", "caption": "Frank's 2000 Yamaha Road Star 1600" },
@@ -85,6 +85,6 @@
   { "id": "yamaha-006", "category": "Yamaha", "imageUrl": "https://frankensteintrikes.com/images/Phil B 2008 Yamaha Raider/Phil B 2008 Yamaha Raider Frankenstein Trikes 180 001.jpg", "caption": "Phil's 2008 Yamaha Raider" },
 
   { "id": "kawasaki-001", "category": "Kawasaki", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Kawasaki 1700/2011 kawasaki 1700 side 180 001.jpg", "caption": "2011 Kawasaki 1700" },
-  { "id": "kawasaki-002", "category": "Kawasaki", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Kawasaki 1700/2011 kawasaki 1700 front 180 002.jpg", "caption": "Kawasaki 1700 Front View" },
-  { "id": "kawasaki-003", "category": "Kawasaki", "imageUrl": "https://frankensteintrikes.com/images/package trike kit pages/Kawasaki 1700/2011 kawasaki 1700 rear 180 003.jpg", "caption": "Kawasaki 1700 Rear View" }
+  { "id": "kawasaki-002", "category": "Kawasaki", "imageUrl": "https://frankensteintrikes.com/images/Jeff T 2017 Kawasaki 1700/Jeff Frankenstein Trikes 2017 Kawasaki 1700 800 002.jpg", "caption": "Jeff's 2017 Kawasaki 1700" },
+  { "id": "kawasaki-003", "category": "Kawasaki", "imageUrl": "https://frankensteintrikes.com/images/Jeff T 2017 Kawasaki 1700/Jeff Frankenstein Trikes 2017 Kawasaki 1700 800 003.jpg", "caption": "Jeff's 2017 Kawasaki 1700" }
 ]
