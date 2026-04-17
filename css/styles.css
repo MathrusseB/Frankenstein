@@ -432,7 +432,7 @@ ul, ol {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 112px;
+  height: 88px;
   padding: 0 var(--gutter);
   max-width: var(--max-width);
   margin: 0 auto;
@@ -449,7 +449,7 @@ ul, ol {
 
 .nav__logo {
   display: block;
-  height: 96px;
+  height: 68px;
   width: auto;
   flex-shrink: 0;
 }
@@ -471,11 +471,11 @@ ul, ol {
 /* On mobile (where the hamburger takes over) show the logo alone. */
 @media (max-width: 1024px) {
   .nav__brand-text { display: none; }
-  .nav__logo { height: 72px; }
+  .nav__logo { height: 56px; }
 }
 
 @media (max-width: 560px) {
-  .nav__logo { height: 56px; }
+  .nav__logo { height: 44px; }
 }
 
 .nav__menu {
@@ -510,12 +510,14 @@ ul, ol {
 }
 
 .nav__caret {
-  font-size: 10px;
+  font-size: 9px;
+  line-height: 1;
+  transform: translateY(-1px);
   transition: transform 0.25s var(--ease);
 }
 
 .nav__item.is-open .nav__caret {
-  transform: rotate(180deg);
+  transform: translateY(-1px) rotate(180deg);
 }
 
 /* Dropdowns */
@@ -657,7 +659,8 @@ html:not(.js-ready) .nav__dropdown {
 /* TODO: replace with images/hero.jpg when hero photo is delivered */
 .hero__media--image {
   background:
-    linear-gradient(90deg, rgba(10,10,11,0.85) 0%, rgba(10,10,11,0.35) 55%, rgba(10,10,11,0) 100%),
+    linear-gradient(180deg, rgba(10,10,11,0.55) 0%, rgba(10,10,11,0.75) 60%, rgba(10,10,11,1) 100%),
+    linear-gradient(90deg, rgba(10,10,11,0.6) 0%, rgba(10,10,11,0) 60%),
     url('../images/red-flames.jpg') center/cover no-repeat,
     #0A0A0B;
 }
@@ -1054,7 +1057,7 @@ html:not(.js-ready) .nav__dropdown {
 
 .footer__logo {
   display: block;
-  height: 128px;
+  height: 112px;
   width: auto;
   flex-shrink: 0;
 }
@@ -3689,7 +3692,7 @@ select { max-width: 100%; }
 
 /* ---------- Footer logo lockup (compact tweaks per breakpoint) ---------- */
 @media (max-width: 900px) {
-  .footer__logo { height: 96px; }
+  .footer__logo { height: 88px; }
 }
 
 @media (max-width: 560px) {
