@@ -529,6 +529,8 @@ ul, ol {
   background: var(--surface);
   border: 1px solid var(--border);
   padding: 16px 0;
+  max-height: none;
+  overflow: visible;
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px);
@@ -622,6 +624,8 @@ ul, ol {
     visibility: visible;
     transform: none;
     min-width: 0;
+    max-height: none;
+    overflow: visible;
   }
 
   .nav__item.is-open .nav__dropdown {
