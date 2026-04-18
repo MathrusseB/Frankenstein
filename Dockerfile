@@ -21,10 +21,14 @@ RUN printf 'server {\n\
   gzip on;\n\
   gzip_types text/plain text/css application/javascript application/json image/svg+xml;\n\
 \n\
-  # Cache static assets\n\
-  location ~* \\.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff2?)$ {\n\
+  # Cache images/fonts aggressively; CSS/JS must revalidate so deploys land\n\
+  location ~* \\.(jpg|jpeg|png|gif|webp|svg|ico|woff2?)$ {\n\
     expires 30d;\n\
-    add_header Cache-Control "public, immutable";\n\
+    add_header Cache-Control "public";\n\
+  }\n\
+  location ~* \\.(css|js)$ {\n\
+    expires -1;\n\
+    add_header Cache-Control "no-cache, must-revalidate";\n\
   }\n\
 \n\
   # Pretty URLs / fallback\n\
